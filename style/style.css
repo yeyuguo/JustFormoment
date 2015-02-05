@@ -1,0 +1,409 @@
+html body * {
+    padding: 0;
+    margin: 0;
+    font-family: 幼圆;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+a {
+    text-decoration: none;
+}
+.clr {
+    clear: both;
+}
+/*主页css*/
+
+#homePage ul li {
+    list-style: none;
+    float: left;
+}
+#homePage .homeheader a {
+    text-decoration: none;
+    padding-left: 1em;
+    padding-top: 0.8em;
+}
+#homePage .homeheader {
+    color: #e7433d;
+    height: 3em;
+    line-height: 3em;
+    font-weight: bold;
+    font-size: 1em;
+    border-bottom: 1px solid #e7433d;
+    padding: 0.5em 0.5em 0;
+}
+#homePage .homeheader .ui-btn-right {
+    right: 1em;
+}
+#homePage .ui-input-text {
+    background: #e7433d;
+    width: 70%;
+    margin-left: 3em;
+    background-color: #e7433d;
+}
+.yyg-search input {
+    color: #fff;
+    padding-left: 2em;
+    background: url(../移动电商官网/切图/切图/drawable-hdpi/button-60.png);
+    background-position: 5px center;
+    background-repeat: no-repeat;
+}
+
+/* 轮播图样式 */
+
+h2, h3, h4, h5, h6, p, ul, li, dl, dt, dd {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+#homePage  li {
+    list-style: none;
+}
+#homePage  img {
+    border: none;
+}
+#homePage em {
+    font-style: normal;
+}
+#homePage a {
+    color: #555;
+    text-decoration: none;
+    outline: none;
+    blr: this.onFocus=this.blur();
+}
+#homePage a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+#homePage .clear {
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+#homePage .play_content {
+    padding: 0px;
+    overflow: hidden;
+    width: 100%;
+    margin: auto;
+}
+#homePage .play {
+    width: 100%;
+    height: 100px;
+    border-bottom: #ccc 1px solid;
+    border-top: #ccc 1px solid;
+    text-align: center;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 99;
+}
+#homePage .textbg {
+    margin-top: 70px;
+    z-index: 1;
+    filter: alpha(opacity=40);
+    opacity: 0.4;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    background: #000;
+}
+#homePage .text {
+    margin-top: 70px;
+    z-index: 2;
+    font-size: 12px;
+    width: 40%;
+    color: #fff;
+    line-height: 30px;
+    overflow: hidden;
+    position: absolute;
+    cursor: pointer;
+}
+#homePage .num {
+    margin: 75px 1% 0 45%;
+    z-index: 3;
+    width: 45%;
+    text-align: right;
+    position: absolute;
+    height: 25px;
+    float: right;
+}
+#homePage .num a {
+    margin: 0 2px;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    cursor: pointer;
+    color: #000;
+    padding: 0 5px;
+    background: #D7D6D7;
+    text-align: center
+}
+#homePage .num a.on {
+    background: #FFD116;
+    color: #A8471C;
+}
+#homePage .num a.on2 {
+    background: #D7D6D7;
+    color: #000;
+}
+#homePage .img_content img {
+    width: 100%;
+    height: 100px;
+}
+
+/*商品分类*/
+#homePage .proItem div{
+	text-align: center;
+}
+.proItem{
+	border-bottom:1px solid #e4e4e4;
+}
+#homePage .yyg-hotProTitle{
+	padding:1em 0;
+}
+.yyg-hotProTitle .hotTitle{
+	border-left: 2px solid #e7433d;
+	padding-left: 0.4em;
+}
+
+.Chinhot{
+	color:#7e7e7e;
+	font-size:1em;
+}
+.yyg-morePro,.Enghot{
+	color:#7e7e7e;
+	font-size: 0.9em;
+}
+#homePage table{
+	margin-top: 2em;
+}
+#homePage table tr td{
+	border:1px solid #F9D1CF;
+	text-align: center;
+}
+table span.yyg-middlePic{
+	height: inherit;
+	line-height: inherit;
+	vertical-align: middle;
+}
+table .yyg-RB{
+	color: #e7433d;
+	font-size: 1em;
+	font-weight: bold;
+}
+table .yyg-B{
+	color: #272727;
+	font-size: 1em;
+}
+
+#homePage .yyg-healthserver .hotTitle{
+	border-left: 2px solid #A0D17E;
+}
+#homePage .homeFootNav ul li a{
+	background-color: #e7433d;
+	color:#fff;	
+}
+#homePage .homeFootNav ul li a.yyg-homeSelected{
+	background-color: #fff;
+	color:#e7433d;
+}
+
+
+/*个人设置css*/
+
+#bankPage .bankheader a {
+    text-decoration: none;
+    padding-left: 1em;
+    padding-top: 0.8em;
+}
+#bankPage .bankheader {
+    text-align: center;
+    color: #e7433d;
+    height: 3em;
+    line-height: 3em;
+    font-weight: bold;
+    font-size: 1em;
+    border-bottom: 1px solid #e7433d;
+    padding: 0.5em 0.5em 0;
+}
+.bankContent .yyg-totalPay, .yyg-totalPay span.yyg-totalmoney, .yyg-payFunc {
+    color: #e7433d;
+    font-size: 1em;
+    font-weight: bold;
+}
+.bankContent .yyg-payMind {
+    font-size: 0.5em;
+    color: #515050;
+    margin-right: 1em;
+}
+.bankContent .yyg-payMind img {
+    width: 1em;
+    height: inherit;
+    line-height: inherit;
+    margin-right: 0.5em;
+}
+.yyg-payFunc {
+    color: #515050;
+}
+.yyg-totalPay, .yyg-payFunc {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #e4e4e4;
+}
+.yyg-bankList {
+    padding: 1em 0;
+    height: 4em;
+}
+#bankPage input[type="submit"] {
+    background: #e7433d;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+/*input[type="submit"]样式*/
+
+#bankPage .bankContent .ui-input-btn input {
+    background: #e7433d;
+    color: #fff;
+    margin: 0;
+    text-indent: 0;
+    opacity: 1;
+}
+#bankPage .bankContent {
+    margin: 0;
+}
+/*个人设置css*/
+
+#personSet .bankheader {
+    text-align: center;
+    color: #e7433d;
+    height: 3em;
+    line-height: 3em;
+    font-weight: bold;
+    font-size: 1em;
+    border-bottom: 1px solid #e7433d;
+    padding: 0.5em 0.5em 0;
+}
+#personSet .bankheader a {
+    text-decoration: none;
+    padding: 0.8em 1em 1em 0.5em;
+}
+/*内容css*/
+
+#personSet div.mindInfo {
+    color: #696969;
+    font-size: 1em;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 0.5em;
+}
+#personSet .saveCancle a.ui-corner-all {
+    background-color: #e7433d;
+    color: #fff;
+    font-weight: 400;
+}
+#personSet .saveCancle a:visited {
+    background-color: #e7433d;
+    color: #fff;
+    text-shadow: none;
+    box-shadow: none;
+}
+#personSet .saveCancle a:first-child {
+    margin-right: 1em;
+}
+#personSet .personSetcont form {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+#personSet .yyg-ui-password {
+    /* max-width: 302px;*/
+    
+    margin-top: 1em;
+    /* padding-left: 1em;
+    padding-right: 1em;*/
+    
+    background-color: #e7433d;
+}
+/*
+#personSet div.mindInfo img {
+    vertical-align: middle;
+    display: table-cell;
+    float: left;
+}
+#personSet div.mindInfo span {
+    margin-left: 0.3em;
+}
+.ui-mobile #personSet label {
+    background-color: #e7433d;
+}
+.personSetcont .ui-input-text input {
+    background-color: #e7433d;
+}
+#personSet .yyg-ui-password label {
+    float: left;
+    height: 27px;
+    padding-top: 0.5em;
+    margin-top: 1em;
+}
+#personSet .yyg-ui-password .ui-input-text {
+    float: left;
+    margin-left: 0.5em;
+    margin-top: 1em;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #e7433d;
+    border-right: 1px solid #e7433d;
+    border-bottom: 1px solid #e7433d;
+}*/
+/*背景图css*/
+
+#personSet .yyg-form .ui-input-text {
+    margin: 0;
+    border: none;
+}
+#personSet .personSetcont .yyg-form {
+    padding-left: 1em;
+    padding-right: 1em;
+    border: none;
+    display: block;
+}
+#yyg-password, #yyg-passwordConfirm {
+    padding-left: 3em;
+    color: #fff;
+    margin-top: 1em;
+}
+#yyg-password {
+    background: url(../移动电商官网/切图/切图/drawable-hdpi/button-9.png) #e7433d;
+    background-repeat: no-repeat;
+    background-position: 1em center;
+}
+#yyg-passwordConfirm {
+    background: url(../移动电商官网/切图/切图/drawable-hdpi/button-10.png) #e7433d;
+    background-repeat: no-repeat;
+    background-position: 1em center;
+}
+/*表格形式的css*/
+
+#personSet table {
+    padding: 1em;
+}
+#personSet table tr td input[type="password"] {
+    border-left: 1px solid #fff;
+}
+#personSet table tr {
+    background-color: #e7433d;
+}
+#personSet table td {
+    padding: 0.25em;
+}
+#personSet table td input[type="submit"] {}
+/*表格形式的css*/
