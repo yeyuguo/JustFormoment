@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>添加地址</title>
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+	<link rel="stylesheet" href="css/duanlj.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+</head>
+<body>
+    <!-- 添加地址页面 段龙剑 2015-02-04 10:52:11 -->
+    <div data-role="page" id="dlj-addAddress" class="dlj-addAddress">
+    	<div data-role="header" class="dlj-addAddressHeader">
+    		<a href="#" data-rel="back">
+    			<img src="image/button-48.png" />
+    		</a>
+    		<h1>添加地址</h1>
+    	</div>
+        <div data-role="content">
+            <form method="" action="" class="dlj-addAddressInput">
+                <label for="dlj-userName" class="ui-hidden-accessible">收货人姓名</label>
+                <div class="dlj-addAddressLine1"></div>
+                <input type="text" id="dlj-userName" class="dlj-userNameIN" data-role="none" placeholder="请输入收货人姓名" />
+                <label for="dlj-userPhone" class="ui-hidden-accessible">收货人手机</label>
+                <div class="dlj-addAddressLine2"></div>
+                <input type="text" id="dlj-userPhone" class="dlj-userPhoneIN" data-role="none" placeholder="请输入手机号码" />
+                <label for="dlj-userEmail" class="ui-hidden-accessible">收货人邮箱</label>
+                <div class="dlj-addAddressLine3"></div>
+                <input type="text" id="dlj-userEmail" class="dlj-userEmailIN" data-role="none" placeholder="请输入邮箱号码" />
+            </form>
+            <form method="" action="" class="ui-block-a dlj-selectPlace">
+                <div data-role="fieldcontain">  
+                    <select  id="dlj-province" data-iconpos="notext">
+                        <option value="beijing">北京市</option>
+                        <option value="shanghai">上海市</option>
+                        <option value="yunnan">云南省</option>
+                    </select>
+                    <label for="dlj-province" class="dlj-selectOption dlj-selectProvince">请选择省</label>
+                </div>
+            </form>
+            <form method="" action="" class="ui-block-b dlj-selectPlace">
+                <div data-role="fieldcontain"> 
+                    <select  id="dlj-city" data-iconpos="notext">
+                        <option value="kunming">昆明市</option>
+                        <option value="yuxi">玉溪市</option>
+                        <option value="qujing">曲靖市</option>
+                    </select>
+                    <label for="dlj-city" class="dlj-selectOption dlj-selectCity">请选择市</label>
+                </div>
+            </form>
+            <form method="" action="" class="ui-block-a dlj-selectPlace">
+                <div data-role="fieldcontain">
+                    <select  id="dlj-district" data-iconpos="notext">
+                        <option value="wuhua">五华区</option>
+                        <option value="panlong">盘龙区</option>
+                        <option value="guandu">官渡区</option>
+                    </select>
+                    <label for="dlj-district" class="dlj-selectOption dlj-selectDistrict">请选择区</label>
+                </div>
+            </form>
+            <form method="" action="" class="ui-block-b dlj-selectPlace">
+                <div data-role="fieldcontain">   
+                    <select  id="dlj-street" data-iconpos="notext">
+                        <option value="hxl">鸿翔路</option>
+                        <option value="jmnl">景明南路</option>
+                        <option value="jmbl">景明北路</option>
+                    </select>
+                    <label for="dlj-street" class="dlj-selectOption dlj-selectStreet">请选择街道</label>
+                </div>
+            </form>
+            <form method="" action="">
+                <div data-role="fieldcontain">
+                    <label for="dlj-detailedPlace" class="ui-hidden-accessible">详细地址</label>
+                    <textarea id="dlj-detailedPlace" class="dlj-detailedPlaceIN" placeholder="请输入详细地址" data-role="none"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 添加地址页面读取所选地址信息
+        $(document).ready(function(){
+            $("#dlj-province option").click(function(){
+                $(".dlj-selectProvince").text($(this).text());
+            });
+            $("#dlj-city option").click(function(){
+                $(".dlj-selectCity").text($(this).text());
+            });
+            $("#dlj-district option").click(function(){
+                $(".dlj-selectDistrict").text($(this).text());
+            });
+            $("#dlj-street option").click(function(){
+                $(".dlj-selectStreet").text($(this).text());
+            });
+        })
+    </script>
+</body>
+</html>

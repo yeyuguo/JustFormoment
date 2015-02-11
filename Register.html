@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>注册</title>
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+	<link rel="stylesheet" href="css/duanlj.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+</head>
+<body>
+    <!-- 注册页面 段龙剑 2015-02-04 10:52:11 -->
+    <div data-role="page" id="dlj-register" class="dlj-register">
+    	<div data-role="header" class="dlj-registerHeader">
+    		<a href="#" data-rel="back">
+    			<img src="image/button-48.png" />
+    		</a>
+    		<h1>注册</h1>
+    	</div>
+        <div data-role="content">
+            <form method="" action="">
+                <label for="dlj-inputEmail" class="ui-hidden-accessible">邮箱</label>
+                <div class="dlj-registerLine1"></div>
+                <input type="text" id="dlj-inputEmail" class="dlj-inputEmailIN" data-role="none" placeholder="请输入邮箱号码" />
+                <label for="dlj-inputPhone" class="ui-hidden-accessible">手机</label>
+                <div class="dlj-registerLine2"></div>
+                <input type="text" id="dlj-inputPhone" class="dlj-inputPhoneIN" data-role="none" placeholder="请输入手机号码" />
+                <label for="dlj-inputPW" class="ui-hidden-accessible">密码</label>
+                <div class="dlj-registerLine3"></div>
+                <input type="text" id="dlj-inputPW" class="dlj-inputPWIN" data-role="none" placeholder="请输入密码" />
+                <label for="dlj-inputPWagain" class="ui-hidden-accessible">二次密码</label>
+                <div class="dlj-registerLine4"></div>
+                <input type="text" id="dlj-inputPWagain" class="dlj-inputPWagainIN" data-role="none" placeholder="请再次输入密码" />
+            </form>
+            <form method="" action="">
+                <label for="dlj-agreement" class="dlj-agreement">同意《一心堂在线服务协议》</label>
+                <input type="checkbox" id="dlj-agreement" class="dlj-agreementIN" />
+            </form>
+            <a href="#" data-role="button" data-corners="false" class="dlj-registerNow">注册</a>
+        </div>
+    </div> 
+</body>
+</html>

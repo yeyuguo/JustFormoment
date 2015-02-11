@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的订单</title>
+    <script type="text/jscript">
+    document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+    document.write('<link rel="stylesheet" href="css/MyOrder.css">');
+    </script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.2.min.js"></script>
+    <style type="text/css" media="all">
+    </style>
+</head>
+
+<body>
+    <div data-role="page" class="wj-obl">
+        <div data-role="header" data-position="fixed" class="wj-top">
+            <div class="wj-topImg1 fl">
+                <a href="#" data-rel="back">
+                    <img src="image/button-48.png">
+                </a>
+            </div>
+            <div class="wj-topTxt fl">
+                <span>我的订单</span>
+            </div>
+            <div class="wj-topImg2 fr">
+                <a href="#">
+                    <img src="image/button-42.png">
+                </a>
+            </div>
+        </div>
+
+        <div data-role="content" id="wj-con" class="department">
+            <div class="wj-conTit">
+                <ul>
+                    <li class="on" id="tb_11">
+                        <a href="#">待付款</a>
+                    </li>
+                    <li id="tb_12">
+                        <a href="#">待发货</a>
+                    </li>
+                    <li id="tb_13">
+                        <a href="#">待收货</a>
+                    </li>
+                    <li id="tb_14">
+                        <a href="#">待评价</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="divstyle">
+              <!-- 待付款 -->
+                <div class="department_c dis" id="tbc_11">
+                    <div class="wj-conGoods">
+                        <div class="fl">
+                            <img src="image/button-25.png">
+                        </div>
+                        <div class="wj-conGImg fl">
+                            <img src="image/order/pie.png">
+                        </div>
+                        <div class="wj-conTxt fl">
+                            <p class="wj-conTxt1">蒙自大井年糕中号礼品盒装年糕...</p>
+                            <p class="wj-conTxt2">蒙自大井年糕中号礼品盒装年糕蒙自大井...</p>
+                        </div>
+                        <div class="wj-conPrice fl">
+                            <p class="wj-conPriTxt1">￥20.00</p>
+                            <p class="wj-conPriTxt2 fl">
+                                <img src="image/button-30.png" class="fl">
+                                <span class="fl">×2</span>
+                                <img src="image/button-34.png" class="fl">
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="clr"></div>
+                    <div class="wj-conGoods">
+                        
+                            <div class="fl">
+                                <img src="image/button-25.png">
+                            </div>
+                            <div class="wj-conGImg fl">
+                                <img src="image/order/pie.png">
+                            </div>
+                            <div class="wj-conTxt fl">
+                                <p class="wj-conTxt1">蒙自大井年糕中号礼品盒装年糕...</p>
+                                <p class="wj-conTxt2">蒙自大井年糕中号礼品盒装年糕蒙自大井...</p>
+                            </div>
+                            <div class="wj-conPrice fl">
+                                <p class="wj-conPriTxt1">￥20.00</p>
+                                <p class="wj-conPriTxt2 fl">
+                                    <img src="image/button-30.png" class="fl">
+                                    <span class="fl">×2</span>
+                                    <img src="image/button-34.png" class="fl">
+                                </p>
+                            </div>
+                    </div>
+
+                    <div class="wj-conShow">
+                        <p>显示其余2件</p>
+                    </div>
+
+                    <div class="wj-conObli">
+                        <p class="fl">待付款</p>
+                        <span class="wj-conObliTxt fr">实付：￥320.00</span>
+                        <span class="fr">共4件商品</span>
+                    </div>
+
+                    <div class="wj-conBut">
+                        <div class="wj-conBut2 fr">
+                            <a href="#">
+                                <p>付款</p>
+                            </a>
+                        </div>
+                        <div class="wj-conBut1 fr">
+                            <a href="#">
+                                <p>取消订单</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+             <!--  待发货 -->
+                <div class="department_c undis" id="tbc_12">
+                    <div class="wj-conGoods">
+                        <div class="fl">
+                            <img src="image/button-25.png">
+                        </div>
+                        <div class="wj-conGImg fl">
+                            <img src="image/order/pie.png">
+                        </div>
+                        <div class="wj-conTxt fl">
+                            <p class="wj-conTxt1">蒙自大井年糕中号礼品盒装年糕...</p>
+                            <p class="wj-conTxt2">蒙自大井年糕中号礼品盒装年糕蒙自大井...</p>
+                        </div>
+                        <div class="wj-conPrice fl">
+                            <p class="wj-conPriTxt1">￥20.00</p>
+                            <p class="wj-conPriTxt2 fl">
+                                <img src="image/button-30.png" class="fl">
+                                <span class="fl">×2</span>
+                                <img src="image/button-34.png" class="fl">
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="clr"></div>
+                    <div class="wj-conGoods">
+                        
+                            <div class="fl">
+                                <img src="image/button-25.png">
+                            </div>
+                            <div class="wj-conGImg fl">
+                                <img src="image/order/pie.png">
+                            </div>
+                            <div class="wj-conTxt fl">
+                                <p class="wj-conTxt1">蒙自大井年糕中号礼品盒装年糕...</p>
+                                <p class="wj-conTxt2">蒙自大井年糕中号礼品盒装年糕蒙自大井...</p>
+                            </div>
+                            <div class="wj-conPrice fl">
+                                <p class="wj-conPriTxt1">￥20.00</p>
+                                <p class="wj-conPriTxt2 fl">
+                                    <img src="image/button-30.png" class="fl">
+                                    <span class="fl">×2</span>
+                                    <img src="image/button-34.png" class="fl">
+                                </p>
+                            </div>
+                    </div>
+
+                    <div class="wj-conShow">
+                        <p>显示其余2件</p>
+                    </div>
+
+                    <div class="wj-conObli">
+                        <p class="fl">待发货</p>
+                        <span class="wj-conObliTxt fr">实付：￥320.00</span>
+                        <span class="fr">共4件商品</span>
+                    </div>
+
+                </div>
+                 <!-- 待收货 -->
+                <div class="department_c undis" id="tbc_13">
+                    <div class="wj-conGoods">
+                        <div class="fl">
+                            <img src="image/button-25.png">
+                        </div>
+                        <div class="wj-conGImg fl">
+                            <img src="image/order/pie.png">
+                        </div>
+                        <div class="wj-conTxt fl">
+                            <p class="wj-conTxt1">蒙自大井年糕中号礼品盒装年糕...</p>
+                            <p class="wj-conTxt2">蒙自大井年糕中号礼品盒装年糕蒙自大井...</p>
+                        </div>
+                        <div class="wj-conPrice fl">
+                            <p class="wj-conPriTxt1">￥20.00</p>
+                            <p class="wj-conPriTxt2 fl">
+                                <img src="image/button-30.png" class="fl">
+                                <span class="fl">×2</span>
+                                <img src="image/button-34.png" class="fl">
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="clr"></div>
+                    <div class="wj-conGoods">
+                        
+                            <div class="fl">
+                                <img src="image/button-25.png">
+                            </div>
+                            <div class="wj-conGImg fl">
+                                <img src="image/order/pie.png">
+                            </div>
+                            <div class="wj-conTxt fl">
+                                <p class="wj-conTxt1">蒙自大井年糕中号礼品盒装年糕...</p>
+                                <p class="wj-conTxt2">蒙自大井年糕中号礼品盒装年糕蒙自大井...</p>
+                            </div>
+                            <div class="wj-conPrice fl">
+                                <p class="wj-conPriTxt1">￥20.00</p>
+                                <p class="wj-conPriTxt2 fl">
+                                    <img src="image/button-30.png" class="fl">
+                                    <span class="fl">×2</span>
+                                    <img src="image/button-34.png" class="fl">
+                                </p>
+                            </div>
+                    </div>
+
+                    <div class="wj-conShow">
+                        <p>显示其余2件</p>
+                    </div>
+
+                    <div class="wj-conObli">
+                        <p class="fl">待收货</p>
+                        <span class="wj-conObliTxt fr">实付：￥320.00</span>
+                        <span class="fr">共4件商品</span>
+                    </div>
+
+                    <div class="wj-conBut">
+                        <div class="wj-conBut2 fr">
+                            <a href="#">
+                                <p>查看物流</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                 <!--  待评价 -->
+                 <div class="department_c undis" id="tbc_14">
+                    <div class="wj-conGoods">
+                        <div class="fl">
+                            <img src="image/button-25.png">
+                        </div>
+                        <div class="wj-conGImg fl">
+                            <img src="image/order/pie.png">
+                        </div>
+                        <div class="wj-conTxt fl">
+                            <p class="wj-conTxt1">蒙自大井年糕中号礼品盒装年糕...</p>
+                            <p class="wj-conTxt2">蒙自大井年糕中号礼品盒装年糕蒙自大井...</p>
+                        </div>
+                        <div class="wj-conPrice fl">
+                            <p class="wj-conPriTxt1">￥20.00</p>
+                            <p class="wj-conPriTxt2 fl">
+                                <img src="image/button-30.png" class="fl">
+                                <span class="fl">×2</span>
+                                <img src="image/button-34.png" class="fl">
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="clr"></div>
+                    <div class="wj-conGoods">
+                        
+                            <div class="fl">
+                                <img src="image/button-25.png">
+                            </div>
+                            <div class="wj-conGImg fl">
+                                <img src="image/order/pie.png">
+                            </div>
+                            <div class="wj-conTxt fl">
+                                <p class="wj-conTxt1">蒙自大井年糕中号礼品盒装年糕...</p>
+                                <p class="wj-conTxt2">蒙自大井年糕中号礼品盒装年糕蒙自大井...</p>
+                            </div>
+                            <div class="wj-conPrice fl">
+                                <p class="wj-conPriTxt1">￥20.00</p>
+                                <p class="wj-conPriTxt2 fl">
+                                    <img src="image/button-30.png" class="fl">
+                                    <span class="fl">×2</span>
+                                    <img src="image/button-34.png" class="fl">
+                                </p>
+                            </div>
+                    </div>
+
+                    <div class="wj-conShow">
+                        <p>显示其余2件</p>
+                    </div>
+
+                    <div class="wj-conObli">
+                        <p class="fl">待评价</p>
+                        <span class="wj-conObliTxt fr">实付：￥320.00</span>
+                        <span class="fr">共4件商品</span>
+                    </div>
+
+                    <div class="wj-conBut">
+                        <div class="wj-conBut2 fr">
+                            <a href="#">
+                                <p>评价</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+    function tab(e) {
+        var elm = $(e),
+            tabs = elm.find('ul li'),
+            tabc = elm.find('.department_c');
+        tabs.each(function(i) {
+            $(tabs[i]).on('click', function() {
+                tabs.each(function() {
+                    tabs.hasClass('on') ? tabs.removeClass('on') : false;
+                })
+                tabc.each(function() {
+                    tabc.hasClass('dis') ? tabc.removeClass('dis').addClass('undis') : false;
+                })
+                $(tabs[i]).addClass('on');
+                $(tabc[i]).removeClass('undis').addClass('dis');
+            })
+        })
+    }
+
+    tab('#wj-con')
+    </script>
+</body>
+
+</html>

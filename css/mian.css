@@ -1,0 +1,57 @@
+/* JQM Demos custom CSS */
+/* Header */
+/*自定义框架字体，背景颜色设置*/
+
+.jqm-hxyy{
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3";
+	background-color:#f2f2f2;
+	text-shadow: 0 0 0px #FFF;  /*清除阴影*/
+	font-weight:normal;   /*清除加粗*/
+	}
+.jqm-hxyy a:hover,a:link,a:active,a:visited {
+	text-decoration: none; color:#999999;}
+/*自定义框架中的头、内容、页脚设计*/
+.jqm-hxyy .jqm-header {
+	background: #e20000;color:#FFFFFF;border:none; }
+.jqm-hxyy .jqm-header h1{
+	text-shadow: 0 0 0px #FFF;}
+.jqm-hxyy .jqm-header .ui-btn{
+	background-color:#e20000;
+	color:#FFFFFF;
+	font-weight:normal;
+	border:none;
+	text-shadow:none;
+	box-shadow:none;  /*盒子样式清楚*/
+	font-size:16px;
+	margin:0px;
+	padding:8px 0px 0px 0px;
+	}
+/*文本框*/
+.jqm-hxyy .jqm-content .btn_text{
+	border:none;
+	background-color:#fff;
+	text-shadow:none;
+	width:100%;
+	height:25px;
+	line-height:25px;
+	}
+.jqm-hxyy .jqm-content .btn_text:focus{  /*获得焦点时，边框阴影*/
+	border:none;
+	text-shadow:none;
+	box-shadow:none;
+	}
+	
+/*页体样式*/
+.jqm-hxyy .jqm-content{   
+	background-color:#f2f2f2;margin:0px;padding:0px;}
+.jqm-hxyy .jqm-content .play{
+	border:none;}
+
+/*页脚样式*/
+.jqm-hxyy .jqm-footer a{ /*页脚超链接样式*/
+	text-shadow: 0 0 0px #FFF; font-weight:normal;color:#acacac;}
+.jqm-hxyy .jqm-footer a:hover{   /*获得焦点颜色样式*/
+	color:#ffffff;}
+.jqm-hxyy .jqm-footer .ui-btn-active{   /*设置点种状态样式*/
+	text-shadow: 0 0 0px #FFF; font-weight:normal;background-color:#e20000;color:#ffffff;border-left-color:#dddddd;}
+

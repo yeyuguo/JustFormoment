@@ -1,0 +1,353 @@
+html body * {
+    padding: 0;
+    margin: 0;
+    font-family: 幼圆;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+a {
+    text-decoration: none;
+}
+.clr {
+    clear: both;
+}
+/*主页css*/
+
+ul li {
+    list-style: none;
+    float: left;
+}
+.homeheader a {
+    text-decoration: none;
+    padding-left: 1em;
+    padding-top: 0.3em;
+}
+.Home .yyg-header .homeheader {
+    color: #e7433d;
+    height: 3em;
+    line-height: 3em;
+    font-weight: bold;
+    font-size: 1em;
+    border-bottom: 1px solid #e7433d;
+    padding: 0 0.5em 0.25em;
+}
+.homeheader .yyg-search {
+    margin-right: 1em;
+}
+.yyg-header .yyg-line {
+    width: 1px;
+    height: 1.375em;
+    border-left: 1px solid #F2A18E;
+    position: absolute;
+    left: 6.0625em;
+    top: 1em;
+}
+.homeheader .ui-btn-right {
+    right: 1em;
+}
+.ui-input-text {
+    background: #e7433d;
+    width: 73%;
+    margin-left: 3em;
+}
+.yyg-search input.yyg-input {
+    text-shadow: none;
+    color: #F2A18E;
+    padding-left: 2.5em;
+    background: url(../image/user/button-60.png) #e7433d;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
+
+/*轮播样式2*/
+
+.addWrap {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background: #fff;
+    margin: 0.5em 0 0;
+    padding: 0;
+}
+.addWrap .swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+}
+.addWrap .swipe-wrap {
+    overflow: hidden;
+    position: relative;
+}
+.addWrap .swipe-wrap > div {
+    float: left;
+    width: 100%;
+    height: inherit;
+    position: relative;
+}
+.addWrap .swipe-wrap > div a img {
+    width: 100%;
+    height: 100px;
+}
+#yyg-position {
+    position: relative;
+    bottom: 30%;
+    left: 70%;
+    padding-right: 8px;
+    margin: 0;
+    background: #000;
+    width: 100%;
+    /*opacity: 0.8;
+    filter: alpha(opacity=80);*/
+    text-align: right;
+}
+#yyg-position li {
+    width: 10px;
+    height: 10px;
+    margin: 0 2px;
+    display: inline-block;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #2B2C2D;
+}
+#yyg-position li.cur {
+    background-color: #fff;
+}
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+/*.HomePage .homeContent .addWrap #mySwipe .swipe-wrap{
+    width: 100%;
+}*/
+/*商品分类*/
+
+.proItem div {
+    text-align: center;
+}
+.proItem {
+    border-bottom: 1px solid #e4e4e4;
+}
+.yyg-hotProTitle {
+    padding: 1em 0;
+}
+.yyg-hotProTitle .hotTitle {
+    border-left: 2px solid #e7433d;
+    padding-left: 0.4em;
+}
+.Chinhot {
+    color: #7e7e7e;
+    font-size: 1em;
+}
+.Home .homeContent .yyg-hotProTitle .yyg-morePro .yyg-more, .Home .homeContent .yyg-hotProTitle .Enghot {
+    color: #7e7e7e;
+    font-size: 0.9em;
+}
+.Home table {
+    margin-top: 2em;
+}
+.Home table tr td {
+    border: 1px solid #F9D1CF;
+    text-align: center;
+}
+.Home table span.yyg-middlePic {
+    height: inherit;
+    line-height: inherit;
+    vertical-align: middle;
+}
+.Home table .yyg-RB {
+    color: #e7433d;
+    font-size: 1em;
+    font-weight: bold;
+}
+.Home table .yyg-B {
+    color: #272727;
+    font-size: 1em;
+}
+.yyg-healthserver .hotTitle {
+    border-left: 2px solid #A0D17E;
+}
+html body .Home .yyg-footer{
+    border:none;
+}
+html body .Home .yyg-footer .homeFootNav ul li a ,
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-homeSelected {
+    text-shadow: none;
+    box-shadow: none;
+    border:none;
+}
+html body .Home .yyg-footer .homeFootNav ul li a {
+    background-color: #e7433d;
+    color: #fff;
+    
+}
+html body .Home .homeFootNav ul li a.yyg-homeSelected {
+    background-color: #fff;
+    color: #e7433d;    
+}
+
+/*银行卡css*/
+
+.bankheader a {
+    text-decoration: none;
+    padding-left: 1em;
+    padding-top: 0.8em;
+}
+.bankheader {
+    text-align: center;
+    color: #e7433d;
+    height: 3em;
+    line-height: 3em;
+    font-weight: bold;
+    font-size: 1em;
+    border-bottom: 1px solid #e7433d;
+    padding: 0.5em 0.5em 0;
+}
+.bankContent .yyg-totalPay, .yyg-totalPay span.yyg-totalmoney, .yyg-payFunc {
+    color: #e7433d;
+    font-size: 1em;
+    font-weight: bold;
+}
+.bankContent .yyg-payMind {
+    font-size: 0.5em;
+    color: #515050;
+    margin-right: 1em;
+}
+.bankContent .yyg-payMind img {
+    width: 1em;
+    height: inherit;
+    line-height: inherit;
+    margin-right: 0.5em;
+}
+.yyg-payFunc {
+    color: #515050;
+}
+.yyg-totalPay, .yyg-payFunc {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #e4e4e4;
+}
+.yyg-bankList {
+    padding: 1em 0;
+    height: 4em;
+}
+input[type="submit"] {
+    background: #e7433d;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+/*input[type="submit"]样式*/
+
+.bankContent .ui-input-btn input {
+    background: #e7433d;
+    color: #fff;
+    margin: 0;
+    text-indent: 0;
+    opacity: 1;
+}
+.bankContent {
+    margin: 0;
+}
+/*个人设置css*/
+
+.bankheader {
+    text-align: center;
+    color: #e7433d;
+    height: 3em;
+    line-height: 3em;
+    font-weight: bold;
+    font-size: 1em;
+    border-bottom: 1px solid #e7433d;
+    padding: 0.5em 0.5em 0;
+}
+.bankheader a {
+    text-decoration: none;
+    padding: 0.8em 1em 1em 0.5em;
+}
+/*内容css*/
+
+#personSet div.mindInfo {
+    color: #696969;
+    font-size: 1em;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 0.5em;
+}
+.saveCancle a.ui-corner-all {
+    background-color: #e7433d;
+    color: #fff;
+    font-weight: 400;
+}
+.saveCancle a:visited {
+    background-color: #e7433d;
+    color: #fff;
+    text-shadow: none;
+    box-shadow: none;
+}
+.saveCancle a:first-child {
+    margin-right: 1em;
+}
+.personSetcont form {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.yyg-ui-password {
+    /* max-width: 302px;*/
+    
+    margin-top: 1em;
+    /* padding-left: 1em;
+    padding-right: 1em;*/
+    
+    background-color: #e7433d;
+}
+/*背景图css*/
+
+.yyg-form .ui-input-text {
+    margin: 0;
+    border: none;
+}
+.yyg-form div.yyg-line {
+    width: 1px;
+    height: 1.75em;
+    position: absolute;
+    left: 4.375em;
+    border-left: 1px solid #fff;
+}
+.yyg-form div.yyg-line:first-child {
+    top: 7.625em;
+}
+.yyg-form div.yyg-line:nth-child(2) {
+    top: 10.8125em;
+}
+.personSetcont .yyg-form {
+    padding-left: 1em;
+    padding-right: 1em;
+    border: none;
+    display: block;
+}
+.yyg-form .ui-input-text input {
+    width: 143%;
+}
+#yyg-password, #yyg-passwordConfirm {
+    text-shadow: none;
+    padding-left: 3em;
+    color: #F2A18E;
+    margin-top: 1em;
+}
+#yyg-password {
+    background: url(../image/user/button-9.png) #e7433d;
+    background-repeat: no-repeat;
+    background-position: 1em center;
+}
+#yyg-passwordConfirm {
+    background: url(../image/user/button-10.png) #e7433d;
+    background-repeat: no-repeat;
+    background-position: 1em center;
+}

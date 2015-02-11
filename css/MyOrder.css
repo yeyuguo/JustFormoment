@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clr{
+	clear:both;
+}
+a{
+	text-decoration: none;
+}
+
+.wj-obl{
+	background: #fff;
+}
+.wj-obl a:hover{
+    color: #e8433d;
+    text-decoration: none;
+}
+.wj-obl .wj-top {
+    height: 3em;
+    background: #fff;
+    line-height: 3em;
+    border-bottom: 2px solid #e8433d;
+}
+.wj-topImg1 img {
+    margin: 0.5em 0 0 1em;
+}
+.wj-topImg2 img {
+    margin: 0.5em 1em 0 0;
+}
+.wj-topTxt {
+    width: 75%;
+    font-size: 1em;
+    font-weight: bold;
+    color: #e8433d;
+    text-align: center;
+}
+.wj-conTit {
+    height: 3em;
+    line-height: 3em;
+    margin: 0.5em 0.5em 0 0.5em;
+}
+.wj-conTit li {
+    width: 25%;
+    float: left;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #e4e4e4;
+    text-align: center;
+    list-style-type: none;
+}
+.wj-conTit li.on{
+		padding-bottom:0;
+    border-bottom: 2px solid #e8433d;
+}
+.wj-conTit li a {
+	color: #515050;
+    font-size: 1em;
+    font-weight: bold;
+}
+.wj-conGoods{
+	height: 7em;
+	line-height: 7em;
+	margin: 0 1em;
+	border-bottom: 1px solid #e4e4e4;
+}
+.wj-obl .department .wj-conGoods .wj-conGImg{
+	height: 5em;
+	width: 5em;
+	margin: 1em 0.5em;
+	border:1px solid #e4e4e4;
+}
+.wj-obl .department .wj-conGoods .wj-conGImg img{
+	padding: 0.25em;
+	height: 4.5em;
+	width: 4.5em;
+}
+.wj-conTxt{
+	height: 5em;
+	width:10em;
+	margin: 1em -2em 1em 0;
+}
+.wj-conTxt .wj-conTxt1 {
+	width: 10em;
+	height: 2.5em;
+	min-width:10em;
+	line-height: 1em;
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #515050;
+	padding-top: 1em;
+	overflow: hidden;
+}
+.wj-conTxt .wj-conTxt2 {
+	width: 10em;
+	height: 4em;
+	min-width: 10em;
+	line-height: 1em;
+	font-size: 0.6em;
+	color: #7e7e7e;
+	overflow: hidden;
+}
+.wj-conPrice{
+	height: 5em;
+	width: 7em;
+	margin: 1em -1em 1em 0;
+}
+.wj-conPrice .wj-conPriTxt1{
+	width: 5em;
+	height: 1.5em;
+	min-width: 5em;
+	line-height: 1em;
+	font-size: 0.8em;
+	letter-spacing: 0.1em;
+	font-weight: bold;
+	color: #515050;
+	padding-top: 2em;
+	padding-bottom: -1em;
+	margin-left: 2em;
+	overflow: hidden;
+}
+.wj-conPrice .wj-conPriTxt2{
+	width: 6em;
+	height: 2.8em;
+	min-width: 6em;
+	line-height: 1em;
+	font-size: 0.8em;
+	letter-spacing: 0.1em;
+	font-weight: bold;
+	color: #515050;
+	margin-left: 2em;
+	margin-top: 0.1em;
+	overflow: hidden;
+}
+.wj-conShow,.wj-conObli{
+	height: 2.5em;
+	line-height:2.5em;
+	margin: 0 1em;
+	border-bottom: 1px solid #e4e4e4;
+}
+.wj-conShow p,.wj-conObli p{
+	font-size: 0.6em;
+	color: #7e7e7e;
+}
+.wj-conObli span{
+	font-size: 0.6em;
+	color: #515050;
+}
+.wj-conObli .wj-conObliTxt{
+	letter-spacing: 0.1em;
+	margin-left: 1em;
+}
+.wj-conBut{
+	height: 2em;
+	line-height:2em;
+	margin: 0.2em 1em;
+}
+.wj-conBut1,.wj-conBut2{
+	height: 2em;
+	width: 5em;
+	line-height: 2em;
+	text-align: center;
+	background: #e8433d;
+	margin-right: 1em;
+}
+.wj-conBut1 p,.wj-conBut2 p{
+	color: #fff;
+	font-size: 0.9em;
+}
+
+
+/*选项卡*/
+.department,.divstyle {
+    width: 100%;
+}
+
+.dis {
+    display: block;
+}
+.undis {
+    display: none;
+}
+.department_c {
+    height: 22em;
+}

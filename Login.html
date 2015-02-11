@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>登录</title>
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+	<link rel="stylesheet" href="css/duanlj.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+</head>
+<body>
+	<!-- 登陆页面 段龙剑 2015-02-04 10:52:11 -->
+    <div data-role="page" id="dlj-login" class="dlj-login">
+    	<div data-role="header" class="dlj-loginHeader">
+    		<a href="#" data-rel="back">
+    			<img src="image/button-48.png" />
+    		</a>
+    		<h1>登录</h1>
+    	</div>
+    	<div data-role="content">
+    		<form method="" action="" style="overflow:hidden;">
+				<label for="dlj-inputName" class="ui-hidden-accessible">用户名</label>
+				<input type="text" id="dlj-inputName" class="dlj-inputNameIN" data-role="none" placeholder="请输入用户名" />
+                <div class="dlj-loginLine1"></div>
+				<label for="dlj-inputPassword" class="ui-hidden-accessible">用户密码</label>
+                <div class="dlj-loginLine2"></div>
+				<input type="text" id="dlj-inputPassword" data-role="none" class="dlj-inputPasswordIN" placeholder="请输入密码" />
+    		</form>
+    		<form method="" action="" class="dlj-PWandAuto">
+                <input type="checkbox" id="dlj-rememberPW"/>
+                <label for="dlj-rememberPW" class="dlj-rememberPW">记住账号</label>
+                <input type="checkbox" id="dlj-autoLogin" />
+                <label for="dlj-autoLogin" class="dlj-autoLogin">自动登录</label>
+    		</form>
+    		<a href="#" class="dlj-forgetPW">忘记密码</a>
+    		<a href="#" data-role="button" data-corners="false" class="dlj-loginNow">登录</a>
+    		<div class="dlj-loginBottom">
+    		<img src="image/login-logo.png" class="dlj-login-logo">
+    			<p class="dlj-yxfw">用心服务</p>
+    			<div class="dlj-bottomRight">
+	    			<p class="dlj-pzbz">品质保证</p>
+	    			<p class="dlj-jrfx">让您和您的家人更放心</p>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</body>
+</html>

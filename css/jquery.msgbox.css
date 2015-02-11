@@ -1,0 +1,34 @@
+.msgbox_wrapper {
+	border: #e20000 1px solid; 
+	BACKGROUND-COLOR:#FFF; 
+	OVERFLOW: hidden; 
+}
+.msgbox_title_wrapper {
+	
+	border: #e20000 1px solid; 
+	BACKGROUND-COLOR: #e20000; 
+	HEIGHT: 30px; 
+	VERTICAL-ALIGN: middle;
+	border-bottom:#e20000 1px solid; 
+	text-shadow:none;
+}
+.msgbox_title_wrapper IMG {
+	MARGIN-RIGHT: 8px
+}
+.msgbox_title {
+	LINE-HEIGHT: 30px; 
+	PADDING-LEFT: 12px; 
+	COLOR: #fff; 
+	FONT-SIZE: 14px; 
+}
+.msgbox_main {
+	TEXT-ALIGN: center;
+	padding:12px;
+	padding-top:20px;
+	COLOR:#e20000; 
+	OVERFLOW: hidden; 
+	FONT-SIZE: 14px; 
+}
+.msgbox_bg {
+	BACKGROUND-COLOR: #999;
+}
