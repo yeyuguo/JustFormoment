@@ -15,6 +15,13 @@ a {
 .clr {
     clear: both;
 }
+@font-face{
+    font-family: fontIco;
+    src: url('fonts/hxfont-awesome.eot');
+    src: url('fonts/hxfont-awesome.eot?#iefix') format('embedded-opentype'),
+         url('fonts/hxfont-awesome.woff') format('woff'),
+         url('fonts/hxfont-awesome.ttf') format('truetype');
+}
 /*主页css*/
 
 ul li {
@@ -180,18 +187,39 @@ html body .Home .yyg-footer .homeFootNav ul li a.yyg-homeSelected {
     box-shadow: none;
     border:none;
 }
-html body .Home .yyg-footer .homeFootNav ul li a {
+html body .Home .yyg-footer .homeFootNav ul li a{
     background-color: #e7433d;
-    color: #fff;
-    
+    color: #fff; 
 }
 html body .Home .homeFootNav ul li a.yyg-homeSelected {
     background-color: #fff;
     color: #e7433d;    
 }
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-hom:before,
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-find:before,
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-class:before,
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-buyCar:before,
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-person:before{
+    font-family: fontIco;
+    font-size: 16px;
+}
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-hom:before{
+    content: "\E008" attr(data-ico);
+}
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-find:before{
+    content: "\F02C" attr(data-ico);
+}
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-class:before{
+    content: "\E010" attr(data-ico);
+}
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-buyCar:before{
+    content: "\E011" attr(data-ico);
+}
+html body .Home .yyg-footer .homeFootNav ul li a.yyg-person:before{
+    content: "\E009" attr(data-ico);
+}
 
 /*银行卡css*/
-
 .bankheader a {
     text-decoration: none;
     padding-left: 1em;
