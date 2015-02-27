@@ -1,43 +1,175 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>注册</title>
-	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
-	<link rel="stylesheet" href="css/duanlj.css" />
+	<script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+	</script>
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+    <script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script src="js/myjs.js"></script>  <!--自定义的方法集合-->
+    <script>
+		//页面加载之前，获取注册token信息
+		var register_token;  //注册的token
+		$(document).on("pagebeforecreate","#dlj-register",function(event){
+			$.ajax({
+				url : localStorage.getItem("H_URL")+"yxtws/oauth/token",   //校验方法
+				type:"GET",
+				data:{client_id:"mobile_android",client_secret:"secret",grant_type:"client_credentials"},   //参数
+				dataType:"json",
+				//timeout:30000,
+				contentType:"application/x-www-form-urlencoded; charset=utf-8",
+				success:function(data){
+					register_token = data.access_token;  //注册的Token
+				},
+				error:function(msg){
+					alert("失败");
+					$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'网络异常!'});
+				}
+			});	
+			$("#dlj-agreement").attr('checked',true);
+			
+		});
+	
+	
+        //页面加载完毕之后绑定事件
+        $(document).on("pageinit","#dlj-register",function(){
+			//window.location.href   获取当前页面的位置URL
+            //注册按钮
+            $("#btn_Register").click(function(e){
+				var meil=  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/; 	//邮箱正则表达式		
+				var Email =$("#txt_email").val();
+				if(!meil.test(Email)){
+					$("#Email").focus();
+					$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'请输入有效的邮箱地址!'});
+					return;
+				}
+				var phone = /^((1)+\d{10})$/;   //手机正则远征
+				var PhoneNumber=$("#txt_phone").val();
+				if(!phone.test(PhoneNumber)){
+					$("#PhoneNumber").focus();
+					$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'请输入有效的手机号码!'});
+					return;
+				}
+				var Password=$("#txt_password").val();
+				if(Password==null || Password == '' || Password.length<6){
+					$("#Password").focus();
+					$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'登录密码不能为空且至少6位!'});
+					return;
+				}
+				var SubPassword=$("#txt_passwordagen").val();
+				if(Password != SubPassword){
+					$("#SubPassword").focus();
+					$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'确认密码和登录密码不一致!'});
+					return;
+				}
+				$.mobile.loading('show',{text:"注册中...",textVisible:true,theme:"b"});
+				$.ajax({
+					url : localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/customers",
+					type:"POST",
+					data:{login:Email,password:Password,phoneNumber:PhoneNumber,access_token:register_token},
+					dataType:"json",
+					//timeout:30000,
+					contentType:"application/x-www-form-urlencoded; charset=utf-8",
+					error:function(XMLHttpRequest, textStatus, errorThrown){   //注册成功返回201状态吗
+						$.mobile.loading("hide");
+						if(XMLHttpRequest.status == 201){
+							$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'注册成功！'});
+							//注册成功之后跳转到登录页面
+							localStorage.setItem("User_Name",Email);
+							localStorage.setItem("User_Password",Password);
+							window.location="Login.html";
+							window.location.load();
+						}else{
+							$.mobile.loading("hide");
+							$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'邮箱地址已经被使用!'});
+						}
+					}
+				});
+            });
+			//复选框点击事件
+			$("#dlj-agreement").click(function(){
+				if($(this).is(':checked')) {
+					$("#btn_Register").attr('disabled',false).button('refresh');
+				}else{
+					$("#btn_Register").attr('disabled',true).button('refresh');
+				}
+				
+			});
+			$("#dlj-agreement").attr('checked',true);
+			
+        });
+    </script>
 </head>
 <body>
-    <!-- 注册页面 段龙剑 2015-02-04 10:52:11 -->
-    <div data-role="page" id="dlj-register" class="dlj-register">
-    	<div data-role="header" class="dlj-registerHeader">
-    		<a href="#" data-rel="back">
-    			<img src="image/button-48.png" />
-    		</a>
-    		<h1>注册</h1>
+    <div data-role="page" class="jqm-hxyy" id="dlj-register">
+    	<div data-role="header" class="jqm-header" data-position="fixed">
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
+    		<h1>注&nbsp;&nbsp;册</h1>
     	</div>
-        <div data-role="content">
-            <form method="" action="">
-                <label for="dlj-inputEmail" class="ui-hidden-accessible">邮箱</label>
-                <div class="dlj-registerLine1"></div>
-                <input type="text" id="dlj-inputEmail" class="dlj-inputEmailIN" data-role="none" placeholder="请输入邮箱号码" />
-                <label for="dlj-inputPhone" class="ui-hidden-accessible">手机</label>
-                <div class="dlj-registerLine2"></div>
-                <input type="text" id="dlj-inputPhone" class="dlj-inputPhoneIN" data-role="none" placeholder="请输入手机号码" />
-                <label for="dlj-inputPW" class="ui-hidden-accessible">密码</label>
-                <div class="dlj-registerLine3"></div>
-                <input type="text" id="dlj-inputPW" class="dlj-inputPWIN" data-role="none" placeholder="请输入密码" />
-                <label for="dlj-inputPWagain" class="ui-hidden-accessible">二次密码</label>
-                <div class="dlj-registerLine4"></div>
-                <input type="text" id="dlj-inputPWagain" class="dlj-inputPWagainIN" data-role="none" placeholder="请再次输入密码" />
-            </form>
-            <form method="" action="">
-                <label for="dlj-agreement" class="dlj-agreement">同意《一心堂在线服务协议》</label>
-                <input type="checkbox" id="dlj-agreement" class="dlj-agreementIN" />
-            </form>
-            <a href="#" data-role="button" data-corners="false" class="dlj-registerNow">注册</a>
+        <div data-role="content" class="jqm-content">
+            <table border="0px" cellpadding="0" cellspacing="0" class="table_input">
+				<tr>
+                	<td width="30px;">
+                    	<input type="image" src="image/button-19.png" class="img_ico"/>
+                    </td>
+                    <td width="1px">
+                    	<input type="image" src="image/user/lin.png" class="img_lin"/>
+                    </td>
+                    <td style="padding:0 2px;">
+                    	<input type="text" data-role="none" class="btn_text" id="txt_email" placeholder="请输入邮箱号码" >
+                    </td>
+                </tr>
+            </table>
+            <table border="0px" cellpadding="0" cellspacing="0" class="table_input">
+				<tr>
+                	<td width="30px;">
+                    	<input type="image" src="image/button-14.png" class="img_ico"/>
+                    </td>
+                    <td width="1px">
+                    	<input type="image" src="image/user/lin.png" class="img_lin"/>
+                    </td>
+                    <td style="padding:0 2px;">
+                    	<input type="text" data-role="none" class="btn_text" id="txt_phone" placeholder="请输入手机号码" >
+                    </td>
+                </tr>
+            </table>
+            <table border="0px" cellpadding="0" cellspacing="0" class="table_input">
+				<tr>
+                	<td width="30px;">
+                    	<input type="image" src="image/user/button-9.png" class="img_ico"/>
+                    </td>
+                    <td width="1px">
+                    	<input type="image" src="image/user/lin.png" class="img_lin"/>
+                    </td>
+                    <td style="padding:0 2px;">
+                    	<input type="password" data-role="none" class="btn_text" id="txt_password" placeholder="请输入密码" >
+                    </td>
+                </tr>
+            </table>
+            <table border="0px" cellpadding="0" cellspacing="0" class="table_input">
+				<tr>
+                	<td width="30px;">
+                    	<input type="image" src="image/user/button-10.png" class="img_ico"/>
+                    </td>
+                    <td width="1px">
+                    	<input type="image" src="image/user/lin.png" class="img_lin"/>
+                    </td>
+                    <td style="padding:0 2px;">
+                    	<input type="password" data-role="none" class="btn_text" id="txt_passwordagen" placeholder="请再次输入密码" >
+                    </td>
+                </tr>
+            </table>
+            <div class="div_agreement">
+            	<input type="checkbox" class="chk_isok" id="chk_agreement" data-role="none"/>
+                <span>同意《一心堂在线服务协议》</span>
+            </div>
+            <a class="ui-btn" href="#" id="btn_Register">注  册</a>
         </div>
     </div> 
 </body>

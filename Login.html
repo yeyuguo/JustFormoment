@@ -1,49 +1,183 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>登录</title>
-	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
-	<link rel="stylesheet" href="css/duanlj.css" />
+    <script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+	</script>
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function(e) {
+		localStorage.clear();  //清空所有缓存数据
+		//window.location.href   获取当前页面的位置URL
+		//localStorage.setItem("Register_Url","http://10.0.51.206:7001/RegisterService.svc/");//服务器
+		localStorage.setItem("Register_Url","http://127.0.0.1:10344/RegisterService.svc/");//服务器
+		localStorage.setItem("H_URL","http://200.20.30.55:9001/");  //登录及获取token		
+		localStorage.setItem("N_URL","http://10.0.51.206:7002/");    //服务器IP地址  QA4服务器地址
+		
+		var UserName=localStorage.getItem("User_Name");   //用户名
+		var UserPassword =localStorage.getItem("User_Password");   //用户密码
+		if(UserName!=null || UserName!=''){
+			$("#text_username").val(UserName);
+		}
+		if(UserPassword!=null || UserPassword!=''){
+			$("#text_password").val(UserPassword);
+		}
+		//注册按钮
+		$("#btn_Register").click(function(e){
+			window.location="Register.html";
+			window.location.load();
+		});
+	//登录按钮
+    $("#btn_Login").click(function(e){
+		var meil=  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/; 	//邮箱正则表达式
+		var phone = /^((1)+\d{10})$/;   //手机正则远征
+		UserName =$("#text_username").val();
+		if(!meil.test(UserName) && !phone.test(UserName)){
+			$("#dlj-inputName").focus();
+			$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'请输入有效的用户名!'});
+			return;
+		}
+		UserPassword=$("#text_password").val();
+		if(UserPassword==null || UserPassword == '' || UserPassword.length<6){
+			$("#UserPassword").focus();
+			$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'登录密码不能为空且至少6位!'});
+			return;
+		}
+		$.mobile.loading('show',{text:"登录中...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("H_URL")+"yxtws/oauth/token",
+			type:"GET",
+			data:{client_id:"mobile_android",client_secret:"secret",username:UserName,password:UserPassword,grant_type:                "password"},
+			dataType:"json",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				localStorage.setItem("access_token",data.access_token);  //用户access_token数据
+				
+				//获取购物车ID   根据用户登录的token 获取用户的购物车ID 
+				$.ajax({
+					url : localStorage.getItem("Register_Url")+"SS_GetCart_Befor",
+					type:"GET",
+					data:{AAccess_token:localStorage.getItem("access_token")},
+					dataType:"jsonp",
+					//timeout:30000,
+					jsonp:"BaseCallback",
+					contentType:"application/json; charset=utf-8",
+					success:function(data){
+						localStorage.setItem("CookieID",data);  //购物车ID
+						window.location="Home.html";
+						window.location.load();
+					},
+					error:function(msg){
+						$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'数据库连接超时，请检查网络是否正常!'});
+					}
+				});
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				//alert("错误"+JSON.stringify(msg));
+				$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'用户名密码错误!'});
+			}
+		});
+	});
+});
+       //记住密码
+	
+	function remPassWord(){
+        var if_cheched = document.getElementById("dlj-rememberPW").checked;
+		if(if_cheched){
+			localStorage.setItem("User_Name",UserName);  //用户ID
+			localStorage.setItem("User_Password",UserPassword);  //密码
+		}else{
+			localStorage.setItem("User_Name","");  //用户ID
+			localStorage.setItem("User_Password","");  //密码
+		}
+    }
+	function autoLogin(){
+		 var if_cheched = document.getElementById("dlj-autoLogin").checked;
+		 if(if_cheched){
+			localStorage.setItem("AotoLogin","1");  //是否自动登录
+		
+		 }else{
+			localStorage.setItem("AotoLogin","0");  //是否自动登录
+		}
+	}
+	//页面加载完毕之后绑定事件
+	$(document).on("pageinit","#dlj-login",function(){
+		$("#dlj-rememberPW").click(function(){
+			if($(this).is(':checked')) {
+				localStorage.setItem("User_Name",UserName);  //用户ID
+				localStorage.setItem("User_Password",UserPassword);  //密码
+				//$("#btn_Register").attr('disabled',false).button('refresh');
+			}else{
+				localStorage.setItem("User_Name","");  //用户ID
+				localStorage.setItem("User_Password","");  //密码
+				//$("#btn_Register").attr('disabled',true).button('refresh');
+			}
+			alert(UserName);
+			alert($(this).is(':checked'));
+		});
+	});
+</script>
 </head>
 <body>
-	<!-- 登陆页面 段龙剑 2015-02-04 10:52:11 -->
-    <div data-role="page" id="dlj-login" class="dlj-login">
-    	<div data-role="header" class="dlj-loginHeader">
-    		<a href="#" data-rel="back">
-    			<img src="image/button-48.png" />
-    		</a>
-    		<h1>登录</h1>
+	<div data-role="page" class="jqm-hxyy">
+    	<div data-role="header" class="jqm-header" data-position="fixed">
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
+    		<h1>登&nbsp;&nbsp;录</h1>
     	</div>
-    	<div data-role="content">
-    		<form method="" action="" style="overflow:hidden;">
-				<label for="dlj-inputName" class="ui-hidden-accessible">用户名</label>
-				<input type="text" id="dlj-inputName" class="dlj-inputNameIN" data-role="none" placeholder="请输入用户名" />
-                <div class="dlj-loginLine1"></div>
-				<label for="dlj-inputPassword" class="ui-hidden-accessible">用户密码</label>
-                <div class="dlj-loginLine2"></div>
-				<input type="text" id="dlj-inputPassword" data-role="none" class="dlj-inputPasswordIN" placeholder="请输入密码" />
-    		</form>
-    		<form method="" action="" class="dlj-PWandAuto">
-                <input type="checkbox" id="dlj-rememberPW"/>
-                <label for="dlj-rememberPW" class="dlj-rememberPW">记住账号</label>
-                <input type="checkbox" id="dlj-autoLogin" />
-                <label for="dlj-autoLogin" class="dlj-autoLogin">自动登录</label>
-    		</form>
-    		<a href="#" class="dlj-forgetPW">忘记密码</a>
-    		<a href="#" data-role="button" data-corners="false" class="dlj-loginNow">登录</a>
-    		<div class="dlj-loginBottom">
-    		<img src="image/login-logo.png" class="dlj-login-logo">
-    			<p class="dlj-yxfw">用心服务</p>
-    			<div class="dlj-bottomRight">
-	    			<p class="dlj-pzbz">品质保证</p>
-	    			<p class="dlj-jrfx">让您和您的家人更放心</p>
-    			</div>
-    		</div>
+    	<div data-role="content" class="jqm-content">
+        	<table border="0px" cellpadding="0" cellspacing="0" class="table_input">
+				<tr>
+                	<td width="30px;">
+                    	<input type="image" src="image/user/button-3.png" class="img_ico"/>
+                    </td>
+                    <td width="1px">
+                    	<input type="image" src="image/user/lin.png" class="img_lin"/>
+                    </td>
+                    <td style="padding:0 2px;">
+                    	<input type="text" data-role="none" class="btn_text" id="text_username" placeholder="请输入用户名" >
+                    </td>
+                </tr>
+            </table>
+            <table border="0px" cellpadding="0" cellspacing="0" class="table_input">
+				<tr>
+                	<td width="30px;">
+                    	<input type="image" src="image/user/button-10.png" class="img_ico"/>
+                    </td>
+                    <td width="1px">
+                    	<input type="image" src="image/user/lin.png" class="img_lin"/>
+                    </td>
+                    <td style="padding:0 2px;">
+                    	<input type="password" data-role="none" class="btn_text" id="text_password" placeholder="请输入密码" >
+                    </td>
+                </tr>
+            </table>
+            <div class="div_chk">
+                <a href="Register.html" rel="external" class="a_register">快速注册</a>
+                <a href="#" rel="external" class="a_getpassword">忘记密码</a>
+            </div>
+            <a class="ui-btn" href="#" id="btn_Login">登  录</a>
     	</div>
+        <div data-role="footer" class="jqm-footer" data-position="fixed">
+        	<div class="div_log">
+            	<img src="image/login-logo.png"/>
+            </div>
+        	<div class="div_footer">
+                 <div class="div_left"><span>用心服务</span></div>
+                 <div class="div_right">
+                    <div class="div_top"><span>品质保证</span></div>
+                    <div class="div_down"><span>让您和您的家人更放心</span></div>
+                 </div>
+             </div>
+        </div>
     </div>
 </body>
 </html>

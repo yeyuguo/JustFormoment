@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HomePage</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+    <link rel="stylesheet" href="css/yyg-style.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+      <script type="text/javascript" src="js/yyg-style.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#yygbtn").on("click",function(){
+         $.mobile.loading("show");
+
+            var jiekou="http://www.corsproxy.com/gc.ditu.aliyun.com/geocoding?a=";
+            $.mobile.loading("show");
+            $.get(
+                jiekou,
+                {a:"昆明市"},
+               function(data){
+                    alert(data);
+               }
+            );            
+         $.mobile.loading("hide");
+        })
+    })
+    </script>
+</head>
+
+<body>
+    <div data-role="page" class="Home">
+        <div data-role="header" class="yyg-header">
+            <div data-role="header" class="homeheader">
+                <a href="#" data-role="none"><img src="image/user/button-47.png">
+                </a>
+                <!-- <label>扫一扫</label> -->
+                <div data-role="" data-inline="true" class="yyg-search">
+                    <div class="yyg-line"></div>
+                    <input type="text" holderplace="搜索商品" class="yyg-input">
+                </div>
+                <a href="#" data-role="none"><img src="image/user/button-42.png">
+                </a>
+            </div>
+
+        </div>
+        <div class="addWrap">
+            <div class="swipe" id="mySwipe">
+                <div class="swipe-wrap">
+                    <div>
+                        <a href="javascript:;"><img class="img-responsive" src="image/goods/01.jpg" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="javascript:;"><img class="img-responsive" src="image/goods/02.jpg" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="javascript:;"><img class="img-responsive" src="image/goods/03.jpg" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="javascript:;"><img class="img-responsive" src="image/goods/01.jpg" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="javascript:;"><img class="img-responsive" src="image/goods/02.jpg" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <ul id="yyg-position">
+                <li class="cur"></li>
+                <li class=""></li>
+                <li class=""></li>
+                <li class=""></li>
+                <li class=""></li>
+            </ul>
+        </div>
+
+        <div data-role="content" class="homeContent" style="width:90%">
+            <div class="proItem ui-grid-c">
+                <div class="ui-block-a">
+                    <a href="#" data-role="button" id="yygbtn">
+                    点击</a>
+                    <label></label>
+                </div>
+                <div class="ui-block-b">
+                    <a href=""><img src="image/order/button-65.png">
+                    </a>
+                    <label>生活优惠</label>
+                </div>
+                <div class="ui-block-c">
+                    <a href=""><img src="image/order/button-66.png">
+                    </a>
+                    <label>整点秒杀</label>
+                </div>
+                <div class="ui-block-d">
+                    <a href=""><img src="image/order/button-67.png">
+                    </a>
+                    <label>健康服务</label>
+                </div>
+            </div>
+            <div class="yyg-hotProTitle">
+                <div class="fl hotTitle">
+                    <p class="Chinhot"><b>热销商品</b>
+                    </p>
+                    <p class="Enghot">HOT COMMODITY</p>
+                </div>
+                <div class="fr yyg-morePro">
+                    <a href="#" class="yyg-more">更多热销商品>></a>
+                </div>
+            </div>
+            <table cellspacing="3" cellpadding="1%" width="100%">
+                <tr>
+                    <td rowspan="2" width="33%">
+                        <p class="yyg-B">周末特惠</p>
+                        <p><span class="yyg-RB">20%大返利</span>
+                        </p>
+                        <img src="image/goods/1.jpg">
+                    </td>
+                    <td width="40%">
+                        <img src="image/goods/1.jpg" class="fl">
+                        <div class="yyg-middlePic">
+                            <p class="yyg-B">婴幼儿奶粉</p>
+                            <p class="yyg-RB">全场慧不停</p>
+                        </div>
+                    </td>
+                    <td width="25%"><img src="image/goods/1.jpg">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" width="66%">
+                        <img src="image/goods/1.jpg">
+                    </td>
+                </tr>
+            </table>
+            <div class="yyg-hotProTitle yyg-healthserver">
+                <div class="fl hotTitle">
+                    <p class="Chinhot"><b>健康服务</b>
+                    </p>
+                    <p class="Enghot">HEALTH SERVICE</p>
+                </div>
+                <div class="fr yyg-morePro">
+                    <a href="#" class="yyg-more">更多健康服务>></a>
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" class="yyg-footer">
+            <div data-role="navbar" class="homeFootNav">
+                <ul>
+                    <li>
+                        <a href="#" class="yyg-hom yyg-homeSelected">
+                            <label>首页</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-ico="" class="yyg-fontIco yyg-find">
+                            <label>发现</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-ico="" class="yyg-fontIco yyg-class">
+                            <label>分类</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-ico="" class="yyg-fontIco yyg-buyCar">
+                            <label>购物车</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-ico="" class="yyg-fontIco yyg-person">
+                            <label>个人中心</label>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+
+    </div>
+  
+</body>
+
+</html>

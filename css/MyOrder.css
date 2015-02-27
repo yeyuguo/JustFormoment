@@ -65,28 +65,36 @@ a{
 }
 .wj-conGoods{
 	height: 7em;
+	width:100%;
 	line-height: 7em;
-	margin: 0 1em;
 	border-bottom: 1px solid #e4e4e4;
+	float:left;
 }
-.wj-obl .department .wj-conGoods .wj-conGImg{
+.wj-obl .department .wj-conGoods .img-line .wj-conGImg{
+	height: 5em;
+	width: 25%;
+	margin: 1em 0.5em;
+	border:1px solid #e4e4e4;
+	float:left;
+}
+.wj-obl .department .wj-conGoods .img-line .wj-conGImg{
 	height: 5em;
 	width: 5em;
 	margin: 1em 0.5em;
-	border:1px solid #e4e4e4;
 }
-.wj-obl .department .wj-conGoods .wj-conGImg img{
+.wj-obl .department .wj-conGoods .img-line .wj-conGImg img{
 	padding: 0.25em;
 	height: 4.5em;
 	width: 4.5em;
 }
 .wj-conTxt{
 	height: 5em;
-	width:10em;
+	width: 40%;
 	margin: 1em -2em 1em 0;
+	float:left;
 }
 .wj-conTxt .wj-conTxt1 {
-	width: 10em;
+	width: 100%;
 	height: 2.5em;
 	min-width:10em;
 	line-height: 1em;
@@ -107,8 +115,9 @@ a{
 }
 .wj-conPrice{
 	height: 5em;
-	width: 7em;
-	margin: 1em -1em 1em 0;
+	width: 35%;
+	margin: 1em -1em 1em 1em;
+	float:left;
 }
 .wj-conPrice .wj-conPriTxt1{
 	width: 5em;
@@ -140,7 +149,6 @@ a{
 .wj-conShow,.wj-conObli{
 	height: 2.5em;
 	line-height:2.5em;
-	margin: 0 1em;
 	border-bottom: 1px solid #e4e4e4;
 }
 .wj-conShow p,.wj-conObli p{
@@ -160,19 +168,47 @@ a{
 	line-height:2em;
 	margin: 0.2em 1em;
 }
-.wj-conBut1,.wj-conBut2{
+
+.wj-obl .department .divstyle .department_c .wj-conBut .wj-conBut2 {
 	height: 2em;
 	width: 5em;
 	line-height: 2em;
 	text-align: center;
-	background: #e8433d;
+	background: #ffffff;
 	margin-right: 1em;
+	float: right;
 }
+.wj-obl .department .divstyle .department_c .wj-conBut .wj-conBut1{
+	height: 2em;
+	width: 7em;
+	line-height: 2em;
+	text-align: center;
+	background: #ffffff;
+	margin-right: 1em;
+	float: right;
+}
+.wj-obl .department .divstyle .department_c .wj-conBut .wj-conBut2 p, .wj-obl .department .divstyle .department_c .wj-conBut .wj-conBut1 p{
+	color: #fff;
+	font-size: 1em;
+	background-color:#e8433d;
+}
+
+.wj-obl .department .divstyle .department_c .wj-conBut .wj-conBut2 .ui-btn, .wj-obl .department .divstyle .department_c .wj-conBut .wj-conBut1 .ui-btn{
+	background-color:#e8433d;
+	color:#FFFFFF;
+	font-size: 0.9em;
+	}
 .wj-conBut1 p,.wj-conBut2 p{
 	color: #fff;
 	font-size: 0.9em;
 }
 
+.wj-obl .department .divstyle .order-id .order-id-span {
+    width: 100%;
+	margin-top:10px;
+	font-size: 0.6em;
+	color: #7e7e7e;
+}
 
 /*选项卡*/
 .department,.divstyle {

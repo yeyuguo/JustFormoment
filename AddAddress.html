@@ -4,10 +4,169 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>添加地址</title>
-	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
-	<link rel="stylesheet" href="css/duanlj.css" />
+	<script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+	</script>
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script>
+	
+	$(document).on("pageinit","#dlj-addAddress",function(){
+		//加载省的信息
+		$.mobile.loading('show',{text:"加载中...",textVisible:true,theme:"b"});
+		$.ajax({
+			url: "xml/Provinces.xml",
+			dataType: 'xml',
+			type: 'GET',
+			timeout: 3000,
+			success: function(xml){
+				$.mobile.loading("hide");
+				$(xml).find("Province").each(function(i){
+					var province='<option value="'+$(this).attr("ID")+'">'+$(this).attr("ProvinceName")+'</option>';
+					$("#dlj-province").append(province);
+				});
+				$("#dlj-province").selectmenu('refresh');
+			},
+			error: function(xml){
+				$.mobile.loading("hide");
+				$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'加载信息出错!'});
+			}
+		});
+		//省选择
+		$("#dlj-province").change(function(){
+			$.mobile.loading('show',{text:"加载中...",textVisible:true,theme:"b"});
+			$("#dlj-city").find("option").remove();
+			$("#dlj-district").find("option").remove();
+			var ID= $("#dlj-province").val();  //获取选择的ID
+			var ProvinceName= $("#dlj-province").find("option:selected").text();
+			$("#province-span").remove();
+			$("#province-name").append('<span id="province-span">'+ProvinceName+'</span>');
+			//$("#province-name").selectmenu('refresh');
+			$.ajax({
+				url: "xml/Cities.xml",
+				dataType: 'xml',
+				type: 'GET',
+				timeout: 3000,
+				success: function(xml)
+				{
+					$.mobile.loading("hide");
+					$("#dlj-city").append('<option value="0">请选择</option>');
+					$("#dlj-district").append('<option value="0">----</option>');
+					$(xml).find("City").each(function(i){
+						if($(this).attr("PID") == ID){
+							var city='<option value="'+$(this).attr("ID")+'">'+$(this).attr("CityName")+'</option>';
+							$("#dlj-city").append(city);
+						}
+					});
+					$("#dlj-city").selectmenu('refresh');
+					$("#dlj-district").selectmenu('refresh');
+				},
+				error: function(xml)
+				{
+					$.mobile.loading("hide");
+					$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'加载信息出错!'});
+				}
+			});
+		});
+		//市选择
+		$("#dlj-city").change(function(){
+			$.mobile.loading('show',{text:"加载中...",textVisible:true,theme:"b"});
+			$("#dlj-district").find("option").remove();
+			var ID= $("#dlj-city").val();  //获取选择的ID
+			var CityName= $("#dlj-city").find("option:selected").text();
+			$("#city-span").remove();
+			$("#city-name").append('<span id="city-span">'+CityName+'</span>');
+			$.ajax({
+				url: "xml/Districts.xml",
+				dataType: 'xml',
+				type: 'GET',
+				timeout: 3000,
+				success: function(xml)
+				{
+					$.mobile.loading("hide");
+					$("#dlj-district").append('<option value="0">请选择</option>');
+					$(xml).find("District").each(function(i)
+					{
+						if($(this).attr("CID") == ID){
+							var city='<option value="'+$(this).attr("ID")+'">'+$(this).attr("DistrictName")+'</option>';
+							$("#dlj-district").append(city);
+						}
+					});
+					$("#dlj-district").selectmenu('refresh');
+				},
+				error: function(xml)
+				{
+					$.mobile.loading("hide");
+					$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'加载信息出错!'});
+				}
+			});
+		});
+		//区选择
+		$("#dlj-district").change(function(){
+			 var DistrictName= $("#dlj-district").find("option:selected").text();
+			$("#district-span").remove();
+			$("#district-name").append('<span id="district-span">'+DistrictName+'</span>');
+			});
+		//保存事件
+		$("#AddressSave").click(function(){
+			var firstname=$("#dlj-userName").val();
+			if(firstname==null || firstname == ''){
+				$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'收货人不能为空!'});
+				return;
+			}
+			var phone = /^((1)+\d{10})$/;   //手机正则远征
+			var cellphone=$("#dlj-userPhone").val();
+			if(!phone.test(cellphone)){
+				$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'请输入有效的手机号码!'});
+				return;
+			}
+			var postal = "000000";
+			var province = $("#dlj-province").val(); //省
+			var city = $("#dlj-city").val(); //市
+			var area = $("#dlj-district").val();  //区
+			var citytxt=$("#dlj-city").find("option:selected").text();
+			var area=$("#dlj-district").find("option:selected").text();
+			if(province == 0 || city == 0 || area == 0){
+				$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'地区选择不完整!'});
+				return;	
+			}
+			
+			var address=$("#dlj-detailedPlace").val();
+			if(address==null || address == ''){
+				$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'详细地址不能为空!'});
+				return;
+			}
+			$.mobile.loading('show',{text:"添加中...",textVisible:true,theme:"b"});
+			//'+$("#sl_area").find("option:selected").text()+'
+			var p='?firstName='+firstname+'&lastName=""&titleCode=mr&line1='+address+'&line2=""&town=""&postalCode='+postal+'&country.isocode=CN&region.isocode='+province+'&city='+city+'&phone='+cellphone+'&access_token='+localStorage.getItem("access_token");
+			$.ajax({
+				url : localStorage.getItem("H_URL")+"//yxtws/v1/hxyxt/customers/current/addresses"+p,
+				type:"POST",
+				dataType:"json",
+				//timeout:30000,
+				contentType:"application/x-www-form-urlencoded; charset=utf-8",
+				success: function(data){
+					$.mobile.loading("hide");
+					alert("添加成功");
+					//window.location="AddressCon.html";
+					//window.location.load();	
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){   //注册成功返回201状态吗
+					$.mobile.loading("hide");
+					alert(textStatus);
+					$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'地址新增失败'});
+				}
+			});
+		});
+	});
+	//JQM_Item页面显示事件，进行数据检索及加载
+	$(document).on("pageshow","#JQM_AddAddress",function(){
+		
+	});
+</script>
 </head>
 <body>
     <!-- 添加地址页面 段龙剑 2015-02-04 10:52:11 -->
@@ -18,7 +177,7 @@
     		</a>
     		<h1>添加地址</h1>
     	</div>
-        <div data-role="content">
+        <div data-role="content" class="add-address-content">
             <form method="" action="" class="dlj-addAddressInput">
                 <label for="dlj-userName" class="ui-hidden-accessible">收货人姓名</label>
                 <div class="dlj-addAddressLine1"></div>
@@ -33,49 +192,37 @@
             <form method="" action="" class="ui-block-a dlj-selectPlace">
                 <div data-role="fieldcontain">  
                     <select  id="dlj-province" data-iconpos="notext">
-                        <option value="beijing">北京市</option>
-                        <option value="shanghai">上海市</option>
-                        <option value="yunnan">云南省</option>
+                        <option value="0">----</option>
                     </select>
-                    <label for="dlj-province" class="dlj-selectOption dlj-selectProvince">请选择省</label>
+                    <label for="dlj-province" class="dlj-selectOption dlj-selectProvince" id="province-name"><span id="province-span">请选择省</span></label>
                 </div>
             </form>
-            <form method="" action="" class="ui-block-b dlj-selectPlace">
+            <form method="" action="" class="ui-block-a dlj-selectPlace">
                 <div data-role="fieldcontain"> 
                     <select  id="dlj-city" data-iconpos="notext">
-                        <option value="kunming">昆明市</option>
-                        <option value="yuxi">玉溪市</option>
-                        <option value="qujing">曲靖市</option>
+                       <option value="0">----</option>
                     </select>
-                    <label for="dlj-city" class="dlj-selectOption dlj-selectCity">请选择市</label>
+                    <label for="dlj-city" class="dlj-selectOption dlj-selectCity" id="city-name"><span id="city-span">请选择市</span></label>
                 </div>
             </form>
             <form method="" action="" class="ui-block-a dlj-selectPlace">
                 <div data-role="fieldcontain">
                     <select  id="dlj-district" data-iconpos="notext">
-                        <option value="wuhua">五华区</option>
-                        <option value="panlong">盘龙区</option>
-                        <option value="guandu">官渡区</option>
+                       <option value="0">----</option>
                     </select>
-                    <label for="dlj-district" class="dlj-selectOption dlj-selectDistrict">请选择区</label>
+                    <label for="dlj-district" class="dlj-selectOption dlj-selectDistrict" id="district-name"><span id="district-span">请选择区</span></label>
                 </div>
             </form>
-            <form method="" action="" class="ui-block-b dlj-selectPlace">
-                <div data-role="fieldcontain">   
-                    <select  id="dlj-street" data-iconpos="notext">
-                        <option value="hxl">鸿翔路</option>
-                        <option value="jmnl">景明南路</option>
-                        <option value="jmbl">景明北路</option>
-                    </select>
-                    <label for="dlj-street" class="dlj-selectOption dlj-selectStreet">请选择街道</label>
-                </div>
-            </form>
+           
             <form method="" action="">
                 <div data-role="fieldcontain">
                     <label for="dlj-detailedPlace" class="ui-hidden-accessible">详细地址</label>
                     <textarea id="dlj-detailedPlace" class="dlj-detailedPlaceIN" placeholder="请输入详细地址" data-role="none"></textarea>
                 </div>
             </form>
+            <div class="addaderss-div">
+                <input type="button" data-corners="false" id="AddressSave" value="保存" class="ui-btn">
+            </div>
         </div>
     </div>
 

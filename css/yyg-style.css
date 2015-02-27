@@ -150,7 +150,7 @@ ul li {
     color: #7e7e7e;
     font-size: 1em;
 }
-.Home .homeContent .yyg-hotProTitle .yyg-morePro .yyg-more, .Home .homeContent .yyg-hotProTitle .Enghot {
+.yyg-hotProTitle .yyg-morePro .yyg-more, .Home .homeContent .yyg-hotProTitle .Enghot {
     color: #7e7e7e;
     font-size: 0.9em;
 }
@@ -219,6 +219,38 @@ html body .Home .yyg-footer .homeFootNav ul li a.yyg-person:before{
     content: "\E009" attr(data-ico);
 }
 
+.buyCarCount{
+    width: 17px;
+    height: 15px;
+    line-height:15px;
+    text-align:center;
+    color:#e7433d;
+    background-color:#fff; 
+    position: absolute;
+    z-index: 10;
+    border-radius:2px;
+    left: 51%;
+    top:1%;
+    font-size: 5px;
+}
+.buyCarCount:after{
+    font-size: 5px;
+    width: 0;
+    height: 0;
+    content:'\00a0';
+    display: block;
+    border-width:4px;
+    position: absolute;
+    left: 20%;
+    bottom:-8px;
+    z-index: 2;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+.buyCarCount:focus{
+    color:#fff;
+    background-color: #000;
+}
 /*银行卡css*/
 .bankheader a {
     text-decoration: none;
