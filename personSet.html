@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>personSettingPage</title>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+    <link rel="stylesheet" href="css/yyg-style.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+   
+</head>
+
+<body>
+    <div data-role="page">
+        <div data-role="header" class="bankheader">
+            <a href="#" data-role="none" data-rel="back"><img src="image/user/button-48.png">
+            </a>
+            个人设置
+            <a href="#" data-role="none"><img src="image/user/button-42.png">
+            </a>
+        </div>
+        <div data-role="content" class="personSetcont">
+            <div data-inline="true" class="mindInfo">
+                <img src="image/user/button-11.png">
+                <span>密码修改</span>
+            </div>
+            <div class="yyg-form">
+                <div class="yyg-line"></div>
+                <div class="yyg-line"></div>
+                <input data-corners="false" type="password" placeholder="请输入密码" id="yyg-password" name="password" data-role="controlgroup">
+                <input data-corners="false" type="password" placeholder="请再次输入密码" id="yyg-passwordConfirm" name="password">
+
+                <div class="saveCancle fr" data-type="horizontal" data-role="controlgroup" data-corners="false">
+                    <a href="#" data-role="button">保存</a>
+                    <a href="#" data-role="button">取消</a>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</body>
+
+</html>

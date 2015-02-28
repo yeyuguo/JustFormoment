@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>bankPage</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+    <link rel="stylesheet" href="css/yyg-style.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+
+</head>
+
+<body>
+    <div data-role="page">
+        <div data-role="header" class="bankheader">
+            <a href="#" data-role="none" data-rel="back">
+                <img src="image/user/button-48.png">
+            </a>
+            立即支付
+
+        </div>
+        <div data-role="content" class="bankContent">
+            <div class="yyg-totalPay">
+                合计支付 : <span class="yyg-totalmoney">300.00</span>元
+                <span class="yyg-payMind fr"><img src="image/user/button-25.png">支付宝</span>
+            </div>
+
+            <div class="yyg-payFunc">
+                银联
+            </div>
+            <form action="" method="post">
+                <fieldset data-role="none" data-type="vertical" data-inline="true">
+                    <label for="onlinePay"><img src="image/user/button-62.png">
+                    </label>
+                    <input type="radio" id="onlinePay" name="payMoney">
+                    <label for="招商"><img src="image/user/button-62.png">
+                    </label>
+                    <input type="radio" id="招商" name="payMoney">
+                </fieldset>
+                <input type="submit" data-role="controlgroup" data-corners="false" value="确认" class="yyg-confirm">
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>
