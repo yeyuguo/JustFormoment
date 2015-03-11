@@ -1,0 +1,239 @@
+/*加入购物车时弹出选择商品规格的模态窗口*/
+.WindowShow {
+	display: none;
+}
+
+/*商品价格和库存等信息展示*/
+.WindowShow .goodsinfo {
+	width: 100%;
+	height: 80px;
+	border-bottom: 2px solid red;
+	background: #d3d7d4;
+	position: fixed;
+	bottom:245px;
+}
+
+/*关闭按钮*/
+.WindowShow .goodsinfo a img {
+	float: right;
+	margin-right: 10px;
+	margin-top: -0.5em;
+	width: 30px;
+	height: 30px;
+}
+
+.WindowShow .goodsinfo dl dt img {
+	width: 110px;
+	height: 80px;
+}
+
+.WindowShow .goodsinfo dl dd {
+	float: left;
+	margin-left: 130px;
+}
+
+.WindowShow .goodsinfo dl .Price {
+	color: red;
+	margin-top: -80px;
+	font-size: 10px;
+}
+
+/*库存*/
+.WindowShow .goodsinfo dl .Count {
+	margin-top: -60px;
+	font-size: 10px;
+}
+
+.WindowShow .goodsinfo dl .Classify {
+	margin-top: -40px;
+	font-size: 10px;
+}
+
+/*选择数量之后发生变hua*/
+.WindowShow .goodsinfo dl .Classify .numbers {
+	font-weight: bolder;
+	color: red;
+}
+
+
+
+
+.WindowShow .select {
+	width: 100%;
+	position: fixed;
+	bottom: 40px;
+	height: 208px;
+	overflow: auto;
+	overflow-x: hidden; /* 超出的内容让其隐藏 */
+	background: white;
+}
+
+.WindowShow .select .type {
+	min-height: 300px;
+	margin-bottom: 1em;
+	margin-left: 10px;
+}
+
+.WindowShow .select .type p {
+	font-size: 15px;
+	font-weight: bolder;
+}
+
+.WindowShow .select .type .size {
+	border-top: 1px solid #ccc;
+	width: 100%;
+	min-height: 300px;
+	margin-top:5px;
+	padding-top:5px;
+}
+
+.WindowShow .select .type .size .sizeselect {
+	min-width: 30%;
+	/*height: 20px;*/
+	min-height:20px;
+	border-radius: 10px;
+	border: 2px solid #ccc;
+	font-size: 15px;
+	text-align: center;
+	float: left;
+	margin-left: 5px;
+	margin-bottom: 30px;
+	cursor:pointer;
+}
+
+.WindowShow .select .type .sellNumber {
+	float: left;
+	border-top: 1px solid #ccc;
+	height: 50px;
+	width: 100%;
+	padding-top: 10px;
+}
+
+.WindowShow .select .type .sellNumber font {
+	float: left;
+	font-size: 18px;
+	font-weight: bolder;
+	margin-top: 6px;
+}
+
+.WindowShow .select .type .sellNumber .no {
+	float: left;
+	margin-top:-28px;
+	margin-left:10%;
+}
+
+.WindowShow .select .type .sellNumber .no #jian {
+	width: 60px;
+	height: 30px;
+	float: right;
+	cursor: pointer;
+}
+
+.WindowShow .select .type .sellNumber .no #jian img {
+	width: 100px;
+	height: 100px;
+}
+
+.WindowShow .select .type .sellNumber .no input {
+	/* width: 100px; */
+	width: 30%;
+	height: 24px;
+	text-align: center;
+	font-size: 15px;
+	float: right;
+}
+
+.WindowShow .select .type .sellNumber .no #jia {
+	width: 60px;
+	height: 30px;
+	float: right;
+	cursor: pointer;
+}
+
+.WindowShow .select .type .sellNumber .no #jia img {
+	height: 100px;
+	width: 100px;
+}
+
+/*确定按钮*/
+.WindowShow .btn_Confirm {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	height: 40px;
+	border-top: 1px solid #ccc;
+	text-align: center;
+}
+
+.WindowShow .btn_Confirm #confirm {
+	width: 100%;
+	height:100%;
+	background: #bd1e22;
+	font-size: 15px;
+	color:#fff;
+	padding-top:10px;
+	font-weight:normal;
+}
+
+/*弹框之后加入购物车的样式*/
+.WindowShow .btn_AddCar {
+	position: fixed;
+	bottom: 5px;;
+	width: 100%;
+	height: 35px;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.WindowShow .btn_AddCar .AddOrBuy {
+	width: 100%;
+	float: left;
+	height: 100%;
+	font-size: 15px;
+	text-align: center;
+	padding-top: 10px;
+	color:#fff;
+}
+
+.WindowShow .btn_AddCar #AddCar {
+	background: #bd1e22;
+}
+
+.WindowShow .btn_AddCar #sell {
+	background: red;
+}
+
+
+.WindowShow .info .infomation {
+	font-size: 25px;
+	margin-top: 10px;
+}
+
+/*选择商品规格之后的样式变化*/
+.selected {
+	min-height:20px;
+	border-radius: 10px;
+	border: 2px solid red;
+	font-size: 15px;
+	text-align: center;
+	float: left;
+	margin-left: 5px;	
+	margin-bottom: 30px;
+	min-width: 30%;
+}
+
+
+/*成功添加购物车之后提示用户的信息样式*/
+#AddOK{width:90%; height:200px; background:#fff; position:absolute; bottom:220px; margin-left:5%;}
+#AddOK a img{width:25px; height:25px; float:right;}
+#AddOK dl{margin-top:50px; margin-left:25%;}
+#AddOK dl dt img{width:35px; height:35px; margin-top:5px;}
+#AddOK dl dd{margin-top:-35px; margin-left:40px; font-size:20px;}
+#AddOK .ShoppingOrPay{margin-top:50px; margin-left:25%;}
+#AddOK .ShoppingOrPay div{text-align:center; color:#fff;}
+#AddOK .ShoppingOrPay .Shopping{background:#F00; float:left;margin-left:-40px; width:100px; height:30px; text-align:center; padding-top:10px;}
+#AddOK .ShoppingOrPay .GoToPay{background:#F93; margin-left:20px; float:left;width:150px; height:30px;text-align:center;padding-top:10px;}
+
+
+/*提示用户添加商品到购物车时必须选择商品规格等信息*/

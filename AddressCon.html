@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>地址管理</title>
+	<script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/duanlj.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+	</script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script>
+	   var AllAddress;  //所有的收货地址信息
+	
+	//事件处理
+	$(document).on("pageinit","#AddressList-page",function(){
+		$("#AddressAdd").click(function(){
+			window.location="AddAddress.html";
+			window.location.load();	
+		});
+	})
+	//加载地址列表
+	$(document).on("pageshow","#AddressList-page",function(){
+		//$("#AddressList").find('li').remove();  //清空列表
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/customers/current/addresses",
+			type:"GET",
+			data:{access_token:localStorage.getItem("access_token")},
+			dataType:"json",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				if(data.addresses.length>0){
+					for(var i=0;i<data.addresses.length;i++){
+						//<a onClick=SelectAddress('+data.addresses[i].id+') href="#"></a>
+					 if(i==0){
+					    var address='<li><div class="first-address"><a onClick=SelectAddress('+data.addresses[i].id+') href="#"><div class="first-list">'+
+                           '<div><div class="name-tell"><div class="name"><span>'+data.addresses[i].firstName+'</span></div>'+
+						   '<div class="tell"><span>'+data.addresses[i].cellphone+'</span></div></div>'+
+                           '<div class="adress"><span>'+data.addresses[i].region.name+data.addresses[i].city+
+						data.addresses[i].cityDistrict+data.addresses[i].line1+'</span></div></div><div class="chose-image">'+'<img src="image/user/address_chosed.png" /></div></a></div></li>';
+					 }else{
+						 var address='<li><div class="no-first-address"><a onClick=SelectAddress('+data.addresses[i].id+') href="#"><div class="no-first-list"><div>'+
+                              '<div class="name-tell"><div class="name"><span>'+data.addresses[i].firstName+'</span></div>'+
+							  '<div class="tell"><span>'+data.addresses[i].cellphone+'</span></div></div>'+
+                              '<div class="adress"><span>'+data.addresses[i].region.name+data.addresses[i].city+
+						data.addresses[i].cityDistrict+data.addresses[i].line1+'</span></div></div></a></div></li>';
+						}
+						
+						$("#AddressList").append(address);
+					}
+					AllAddress = data;  //赋值
+				}
+				$("#AddressList").listview('refresh');
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+	});
+	//设置选中的收货地址信息
+	function SelectAddress(i){
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("WCF_Url")+"SS_SetUserAddress",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID"),AAddress:i},
+			dataType:"jsonp",
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				if(data == 'OK'){ 
+					window.location="CommitOrder.html";
+					window.location.load();	
+				}
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'设置收货地址错误!'});
+			}
+		});
+	}
+	
+    </script>
+</head>
+<body>
+   
+   <div data-role="page" id="AddressList-page" class="jqm-hxyy">
+    	<div data-role="header" class="jqm-header" data-position="fixed">
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
+    		<h1>地址管理</h1>
+    	</div>
+        <div data-role="content" class="add-address-content">
+        <!-- 其他属性  data-inset="true" data-split-theme="a" data-split-icon="delete -->
+          <ul id="AddressList" data-role="listview"  >
+            
+           </ul>
+         
+          
+          
+  
+        </div>
+        <div data-role="footer" class="jqm-footer address-list-footer" data-position="fixed">
+                   	<input type="button" data-corners="false" id="AddressAdd" value="添加地址" class="ui-btn">
+
+        </div>
+    </div>
+
+  
+</body>
+</html>

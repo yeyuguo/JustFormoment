@@ -329,21 +329,32 @@ input[type="submit"] {
     text-decoration: none;
     padding: 0.8em 1em 1em 0.5em;
 }
-/*内容css*/
-
-#personSet div.mindInfo {
-    color: #696969;
-    font-size: 1em;
+/*密码修改图片和文字css*/
+.jqm-hxyy .personSetcont .mindInfo{
+	color: #696969; 
+    font-size: 14px;
     font-weight: bold;
     height: 25px;
+	width:100%;
     line-height: 25px;
     border-bottom: 1px solid #e4e4e4;
-    padding-bottom: 0.5em;
+    padding-bottom:10px; float:left;
+	margin-bottom:20px;
 }
+.jqm-hxyy .personSetcont .mindInfo .mindInfo-img{
+	width:25px; float:left;
+}
+.jqm-hxyy .personSetcont .mindInfo .mindInfo-text{
+	width:150px;
+}
+
+
+
 .saveCancle a.ui-corner-all {
     background-color: #e7433d;
     color: #fff;
     font-weight: 400;
+	height:10px; width:60px; line-height:10px;
 }
 .saveCancle a:visited {
     background-color: #e7433d;
@@ -411,3 +422,17 @@ input[type="submit"] {
     background-repeat: no-repeat;
     background-position: 1em center;
 }
+
+/*密码修表格css*/
+.jqm-hxyy .personSetcont .table_input{
+	width:90%; margin:20px auto 0 auto;}
+.jqm-hxyy .personSetcont .table_input tr{
+	width:100%; background-color:#e9413e;}
+.jqm-hxyy .personSetcont .table_input td{
+	height:40px;}
+.jqm-hxyy .personSetcont .table_input td .img_ico{
+	margin:4px 10px 0 10px;}
+.jqm-hxyy .personSetcont .table_input td .img_lin{
+	margin-top:4px;}
+.jqm-hxyy .personSetcont .table_input td .btn_text{
+	outline:none; background:transparent; border-style:none; color:#fff; font-size:16px; height:40px; line-height:40px;}

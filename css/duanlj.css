@@ -1,0 +1,461 @@
+/**
+ * 登录页面
+ * @authors 段龙剑
+ * @date    2015-02-04 10:52:11
+ */
+.dlj-login {
+	background: #fff;
+}
+.dlj-login form {
+ 	overflow: hidden;
+}
+.dlj-loginHeader h1, .dlj-login .ui-content .dlj-inputNameIN, .dlj-login .ui-content .dlj-inputPasswordIN, .dlj-PWandAuto .ui-checkbox .dlj-rememberPW, .dlj-PWandAuto .ui-checkbox .dlj-autoLogin, .dlj-login .ui-content .dlj-forgetPW, .dlj-login .ui-content .dlj-loginNow, .ui-content .dlj-loginBottom .dlj-yxfw, .dlj-loginBottom .dlj-bottomRight .dlj-pzbz, .dlj-loginBottom .dlj-bottomRight .dlj-jrfx {
+ 	font-family: Microsoft Yahei;
+}
+.dlj-login .dlj-loginHeader {
+ 	background: #fff !important;
+	border-bottom: 1px solid #e8433d !important;
+}
+.dlj-login .dlj-loginHeader a {
+	background: none !important;
+	border: none;
+	box-shadow: none;
+	padding: 5px 10px;
+}
+.dlj-login .dlj-loginHeader h1 {
+	letter-spacing: 20px;
+	text-shadow: none;
+	color: #e8433d;
+	font-size: 16px;
+	font-weight: normal;
+}
+.dlj-login .ui-content .dlj-inputNameIN, .dlj-login .ui-content .dlj-inputPasswordIN {
+	margin-top: 15px;
+	padding-left: 60px;
+	width: 100%;
+	height: 45px;
+	color: #fff;
+	border: none;
+}
+.dlj-login .ui-content .dlj-inputNameIN {
+	background: url(../image/button-3.png) 20px center no-repeat #e8433d;
+}
+.dlj-login .ui-content .dlj-inputPasswordIN {
+	background: url(../image/button-10.png) 25px center no-repeat #e8433d;
+}
+.dlj-loginLine1, .dlj-loginLine2 {
+	width:1px;
+	height:35px;
+	background:#fff;
+	position:absolute;
+	left:70px;
+}
+.ui-content form .dlj-loginLine1 {
+	top:83px;
+}
+.ui-content form .dlj-loginLine2 {
+	top: 145px;
+}
+.dlj-login .ui-content .dlj-PWandAuto {
+	float: left;
+	margin-top: 5px;
+}
+
+/*checkbox复选框样式*/
+.ui-content .dlj-PWandAuto .ui-checkbox {
+	float: left;
+	margin-right: 20px;
+}
+.dlj-PWandAuto .ui-checkbox .ui-btn-icon-left:after {
+	width: 23px;
+	height: 23px;
+	margin-left: -8px;
+	opacity: 1;
+	background: url(../image/button-26.png);
+}
+.dlj-PWandAuto .ui-checkbox .ui-checkbox-on:after {
+	background: url(../image/button-25.png) !important;
+}
+.dlj-PWandAuto .ui-checkbox .ui-checkbox-on:after, .dlj-PWandAuto .ui-checkbox .ui-btn.ui-checkbox-off:after {
+	margin-top: -11px;
+}
+.dlj-rememberPW, .dlj-autoLogin, .dlj-forgetPW, .dlj-loginNow {
+	font-weight: normal !important;
+}
+.dlj-PWandAuto .ui-checkbox .dlj-rememberPW, .dlj-PWandAuto .ui-checkbox .dlj-autoLogin {
+	text-shadow: none !important;
+	color: #696c6b !important;
+	border: none !important;
+	padding: 3px 0 4px 25px;
+	background: #fff !important;
+}
+.dlj-PWandAuto .ui-checkbox .dlj-rememberPW:hover, .dlj-PWandAuto .ui-checkbox .dlj-autoLogin:hover {
+	background: #fff !important;
+}
+.dlj-PWandAuto .ui-checkbox .dlj-autoLogin {
+	color: #6b6b6b !important;
+}
+
+.dlj-login .ui-content .dlj-forgetPW {
+	color: #6b6b6b !important;
+	float: right;
+	margin-top: 16px;
+}
+
+.dlj-login .ui-content .dlj-loginNow {
+	letter-spacing: 20px;
+	clear: both;
+	margin-top: 70px;
+	font-size: 18px;
+	color: #fff !important;
+	border: none;
+	text-shadow: none !important;
+	box-shadow: none;
+	background: #e8433d !important;
+}
+
+.dlj-login .ui-content .dlj-loginBottom {
+	width: 200px;
+	margin: auto ;
+	margin-top: 150px;
+}
+.ui-content .dlj-loginBottom .dlj-login-logo {
+	margin: 0 0 30px 30px ;
+}
+.ui-content .dlj-loginBottom .dlj-yxfw, .dlj-loginBottom .dlj-bottomRight .dlj-pzbz, .dlj-loginBottom .dlj-bottomRight .dlj-jrfx {
+	color: #e8433d;
+	margin: 0;
+}
+.ui-content .dlj-loginBottom .dlj-yxfw {
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	width: 70px;
+	border-right: 2px solid #e8433d;
+}
+.ui-content .dlj-loginBottom .dlj-bottomRight {
+	margin: -3px 0 0 5px;
+	float: left;
+}
+.dlj-loginBottom .dlj-bottomRight .dlj-pzbz {
+	font-size: 14px;
+}
+.dlj-loginBottom .dlj-bottomRight .dlj-jrfx {
+	font-size: 12px;
+}
+
+/**
+ * 注册页面
+ * @authors 段龙剑
+ * @date    2015-02-04 10:52:11
+ */
+.dlj-register {
+	background: #fff;
+}
+.dlj-register form {
+ 	overflow: hidden;
+}
+.dlj-register .dlj-registerHeader h1, .ui-content form .dlj-inputEmailIN, .ui-content form .dlj-inputPhoneIN, .ui-content form .dlj-inputPWIN, .ui-content form .dlj-inputPWagainIN, form .ui-checkbox .dlj-agreement, .dlj-register .ui-content .dlj-registerNow {
+ 	font-family: Microsoft Yahei;
+ }
+.dlj-register .dlj-registerHeader {
+ 	background: #fff !important;
+	border-bottom: 1px solid #e8433d !important;
+}
+.dlj-register .dlj-registerHeader a {
+	background: none !important;
+	border: none;
+	box-shadow: none;
+	padding: 5px 10px;
+}
+.dlj-register .dlj-registerHeader h1 {
+	letter-spacing: 20px;
+	text-shadow: none;
+	color: #e8433d;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.ui-content form .dlj-inputEmailIN, .ui-content form .dlj-inputPhoneIN, .ui-content form .dlj-inputPWIN, .ui-content form .dlj-inputPWagainIN {
+	margin-top: 15px;
+	width: 100%;
+	height: 35px;
+	color: #fff;
+	border: none;
+	padding-left: 60px;
+}
+.ui-content form .dlj-inputEmailIN {
+	background: url(../image/button-19.png) 20px center no-repeat #e8433d;
+}
+.ui-content form .dlj-inputPhoneIN {
+	background: url(../image/button-14.png) 20px center no-repeat #e8433d;
+}
+.ui-content form .dlj-inputPWIN {
+	background: url(../image/button-9.png) 25px center no-repeat #e8433d;
+}
+.ui-content form .dlj-inputPWagainIN {
+	background: url(../image/button-10.png) 25px center no-repeat #e8433d;
+}
+.dlj-registerLine1, .dlj-registerLine2, .dlj-registerLine3, .dlj-registerLine4 {
+	width:1px;
+	height:28px;
+	background:#fff;
+	position:absolute;
+	left:70px;
+}
+.ui-content form .dlj-registerLine1 {
+	top: 81px;
+}
+.ui-content form .dlj-registerLine2 {
+	top: 134px;
+}
+.ui-content form .dlj-registerLine3 {
+	top: 185px;
+}
+.ui-content form .dlj-registerLine4 {
+	top: 237px;
+}
+
+/*checkbox复选框样式*/
+.dlj-register .ui-checkbox .ui-btn-icon-left {
+	border: none !important;
+	padding-left: 30px;
+	background: #fff;
+}
+.dlj-register .ui-checkbox .ui-btn-icon-left:hover {
+	background: #fff;
+}
+.dlj-register .ui-checkbox .ui-btn-icon-left:after {
+	width: 23px;
+	height: 23px;
+	margin-left: -8px;
+	opacity: 1;
+	background: url(../image/button-28.png);
+}
+.dlj-register .ui-checkbox .ui-checkbox-on:after {
+	background: url(../image/button-24.png) !important;
+}
+.dlj-register .ui-checkbox .ui-checkbox-on:after, .dlj-register .ui-checkbox .ui-btn.ui-checkbox-off:after {
+	margin-top: -11px;
+}
+form .ui-checkbox .dlj-agreement {
+	font-weight: normal !important;
+	color: #e8433d !important;
+}
+
+.dlj-register .ui-content .dlj-registerNow {
+	clear: both;
+	letter-spacing: 20px;
+	font-weight: normal !important;
+	font-size: 18px;
+	color: #fff !important;
+	border: none;
+	text-shadow: none !important;
+	box-shadow: none;
+	background: #e8433d !important;
+}
+
+.dlj-register .register-content .registt-div  .ui-btn {
+	background-color:#e20000;
+	color:#FFFFFF;
+	text-shadow:none;
+	box-shadow:none;
+}
+
+ /**
+ * 添加地址页面
+ * @authors 段龙剑
+ * @date    2015-02-04 10:52:11
+ */
+.dlj-addAddress {
+	background: #fff;
+}
+.dlj-addAddress .dlj-addAddressHeader h1, .ui-content .dlj-addAddressInput .dlj-userNameIN, .ui-content .dlj-addAddressInput .dlj-userPhoneIN, .ui-content .dlj-addAddressInput .dlj-userEmailIN, .dlj-selectPlace .ui-field-contain .dlj-selectOption, .ui-content .dlj-selectPlace span, .ui-content .dlj-selectPlace option, form .ui-field-contain .dlj-detailedPlaceIN {
+ 	font-family: Microsoft Yahei !important;
+}
+.dlj-addAddress .dlj-addAddressHeader {
+ 	background: #fff !important;
+	border-bottom: 1px solid #e8433d !important;
+}
+.dlj-addAddress .dlj-addAddressHeader a {
+	background: none !important;
+	border: none;
+	box-shadow: none;
+	padding: 5px 10px;
+}
+.dlj-addAddress .dlj-addAddressHeader h1 {
+	text-shadow: none;
+	color: #e8433d;
+	font-size: 16px;
+	font-weight: normal;
+}
+.ui-content .dlj-addAddressInput .dlj-userNameIN, .ui-content .dlj-addAddressInput .dlj-userPhoneIN, .ui-content .dlj-addAddressInput .dlj-userEmailIN {
+	margin-top: 15px;
+	width: 100%;
+	height: 35px;
+	border: none;
+	padding-left: 60px;
+	border-bottom: 1px solid #dedede;
+}
+.ui-content .dlj-addAddressInput .dlj-userNameIN {
+	background: url(../image/button-6.png) 15px center no-repeat #fff;
+}
+.ui-content .dlj-addAddressInput .dlj-userPhoneIN {
+	background: url(../image/button-12.png) 10px center no-repeat #fff;
+}
+.ui-content .dlj-addAddressInput .dlj-userEmailIN {
+	background: url(../image/button-21.png) 10px center no-repeat #fff;
+}
+/*新增地址的保存button*/
+.dlj-addAddress .add-address-content .addaderss-div .ui-btn {
+	background-color:#e20000;
+	color:#FFFFFF;
+	text-shadow:none;
+	box-shadow:none;
+}
+.ui-content .dlj-addAddressInput .dlj-userNameIN::-moz-placeholder, .ui-content .dlj-addAddressInput .dlj-userPhoneIN::-moz-placeholder, .ui-content .dlj-addAddressInput .dlj-userEmailIN::-moz-placeholder, .ui-content .dlj-addAddressInput .dlj-detailedPlaceIN::-moz-placeholder {
+	color: #ccc;
+}
+.ui-content .dlj-addAddressInput .dlj-userNameIN::-webkit-input-placeholder, .ui-content .dlj-addAddressInput .dlj-userPhoneIN::-webkit-input-placeholder, .ui-content .dlj-addAddressInput .dlj-userEmailIN::-webkit-input-placeholder, .ui-content .dlj-addAddressInput .dlj-detailedPlaceIN::-webkit-input-placeholder {
+	color: #ccc;
+}
+.ui-content .dlj-addAddressInput .dlj-addAddressLine1, .ui-content .dlj-addAddressInput .dlj-addAddressLine2, .ui-content .dlj-addAddressInput .dlj-addAddressLine3 {
+	width:1px;
+	height:28px;
+	background:#ccc;
+	position:absolute;
+	left:65px;
+}
+.ui-content .dlj-addAddressInput .dlj-addAddressLine1 {
+	top: 81px;
+}
+.ui-content .dlj-addAddressInput .dlj-addAddressLine2 {
+	top: 134px;
+}
+.ui-content .dlj-addAddressInput .dlj-addAddressLine3 {
+	top: 186px;
+}
+.dlj-addAddress .ui-content .dlj-addAddressInput {
+ 	overflow: hidden;
+}
+.dlj-addAddress .ui-content .dlj-selectPlace {
+	border-bottom: 1px solid #dedede;
+	width: 100%;
+}
+.dlj-addAddress .ui-content .ui-block-b {
+	float: right;
+}
+.dlj-selectPlace .ui-field-contain .dlj-selectOption {
+	float: right !important;
+	margin-right: 3px !important;
+	width: 70% !important;
+	color: #ccc;
+}
+.ui-content .dlj-selectPlace .ui-field-contain {
+	text-align: right;
+}
+.dlj-selectPlace .ui-field-contain .ui-select {
+	width: 30px !important;
+	float: right;
+	margin-top: -2px;
+}
+.dlj-addAddress .ui-select .ui-btn {
+	border: none;
+	background: none;
+}
+.dlj-addAddress .ui-select .ui-shadow {
+	box-shadow: none;
+}
+.dlj-addAddress .ui-select .ui-btn-icon-notext.ui-corner-all, .dlj-addAddress .ui-select .ui-btn-icon-notext:after {
+	border-radius: 0;
+}
+.dlj-addAddress .ui-select .ui-btn-icon-notext:after {
+	width: 23px;
+	height: 23px;
+	background: url("../image/button-16.png");
+}
+.dlj-addAddress .ui-field-contain .dlj-detailedPlaceIN {
+	margin-top: 20px;
+	width: 100%;
+	border: none;
+	background: #fff;
+	border-bottom: 1px solid #dedede;
+}
+/*地址列表*/
+.jqm-hxyy .add-address-content{
+	width:100%;
+
+}
+.jqm-hxyy .ui-content{
+	width:100%; padding:0;
+
+}
+.jqm-hxyy .add-address-content ul{
+	width:90%; margin:0; padding:0; margin-left:5%;
+}
+.jqm-hxyy .add-address-content li{
+	width:100%; margin:0; padding:0; 
+}
+.jqm-hxyy .add-address-content .chose-image{
+	width:10%; height:100px;  margin:0; padding:0; text-align:center; line-height:100px;
+}
+.jqm-hxyy .add-address-content  .first-address{
+	width:100%; height:100px;  float:left; background:#E8E8E8;
+	
+}
+
+.jqm-hxyy .add-address-content .first-address  .first-list{
+	width:90%; height:100px;  float:left; 
+	
+}
+.jqm-hxyy .add-address-content  .no-first-address{
+	width:100%; height:100px; 
+	
+}
+.jqm-hxyy .add-address-content  .no-first-address .no-first-list{
+	width:100%; height:100px; 
+	
+}
+
+.jqm-hxyy .add-address-content .first-address  .first-list .name-tell{
+	width:85%; height:40px;  float:left; margin-left:5%;  margin-right:10%;
+}
+.jqm-hxyy .add-address-content .first-address  .first-list .name-tell .name{
+	width:45%; text-align:left; font-size:14px; float:left; margin-top:20px; margin-left:5%;
+}
+.jqm-hxyy .add-address-content .first-address  .first-list .name-tell .tell{
+	width:45%; text-align:right; font-size:14px;  float:left; margin-top:20px; margin-right:5%;
+}
+.jqm-hxyy .add-address-content .first-address  .first-list .adress{
+	width:85%; height:60px; float:left; margin-left:5%;  margin-right:10%;
+}
+.jqm-hxyy .add-address-content .first-address  .first-list .adress span{
+	margin-left:5%; font-size:12px;
+	
+}
+
+.jqm-hxyy .add-address-content .no-first-address  .no-first-list .name-tell{
+	width:85%; height:40px;    float:left; margin-left:5%;  margin-right:10%;
+}
+.jqm-hxyy .add-address-content .no-first-address  .no-first-list .name-tell .name{
+	width:45%; text-align:left; font-size:14px; float:left; margin-top:20px; margin-left:5%;
+}
+.jqm-hxyy .add-address-content .no-first-address .no-first-list .name-tell .tell{
+	width:45%; text-align:right; font-size:14px;  float:left; margin-top:20px; margin-right:5%;
+}
+.jqm-hxyy .add-address-content .no-first-address  .no-first-list .adress{
+	width:85%; height:60px;  float:left; margin-left:5%;  margin-right:10%;
+}
+.jqm-hxyy .add-address-content .no-first-address .no-first-list .adress span{
+	margin-left:5%; font-size:12px;
+	
+}
+.jqm-hxyy .address-list-footer{
+	text-align:center;
+}
+.jqm-hxyy .address-list-footer .ui-btn{
+	width:80%; height:20px; line-height:20px; color:#FFFFFF; font-size:16px;
+	background-color:#e7433d;
+	
+}

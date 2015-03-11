@@ -6,17 +6,78 @@
 	<title>商品介绍</title>
     <script type="text/jscript">
 		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
-		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/mian.css"/>');
 		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
 		document.write('<link rel="stylesheet" href="css/lunbo.css">');
+		
 	</script>
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
 	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
     <script src="js/lunbo.js"></script>
+    <script src="js/xcj.js"></script>
+     <script>
+	
+	//事件处理
+	$(document).on("pageinit","#goods-details-page",function(){
+		$("#AddressAdd").click(function(){
+			window.location="AddAddress.html";
+			window.location.load();	
+		});
+	})
+	
+	//加载地址列表
+	$(document).on("pageshow","#goods-details-page",function(){
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/products/100004524",
+			type:"GET",
+			data:{options:"STOCK,PRICE"},
+			dataType:"json",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(data));
+				var allimage ="";
+				if(data.images.length>0){
+					for(var i=0;i<data.images.length;i++){
+						var image_tring = data.images[i].url;
+						image_tring = image_tring.replace('http://qa-image1.yxt.com:8080/medias','http://image.hxyxt.com/medias');
+						//alert(image_tring);
+					    var address='<img '+'src="'+image_tring+'" alt="'+data.images[i].altText+'" title="'+
+				data.images[i].altText+'"/>';
+						allimage=allimage+address;
+					}
+				}
+				
+				$("#goods_nameID").append('<span>'+data.name+'</span>');
+				$("#priceID").append('<span>'+data.price.formattedValue+'</span>');
+				$("#goods_detailsID").append(allimage);
+				$("#goods_priceID").append('<span>单价：'+data.price.formattedValue+'</span>');
+				var inventory;
+				if(data.stock.stockLevelStatus.code == "inStock"){
+					inventory = "库存充足";
+				}else if(data.stock.stockLevelStatus.code == "outofstock"){
+					inventory = "缺货";
+				}else{
+					inventory = data.stock.stockLevelStatus.code;
+				}
+				$("#total_countID").append('<span>'+inventory+'</span>');
+				$("#AddressList").listview('refresh');
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+	});
+    </script>
+  
 </head>
 <body>
-	<div data-role="page" class="jqm-hxyy">
+	<div data-role="page" id="goods-details-page" class="jqm-hxyy">
     	<div data-role="header" class="jqm-header" data-position="fixed">
     		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
     		<h1>商品介绍</h1>
@@ -36,24 +97,105 @@
                     </li>
                 </ul>
 			</div>
+            
             <!--商品描述-->
-            <div class="div_item">
-            	<div class="div_item_title">
-            		商品名称山东龙口发件山东龙口发件山东龙口发件
+            <div class="div_items">
+            	<div class="div_item_title" id="goods_nameID">
+            		
                 </div>
-                <div class="div_item_price">
-                	优惠劵：99.00
+               
+                <div class="div_item_price" id="priceID">
+                	
                 </div> 
-                <div class="div_item_des">
-                	商品详情：
+                 <div class="div_item_type">
+                	请选择颜色和分类
+                </div> 
+                <div class="div_item_des" id="goods_detailsID">
+                
                 </div>
             </div>
     	</div>
         <div data-role="footer" class="jqm-footer jqm-item-footer" data-position="fixed">
-        	<input type="button" id="btn_Buy" data-role="none" value="立即购买" class="ui-btn btn-buy">
+        	<input type="button" id="btn_Buy" data-role="none" value="立即购买" class="ui-btn btn-buy select">
+            <input type="button" id="btn_AddCart" data-role="none" value="加入购物车" class="ui-btn btn-addcart select">
             <input type="button" id="btn_Cart" data-role="none" value="购物车" class="ui-btn btn-cart">
             <span class="span_count">2</span>
         </div>
+      
     </div>
+    
+    
+    <!--选择商品分类时弹出窗口-->
+    <div class="WindowShow">
+		<div class="goodsinfo">
+			<a href="#" id="close"><img src="image/close.png" title="关闭" alt="关闭"></img> </a>
+			<dl>
+				<dt>
+					<img src="image/goods/1.jpg"></img>
+				</dt>
+				<dd class="Price" id="goods_priceID"></dd>
+				<dd class="Count" id="total_countID"></dd>
+				<dd class="Classify">请选择规格、分类</dd>
+			</dl>
+		</div>
+
+		<div class="select">
+			<div class="type">
+				<p>颜色/尺码</p>
+				<div class="size">
+					<div class="sizeselect">10g精美包装 送礼佳品 10g精美包装 送礼佳品10g精美包装 </div>
+					<div class="sizeselect">20g精美包装 送礼佳品</div>
+					<div class="sizeselect">30g</div>
+					<div class="sizeselect">40g</div>
+					<div class="sizeselect">50g</div>
+					<div class="sizeselect">60g</div>
+					<div class="sizeselect">70g</div>
+					<div class="sizeselect">80g</div>
+					<div class="sizeselect">90g</div>
+					<div class="sizeselect">50g</div>
+					<div class="sizeselect">60g</div>
+					<div class="sizeselect">70g</div>
+					<div class="sizeselect">80g</div>
+					<div class="sizeselect">90g</div>
+				</div>
+
+
+				<div class="sellNumber">
+					<font>购买数量</font>
+					<div class="no">
+						<img src="image/button-48.png" id="jia" /> <input type="text"
+							value="1" id="num"> <img src="image/button-48.png" id="jian"/>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="btn_Confirm">
+			<div id="confirm">确定</div>
+		</div>
+		<div class="btn_AddCar">
+			<div class="AddOrBuy" class="oo" id="AddCar" >加入购物车</div>
+		</div>
+	</div>
+    
+  
+  
+    <!--用户添加商品到购物车成功时的提示信息-->
+    <div id="AddOK" title="温馨提示" style="display:none">
+      <a id="closeConfirm"><img src="image/close.png"></a>
+      <dl>
+        <dt><img src="image/addok.png"></dt>
+        <dd>添加成功</dd>
+      </dl>
+      <div class="ShoppingOrPay">
+         <div class="Shopping">继续购物</div>
+         <div class="GoToPay">到购物车结算</div>
+      </div> 
+    </div>
+    
+    
+   
 </body>
 </html>

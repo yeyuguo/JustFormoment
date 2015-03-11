@@ -16,8 +16,8 @@
     $(document).ready(function(e) {
 		localStorage.clear();  //清空所有缓存数据
 		//window.location.href   获取当前页面的位置URL
-		//localStorage.setItem("Register_Url","http://10.0.51.206:7001/RegisterService.svc/");//服务器
-		localStorage.setItem("Register_Url","http://127.0.0.1:10344/RegisterService.svc/");//服务器
+		localStorage.setItem("Register_Url","http://10.0.51.206:7001/RegisterService.svc/");//服务器
+		//localStorage.setItem("Register_Url","http://127.0.0.1:10344/RegisterService.svc/");//服务器
 		localStorage.setItem("H_URL","http://200.20.30.55:9001/");  //登录及获取token		
 		localStorage.setItem("N_URL","http://10.0.51.206:7002/");    //服务器IP地址  QA4服务器地址
 		
@@ -54,7 +54,7 @@
 		$.ajax({
 			url:localStorage.getItem("H_URL")+"yxtws/oauth/token",
 			type:"GET",
-			data:{client_id:"mobile_android",client_secret:"secret",username:UserName,password:UserPassword,grant_type:                "password"},
+			data:{client_id:"mobile_android",client_secret:"secret",username:UserName,password:UserPassword,grant_type:"password"},
 			dataType:"json",
 			contentType:"application/x-www-form-urlencoded; charset=utf-8",
 			success:function(data){

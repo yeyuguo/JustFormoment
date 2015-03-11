@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>确认商品</title>
+    <script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+		document.write('<link rel="stylesheet" href="dist/css/bootstrap.min.css">');
+	</script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script src="dist/js/bootstrap.min.js"></script>
+        <script>
+	
+	//事件处理
+	$(document).on("pageinit","#confirm-order-page",function(){
+		$("#AddressAdd").click(function(){
+			window.location="AddAddress.html";
+			window.location.load();	
+		});
+	})
+	//加载购物车信息
+	$(document).on("pageshow","#confirm-order-pag",function(){
+		//$("#ShopCarList").find('li').remove();  //清空列表
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_GetCart_After",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID")},
+			dataType:"jsonp",
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert(data);
+				var data_json = JSON.parse(data); 
+				//alert(JSON.stringify(data_json.entries));
+				if(data_json.entries.length>0){
+					for(var i=0;i<data_json.entries.length;i++){
+						//alert(JSON.stringify(data_json.entries[i]));
+					    var address='<li><a onClick=SelectAddress('+i+') href="#"><div class="shopcar-list">'+
+                           '<div><div class="name-tell"><div class="name"><span></span></div>'+
+						   '<div class="tell"><span></span></div></div>'+
+                           '<div class="adress"><span></span></div></div></a></li>';
+						   
+						   
+						   
+						    var address='<li> <div class="list-itme">'+
+                               '<table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;"><tr>'+
+                	           '<td class="choose-btn"><input type="checkbox"/> </td>'+
+                               '<td class="imge-div"><img class="goods-img" src="image/order/pie.png" />'+
+                               '</td> <td class="name-descreble"><div class="name">'+
+                        	   '<p class="text-p">'+data_json.entries[i].name+'</p> </div>'+
+                               '<div class="describe"><p class="text-p">商品说明：阿斯发顿发阿斯顿发撒地方阿斯顿发</p></div></td>'+
+                               '<td class="count-price"><div class="price">'+data_json.entries[i].basePrice.formattedValue+'                                </div><div class="shoping-count" ><img src="image/button-30.png" id="add" />  <span>×'+data_json.entries[i].quantity+'</span>'+
+                               '<img src="image/button-34.png" id="reduce"/></div></td></tr></table></div></li>';
+					 
+					
+						$("#ShopCarList").append(address);
+					}
+					AllAddress = data;  //赋值
+				}
+				$("#ShopCarList").listview('refresh');
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+	});
+	
+	
+    </script>
+</head>
+<body>
+	<div data-role="page" id="confirm-order-page" class="jqm-hxyy">
+    	<div data-role="header" class="jqm-header" data-position="fixed">
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
+    		<h1>确认商品</h1>
+    	</div>
+    	<div data-role="content" class="jqm-content confirm-order-content">
+           <div class="container">
+              <div class="row">
+                  <div class="col-xs-3 col-sm-2 col-md-1">
+                       收件人：
+                  </div>
+                  <div class="col-xs-9 col-sm-10 col-md-11">
+                          张三
+                  </div>
+            </div>
+            <div class="row">
+               <div class="col-xs-3 col-sm-2 col-md-1">
+                   地&nbsp;&nbsp;址：
+               </div>
+              <div class="col-xs-9 col-sm-10 col-md-11">
+                哈哈生宝宝吧哈哈生宝宝吧哈哈生宝宝吧哈哈生宝宝吧哈哈生宝宝吧哈哈生宝宝宝
+              </div>
+            </div>
+      </div>
+      <div class="goods-list">
+           <ul id="ShopCarList"  >
+                 <li>
+                   <div class="list-itme">
+                     <table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;">
+            	<tr>
+                    <td class="imge-div">
+                    	<img src="image/order/pie.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/>
+                    </td>
+                    <td class="name-descreble">
+                    	<div class="name">
+                        	<p class="text-p">商品名称：阿道夫爱的色放阿斯顿发阿斯顿发阿斯顿发撒地方阿斯顿发阿斯sdf sdf 顿发按时的</p>
+                        </div>
+                        <div class="describe">
+                        	<p class="text-p">商品说明：阿斯顿发阿斯顿发阿斯顿发撒地方阿斯顿发</p>
+                        </div>
+                    </td>
+                    <td class="count-price">
+                    	<div class="price">
+                        	200￥
+                        </div>
+                        <div class="shoping-count" >
+                          <span>2</span>
+                        </div>
+                    </td>
+                </tr>
+                
+            </table>
+                   </div>
+                 </li>
+              </ul> 
+      </div>
+      <div class="send-methods">
+          <div class="text"><span>配送方式</span></div>
+          <div class="methods"><span>EMS</span></div>
+      </div>	
+      <div class="message">
+        <span>买家留言：</span>
+      </div>	
+      <div class="total-count-price">
+          <div class="total_count"><span>共计：3件商品</span></div>
+          <div class="total_price"><span>合计：150</span></div>
+      </div>	
+   </div>
+   <div data-role="footer" class="jqm-footer confirm-order-footer" data-position="fixed">
+          <input type="button" data-corners="false" id="ConfirmOrder_button" value="确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;认" class="ui-btn">
+   </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>订单详情</title>
+    <script type="text/jscript">
+    document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+	document.write('<link rel="stylesheet" href="css/mian.css" />');
+	document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+    </script>
+    <script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <style type="text/css" media="all">
+    </style>
+   <script type="text/javascript" language="javascript">
+   $(document).on("pageshow","#wjh_MyOrderDetails",function(){
+	var OrderDetails = JSON.parse(localStorage.getItem("OrderObj")); 
+	alert("上个页面传过来:"+JSON.stringify(OrderDetails));
+	$(".total-price").html("总计："+OrderDetails.total.formattedValue);
+	alert(localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/orders/"+OrderDetails.code);
+	$("#OrderList").find("li").remove(); //清空列表
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/orders/"+OrderDetails.code,
+			type:"GET",
+			data:{access_token:localStorage.getItem("access_token")},
+			dataType:"json",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				var adress = data.deliveryAddress.region.name+data.deliveryAddress.city+data.deliveryAddress.cityDistrict+","+                      data.deliveryAddress.line1;
+				var order_name = data.deliveryAddress.firstName;
+				var order_tell = data.deliveryAddress.cellphone;
+				$(".order-adress").html("收货地址："+adress);
+				$(".order-name").html("收货人："+order_name);
+				$(".order-tell").html("收货人电话："+order_tell);
+				if(data.entries.length>0){
+					for(var i=0;i<data.entries.length;i++){
+						//alert(JSON.stringify(data.entries[i]));
+						//alert(JSON.stringify(data.deliveryAddress.region.name));
+						
+			         	var order_state =1;
+			        	var order_price = data.entries[i].basePrice.formattedValue;
+				         
+				       var liItem ='<li> <div class="ListItem"> <a href="#" rel="external" onClick=SelectOrder('+i+')>' +
+					  ' <div class="Order_Image"><img  src="image/Sale/user_avatar.png"> </div>'+
+                      ' <div class="goods_item">'+
+                      ' <div class="Price" id="eamilID"><span>单价：'+order_price+'</span></div>'+
+                      ' <div class="count" id="sexID"><span>数量：'+data.entries[i].quantity+'</span></div>'+
+                      ' <div class="name" id="tellID"><span>'+data.entries[i].product.name+'</span></div>'+
+                      ' <div class="OrderNumber" id="birthdayID"><span>订单号：'+OrderDetails.code+'</span></div>'+
+                      ' </div> </a></div></li> ';
+					
+					
+					  $("#OrderList").append(liItem);  //添加到ul中
+					}
+					
+				}
+				$("#OrderList").listview('refresh');
+			},
+			error:function(msg){
+				alert(JSON.stringify(msg));
+				$.mobile.loading("hide");
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+});
+</script>
+</head>
+
+<body>
+        <div data-role="page" id="wjh_MyOrderDetails" class="jqm-hxyy">
+    	<div data-role="header" class="jqm-header" data-position="fixed">
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
+    		<h1>订单详情</h1>
+    	</div>
+
+        <div data-role="content" id="wj-con" class="jqm-orderdetails">
+            <!-- 订单信息开始-->
+           <div class="order-info">
+            <span class="order-name">收货人：张三</span>
+            <span class="order-tell">收货人电话：18700000000</span>
+            <span class="order-adress">收货地址：呈贡大新册鸿翔一心堂</span>
+            <span class="order-goods">商品信息</span>
+          </div>
+  <!-- 订单信息结束-->
+  <!-- 订单列表开始-->
+	     <div id="userinfo" class="goods-info">
+            <ul data-role="listview" id="OrderList" >
+           
+           </ul>
+         </div>
+    
+    <!-- 订单列表结束-->
+        </div>
+         <div data-role='footer' data-position="fixed">
+    	    <div class="total-price-div">
+              <span class="total-price">订单总金额：￥200.0</span>
+	        </div>
+   </div>
+    </div>
+   
+</body>
+
+</html>
