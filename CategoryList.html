@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>分类列表</title>
+    <script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+	</script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+    <script src="js/mian.js"></script>
+	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script>
+	var SerchKey ="";
+	var ThisPageCount=0;
+	var TotalPageCount=0;
+
+	//事件处理
+	$(document).on("pageinit","#category-list-page",function(){
+		
+	})
+	
+	//加载商品列表
+	$(document).on("pageshow","#category-list-page",function(){
+		SerchKey =  GetQueryString("serch_key");
+		//alert(SerchKey);
+		if(SerchKey == null || SerchKey == ""){
+			return;
+		}
+		$.mobile.loading('show',{text:"正在查询,请稍后...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/products?/",
+			type:"GET",
+			data:{query:SerchKey,currentPage:ThisPageCount},
+			dataType:"json",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(data));
+				var allimage ="";
+				var GoodsSmallPicture = "";
+				TotalPageCount = data.pagination.totalPages - 1;
+				if(data.products.length>0){
+					for(var i=0;i<data.products.length;i++){
+						//alert(JSON.stringify(data.products[i]));
+						var inventory;
+				         if(data.products[i].stock.stockLevelStatus.code == "inStock"){
+					           inventory = "库存充足";
+				         }else if(data.products[i].stock.stockLevelStatus.code == "outOfStock"){ 
+					         inventory = "缺货";
+			          	}else{
+					          inventory = "库存："+data.products[i].stock.stockLevelStatus.code;
+			             	}
+						
+						var goods ='<li><div class="list-itme"><a onClick=SelectGoods('+data.products[i].code+') href="#">'+
+                          '<table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;">'+
+            	          '<tr><td class="imge-div">'+
+          '<img src="image/order/pie.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/>'+
+                          '</td><td class="name-descreble"><div class="name">'+
+                          '<p class="text-p">'+data.products[i].name+'</p></div><div class="describe">'+
+                          '<p class="text-p">'+data.products[i].manufacturer+'</p></div></td><td class="count-price">'+
+                    	  '<div class="price">'+data.products[i].price.formattedValue+'</div><div class="shoping-count" >'+
+                          '<span>'+inventory+'</span></div></td></tr></table></div></li>';
+					      $("#serch_goods_list").append(goods);
+					}
+				}
+
+				
+				
+				$("#serch_goods_list").listview('refresh');
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+	});
+	function SelectGoods(code){
+		window.location="ItemDes.html?Id="+code;
+	    window.location.load();	
+	}
+    </script>
+   
+</head>
+<body>
+	<div data-role="page" id="category-list-page" class="jqm-hxyy">
+    	<div data-role="header" class="jqm-header category-list-page" data-position="fixed">
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
+    		<h1>分类列表</h1>
+    	</div>
+    	<div data-role="content" class="jqm-content confirm-order-content">
+          <div class="goods-list">
+           <ul id="serch_goods_list"  >
+              <!-- <li>
+                   <div class="list-itme">
+                     <table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;">
+            	<tr>
+                    <td class="imge-div">
+                    	<img src="image/order/pie.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/>
+                    </td>
+                    <td class="name-descreble">
+                    	<div class="name">
+                        	<p class="text-p">商品名称：阿道夫爱的色放阿斯顿发阿斯顿发阿斯顿发撒地方阿斯顿发阿斯sdf sdf 顿发按时的</p>
+                        </div>
+                        <div class="describe">
+                        	<p class="text-p">商品说明：阿斯顿发阿斯顿发阿斯顿发撒地方阿斯顿发</p>
+                        </div>
+                    </td>
+                    <td class="count-price">
+                    	<div class="price">
+                        	200￥
+                        </div>
+                        <div class="shoping-count" >
+                          <span>2</span>
+                        </div>
+                    </td>
+                </tr>
+                
+            </table>
+                   </div>
+                 </li>-->
+              </ul> 
+      </div>
+    	</div>
+         <div data-role="footer" class="jqm-footer" data-position="fixed">
+           
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" language="javascript">
+		//页面滑动事件
+		$(this).on("scrollstop",function(event){
+			var tmpVisible = $("#serch_goods_list").is(":visible");
+			if(tmpVisible == true){
+				//获取高度，判断是否已经滑动到最后一行
+				var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+				ThisPageCount ++;
+				if($(document).height() <= totalheight && ThisPageCount < TotalPageCount){
+					$.mobile.loading('show',{text:"正在加载,请稍后...",textVisible:true,theme:"b"});
+					$.ajax({
+			url:localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/products?/",
+			type:"GET",
+			data:{query:SerchKey,currentPage:ThisPageCount},
+			dataType:"json",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(data));
+				var allimage ="";
+				var GoodsSmallPicture = "";
+				TotalPageCount = data.pagination.totalPages - 1;
+				if(data.products.length>0){
+					for(var i=0;i<data.products.length;i++){
+						var inventory;
+				         if(data.products[i].stock.stockLevelStatus.code == "inStock"){
+					           inventory = "库存充足";
+				         }else if(data.products[i].stock.stockLevelStatus.code == "outOfStock"){ 
+					         inventory = "缺货";
+			          	}else{
+					          inventory = "库存："+data.products[i].stock.stockLevelStatus.code;
+			             	}
+						
+						var goods ='<li><div class="list-itme"><a onClick=SelectGoods('+data.products[i].code+') href="#">'+
+                          '<table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;">'+
+            	          '<tr><td class="imge-div">'+
+          '<img src="image/order/pie.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/>'+
+                          '</td><td class="name-descreble"><div class="name">'+
+                          '<p class="text-p">'+data.products[i].name+'</p></div><div class="describe">'+
+                          '<p class="text-p">'+data.products[i].manufacturer+'</p></div></td><td class="count-price">'+
+                    	  '<div class="price">'+data.products[i].price.formattedValue+'</div><div class="shoping-count" >'+
+                          '<span>'+inventory+'</span></div></td></tr></table></div></li>';
+					      $("#serch_goods_list").append(goods);
+					}
+				}
+
+				
+				
+				$("#serch_goods_list").listview('refresh');
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+				}
+			}
+		});
+	</script>
+</html>

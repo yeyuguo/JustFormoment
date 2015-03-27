@@ -107,53 +107,19 @@
 	height: 50px;
 	width: 100%;
 	padding-top: 10px;
+	background:red;
 }
 
-.WindowShow .select .type .sellNumber font {
-	float: left;
-	font-size: 18px;
-	font-weight: bolder;
-	margin-top: 6px;
-}
+/*20150319选择数量*/
+/*.WindowShow .select .type .sellNumber{height: 100px;padding: 100px 0px; background:yellow;}
+*/
 
-.WindowShow .select .type .sellNumber .no {
-	float: left;
-	margin-top:-28px;
-	margin-left:10%;
-}
+.WindowShow .select .type .sellNumber  div {float: left;width: 100px;height: 70px;text-align: center;font-size: 50px;padding-top: 10px;}
+.WindowShow .select .type .sellNumber  .des {width: 250px;font-size: 30px;padding-top: 25px;height: 55px; }
+.WindowShow .select .type .sellNumber  input {float: left;height: 80px;text-align: center;font-size: 35px;width: 200px; }
+#text{background:red;}
 
-.WindowShow .select .type .sellNumber .no #jian {
-	width: 60px;
-	height: 30px;
-	float: right;
-	cursor: pointer;
-}
 
-.WindowShow .select .type .sellNumber .no #jian img {
-	width: 100px;
-	height: 100px;
-}
-
-.WindowShow .select .type .sellNumber .no input {
-	/* width: 100px; */
-	width: 30%;
-	height: 24px;
-	text-align: center;
-	font-size: 15px;
-	float: right;
-}
-
-.WindowShow .select .type .sellNumber .no #jia {
-	width: 60px;
-	height: 30px;
-	float: right;
-	cursor: pointer;
-}
-
-.WindowShow .select .type .sellNumber .no #jia img {
-	height: 100px;
-	width: 100px;
-}
 
 /*确定按钮*/
 .WindowShow .btn_Confirm {

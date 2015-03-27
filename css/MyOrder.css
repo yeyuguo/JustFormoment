@@ -70,6 +70,9 @@ a{
 	border-bottom: 1px solid #e4e4e4;
 	float:left;
 }
+.wj-obl .department{
+	padding:0; margin:0; width:100%;
+}
 .wj-obl .department .wj-conGoods .img-line .wj-conGImg{
 	height: 5em;
 	width: 25%;
@@ -216,11 +219,79 @@ a{
 }
 
 .dis {
-    display: block;
+    display: block; width:90%; margin-left:5%;
 }
 .undis {
     display: none;
 }
 .department_c {
     height: 22em;
+}
+/*团购页*/
+
+.jqm-hxyy .bulk-content .buik-navigation {
+    height: 3em;
+    line-height: 3em;
+    margin: 0.5em 0.5em 0 0.5em;
+	border-bottom: 2px solid #e4e4e4;
+	font-size:14px; 
+}
+.jqm-hxyy .bulk-content .buik-navigation li {
+    width: 25%;
+    float: left;
+    padding-bottom: 1px;
+    border-bottom: 2px solid #e4e4e4;
+    text-align: center;
+    list-style-type: none; 
+}
+.jqm-hxyy .bulk-content .buik-navigation li.on{
+	padding-bottom:0; 
+    border-bottom: 2px solid #e8433d;
+}
+.jqm-hxyy .bulk-content .buik-navigation li a {
+	color: #505050;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.jqm-hxyy .bulk-content .goods-content{
+	width:100%;
+}
+.jqm-hxyy .bulk-content .goods-content .update-time{
+	width:95%; height:25px; line-height:25px; font-size:14px; color:#979797; text-align:right; padding-right:5%;
+}
+.jqm-hxyy .bulk-content .goods-content .goods-details{
+	width:90%; height:250px; margin-left:5%; border: 1px solid #e4e4e4;
+}
+.jqm-hxyy .bulk-content .goods-content .goods-details .image-div{
+	width:100%; height:140px; 
+}
+.jqm-hxyy .bulk-content .goods-content .goods-details .image-div .image-div-bord{
+	width:100%; height:140px;  margin-top:-140px; text-align:right;
+}
+.jqm-hxyy .bulk-content .goods-content .goods-details .image-div .image-div-img{
+	width:100%; height:140px; 
+}
+.jqm-hxyy .bulk-content .goods-content .goods-details .image-div .image-div-img img{
+	width:100%; height:100%; 
+}
+
+
+.jqm-hxyy .bulk-content .goods-content .buil-price-buy{
+	width:90%; height:40px; float:left; margin-left:5%; margin-top:10px;
+}
+.jqm-hxyy .bulk-content .goods-content .buil-price-buy .buil-price{
+	width:50%; height:40px; float:left;
+}
+.jqm-hxyy .bulk-content .goods-content .buil-price-buy .buil-price .now-price{
+	font-size:20px; color:#e7423c;
+}
+.jqm-hxyy .bulk-content .goods-content .buil-price-buy .buil-price .old-price{
+	font-size:14px; color:#cccccc;
+}
+.jqm-hxyy .bulk-content .goods-content .buil-price-buy .buil-buy{
+	width:50%; height:40px; float:left; text-align:right;
+}
+.jqm-hxyy .bulk-content .goods-content .buil-describe{
+	width:90%; height:45px;  float:left; margin-left:5%; margin-top:5px; font-size:14px; color:#818181;
 }

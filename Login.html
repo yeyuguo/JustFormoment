@@ -14,13 +14,6 @@
 	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
     <script type="text/javascript" language="javascript">
     $(document).ready(function(e) {
-		localStorage.clear();  //清空所有缓存数据
-		//window.location.href   获取当前页面的位置URL
-		localStorage.setItem("Register_Url","http://10.0.51.206:7001/RegisterService.svc/");//服务器
-		//localStorage.setItem("Register_Url","http://127.0.0.1:10344/RegisterService.svc/");//服务器
-		localStorage.setItem("H_URL","http://200.20.30.55:9001/");  //登录及获取token		
-		localStorage.setItem("N_URL","http://10.0.51.206:7002/");    //服务器IP地址  QA4服务器地址
-		
 		var UserName=localStorage.getItem("User_Name");   //用户名
 		var UserPassword =localStorage.getItem("User_Password");   //用户密码
 		if(UserName!=null || UserName!=''){
@@ -51,6 +44,7 @@
 			return;
 		}
 		$.mobile.loading('show',{text:"登录中...",textVisible:true,theme:"b"});
+		//alert(localStorage.getItem("H_URL")+"yxtws/oauth/token");
 		$.ajax({
 			url:localStorage.getItem("H_URL")+"yxtws/oauth/token",
 			type:"GET",
@@ -58,24 +52,29 @@
 			dataType:"json",
 			contentType:"application/x-www-form-urlencoded; charset=utf-8",
 			success:function(data){
-				$.mobile.loading("hide");
 				localStorage.setItem("access_token",data.access_token);  //用户access_token数据
-				
-				//获取购物车ID   根据用户登录的token 获取用户的购物车ID 
+				localStorage.setItem("user_password",UserPassword);  //用户密码
+				localStorage.setItem("user_id",UserName);  //用户名
+				//alert(data.access_token);
+				//获取购物车ID   根据用户登录的token 获取用户的购物车ID
+				//alert(localStorage.getItem("Register_Url")+"SS_GetCart_Befor?=AAccess_token"+localStorage.getItem("access_token")); 
 				$.ajax({
 					url : localStorage.getItem("Register_Url")+"SS_GetCart_Befor",
 					type:"GET",
 					data:{AAccess_token:localStorage.getItem("access_token")},
 					dataType:"jsonp",
-					//timeout:30000,
+					timeout:10000,
 					jsonp:"BaseCallback",
 					contentType:"application/json; charset=utf-8",
 					success:function(data){
-						localStorage.setItem("CookieID",data);  //购物车ID
-						window.location="Home.html";
-						window.location.load();
+						$.mobile.loading("hide");
+				        localStorage.setItem("CookieID",data);  //购物车ID
+						//alert(data);
+				        window.location=localStorage.getItem("come_from_page");
+				        window.location.load();
 					},
 					error:function(msg){
+						$.mobile.loading("hide");
 						$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'数据库连接超时，请检查网络是否正常!'});
 					}
 				});
@@ -121,8 +120,8 @@
 				localStorage.setItem("User_Password","");  //密码
 				//$("#btn_Register").attr('disabled',true).button('refresh');
 			}
-			alert(UserName);
-			alert($(this).is(':checked'));
+			//alert(UserName);
+			//alert($(this).is(':checked'));
 		});
 	});
 </script>

@@ -14,20 +14,62 @@
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
 	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
     <script src="dist/js/bootstrap.min.js"></script>
-        <script>
-	
+    <script>
+	var AllGoodsCount =0;
+	var AllGoodsPrice = 0.0;
 	//事件处理
 	$(document).on("pageinit","#confirm-order-page",function(){
 		$("#AddressAdd").click(function(){
 			window.location="AddAddress.html";
 			window.location.load();	
 		});
-	})
-	//加载购物车信息
-	$(document).on("pageshow","#confirm-order-pag",function(){
+		$("#ConfirmOrder_button").click(function(){
+			$.mobile.loading('show',{text:"正在提交订单，请稍后...",textVisible:true,theme:"b"});
+			//提交订单
+			//alert(localStorage.getItem("Register_Url")+"SS_CreateOrder"+"?AAccess_token="+localStorage.getItem("access_token")+"&ACookieID="+localStorage.getItem("CookieID"));
+			$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_CreateOrder",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID")},
+			dataType:"jsonp",
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				var data_json = JSON.parse(data); 
+				//alert(JSON.stringify(data_json));
+		       window.location="OrderPay.html?order_number="+data_json.code+"&total_price="+data_json.totalPrice.value;
+			   window.location.load();	
+			
+			
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+			
+			
+			
+			
+			
+			
+		});
+		
+		
+	});
+	function ToSetAddress(){
+			window.location="AddressCon.html";
+			window.location.load();	
+		}
+	
+	$(document).on("pageshow","#confirm-order-page",function(){
 		//$("#ShopCarList").find('li').remove();  //清空列表
 		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
-		$.ajax({
+			//获取最新购物车
+			$.ajax({
 			url:localStorage.getItem("Register_Url")+"SS_GetCart_After",
 			type:"GET",
 			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID")},
@@ -38,33 +80,53 @@
 				$.mobile.loading("hide");
 				//alert(data);
 				var data_json = JSON.parse(data); 
-				//alert(JSON.stringify(data_json.entries));
+				//alert(JSON.stringify(data_json));
+				var AddressName = "";
+				var AddressAddress = "";
+				if(data_json.deliveryAddress == null || data_json.deliveryAddress == ""){
+					AddressName = "请单击设置收货人信息";
+					AddressAddress = "请单击设置收货地址";
+				}else{
+					var phone = "";
+					if(data_json.deliveryAddress.cellphone == null || data_json.deliveryAddress.cellphone == ""){
+						phone = data_json.deliveryAddress.phone;
+					}else{
+						phone = data_json.deliveryAddress.cellphone;
+					}
+					AddressName = data_json.deliveryAddress.firstName+","+phone;
+					AddressAddress = data_json.deliveryAddress.region.name+data_json.deliveryAddress.city+
+						data_json.deliveryAddress.cityDistrict+data_json.deliveryAddress.line1;
+				}
+				$("#address_name").html(AddressName);
+				$("#address_address").html(AddressAddress);
+				$("#send_methods_details").html(data_json.deliveryMode.name);
+				
 				if(data_json.entries.length>0){
 					for(var i=0;i<data_json.entries.length;i++){
-						//alert(JSON.stringify(data_json.entries[i]));
-					    var address='<li><a onClick=SelectAddress('+i+') href="#"><div class="shopcar-list">'+
-                           '<div><div class="name-tell"><div class="name"><span></span></div>'+
-						   '<div class="tell"><span></span></div></div>'+
-                           '<div class="adress"><span></span></div></div></a></li>';
-						   
-						   
-						   
-						    var address='<li> <div class="list-itme">'+
-                               '<table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;"><tr>'+
-                	           '<td class="choose-btn"><input type="checkbox"/> </td>'+
-                               '<td class="imge-div"><img class="goods-img" src="image/order/pie.png" />'+
-                               '</td> <td class="name-descreble"><div class="name">'+
-                        	   '<p class="text-p">'+data_json.entries[i].name+'</p> </div>'+
-                               '<div class="describe"><p class="text-p">商品说明：阿斯发顿发阿斯顿发撒地方阿斯顿发</p></div></td>'+
-                               '<td class="count-price"><div class="price">'+data_json.entries[i].basePrice.formattedValue+'                                </div><div class="shoping-count" ><img src="image/button-30.png" id="add" />  <span>×'+data_json.entries[i].quantity+'</span>'+
-                               '<img src="image/button-34.png" id="reduce"/></div></td></tr></table></div></li>';
-					 
-					
-						$("#ShopCarList").append(address);
+                      //alert(data_json.entries[i].quantity);
+					  var SGoodsCount=data_json.entries[i].quantity;
+					  var address='<li><div class="list-itme">'+
+                          '<table id="list_table_id" border="0px" cellpadding="0" cellspacing="0" style=" width:100%;"><tr><td class="imge-div">'+
+                    	  '<img src="image/order/pie.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/>'+
+                        '</td> <td class="name-descreble"><div class="name">'+
+                        '<p class="text-p">'+data_json.entries[i].product.name+'</p></div>'+
+                        '<div class="describe"><p class="text-p">'+data_json.entries[i].product.name+'</p></div></td>'+
+                        '<td class="count-price"><div class="price">'+data_json.entries[i].basePrice.formattedValue+'</div>'+
+                '<div class="shoping-count" >×'+SGoodsCount+'</div></td></tr></table</div></li>';
+							
+							  
+						     $("#order_goods_list").append(address);
+							 AllGoodsCount = AllGoodsCount + SGoodsCount;
+							 AllGoodsPrice = AllGoodsPrice + SGoodsCount*data_json.entries[i].basePrice.value;
+							 
 					}
+					
+					$("#all_goods_count").html("共计："+AllGoodsCount+"件商品");
+					$("#all_goods_price").html("合计："+AllGoodsPrice);
 					AllAddress = data;  //赋值
 				}
-				$("#ShopCarList").listview('refresh');
+				$("#list_table_id").table('refresh');
+				$("#order_goods_list").listview('refresh');
 			},
 			error:function(msg){
 				$.mobile.loading("hide");
@@ -73,6 +135,7 @@
 				//window.location.load();	
 			}
 		});
+
 	});
 	
 	
@@ -86,26 +149,28 @@
     	</div>
     	<div data-role="content" class="jqm-content confirm-order-content">
            <div class="container">
+           <a onClick=ToSetAddress() href="#">
               <div class="row">
-                  <div class="col-xs-3 col-sm-2 col-md-1">
+                  <div  class="col-xs-3 col-sm-2 col-md-1">
                        收件人：
                   </div>
-                  <div class="col-xs-9 col-sm-10 col-md-11">
-                          张三
+                  <div id="address_name" class="col-xs-9 col-sm-10 col-md-11">
+                         .....
                   </div>
             </div>
             <div class="row">
-               <div class="col-xs-3 col-sm-2 col-md-1">
+               <div  class="col-xs-3 col-sm-2 col-md-1">
                    地&nbsp;&nbsp;址：
                </div>
-              <div class="col-xs-9 col-sm-10 col-md-11">
-                哈哈生宝宝吧哈哈生宝宝吧哈哈生宝宝吧哈哈生宝宝吧哈哈生宝宝吧哈哈生宝宝宝
+              <div id="address_address" class="col-xs-9 col-sm-10 col-md-11">
+                 ......
               </div>
             </div>
+            </a>
       </div>
       <div class="goods-list">
-           <ul id="ShopCarList"  >
-                 <li>
+           <ul id="order_goods_list"  >
+                <!-- <li>
                    <div class="list-itme">
                      <table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;">
             	<tr>
@@ -132,19 +197,19 @@
                 
             </table>
                    </div>
-                 </li>
+                 </li>-->
               </ul> 
       </div>
       <div class="send-methods">
           <div class="text"><span>配送方式</span></div>
-          <div class="methods"><span>EMS</span></div>
+          <div id="send_methods_details" class="methods"><span>EMS</span></div>
       </div>	
       <div class="message">
         <span>买家留言：</span>
       </div>	
       <div class="total-count-price">
-          <div class="total_count"><span>共计：3件商品</span></div>
-          <div class="total_price"><span>合计：150</span></div>
+          <div id="all_goods_count" class="total_count"><span>共计：0件商品</span></div>
+          <div id="all_goods_price" class="total_price"><span>合计：0.0</span></div>
       </div>	
    </div>
    <div data-role="footer" class="jqm-footer confirm-order-footer" data-position="fixed">

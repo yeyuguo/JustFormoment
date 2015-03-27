@@ -28,7 +28,7 @@
 					register_token = data.access_token;  //注册的Token
 				},
 				error:function(msg){
-					alert("失败");
+					//alert("失败");
 					$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'网络异常!'});
 				}
 			});	
@@ -84,6 +84,7 @@
 							localStorage.setItem("User_Name",Email);
 							localStorage.setItem("User_Password",Password);
 							window.location="Login.html";
+							localStorage.setItem("come_from_page","PersonalCenter.html");  //登录页面的来源
 							window.location.load();
 						}else{
 							$.mobile.loading("hide");

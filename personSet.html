@@ -4,11 +4,79 @@
 <head>
     <title>personSettingPage</title>
     <meta charset="utf-8">
-     <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
-     <link rel="stylesheet" href="css/mian.css">
-    <link rel="stylesheet" href="css/yyg-style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/yyg-style.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+	</script>
+ 
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+    <script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function(e) {
+
+	//保存修改按钮
+    $("#SavePassword").click(function(e){
+	   
+		var OldPassword=localStorage.getItem("user_password"); 
+		var NewPassword=$("#new_password").val();
+		var AginPassword=$("#agin_password").val();
+		if(NewPassword==null || NewPassword == '' || NewPassword.length<6){
+			$("#NewPassword").focus();
+			$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'登录密码不能为空且至少6位!'});
+			return;
+		}
+		if(OldPassword==null || OldPassword == '' || OldPassword.length<6){
+			$("#OldPassword").focus();
+			$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'新密码不能为空且至少6位!'});
+			return;
+		}
+		if(NewPassword != AginPassword){
+			//$("#UserPassword").focus();
+			$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'两次输入的密码不一致!'});
+			return;
+		}
+		// alert(localStorage.getItem("H_M_URL")+"yxtws/v1/hxyxt/customers/current/password");
+		$.mobile.loading('show',{text:"修改中...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("H_M_URL")+"yxtws/v1/hxyxt/customers/current/password",
+			type:"POST",
+			data:{access_token:localStorage.getItem("access_token"),old:OldPassword,new:NewPassword},
+			dataType:"json",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert("成功"+JSON.stringify(data));
+				$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:"修改成功"});
+			
+	
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				if(msg.status == 202){
+					$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:"修改成功"});
+					localStorage.setItem("access_token","");  //用户access_token数据
+					window.location="Login.html";
+			        window.location.load();	
+				}else{
+					$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:"修改失败"});
+				}
+
+				
+			}
+		});
+	});
+});
+
+
+	//页面加载完毕之后绑定事件
+	$(document).on("pageinit","#dlj-login",function(){
+
+	});
+</script>
 </head>
 
 <body>
@@ -25,13 +93,13 @@
             <table border="0px" cellpadding="0" cellspacing="0" class="table_input">
 				<tr>
                 	<td width="30px;">
-                    	<input type="image" src="image/user/button-9.png" class="img_ico"/>
+                    	<input  type="image" src="image/user/button-9.png" class="img_ico"/>
                     </td>
                     <td width="1px">
-                    	<input type="image" src="image/user/lin.png" class="img_lin"/>
+                    	<input  type="image" src="image/user/lin.png" class="img_lin"/>
                     </td>
                     <td style="padding:0 2px;">
-                    	<input type="password" data-role="none" class="btn_text" id="text_username" placeholder="请输入密码" >
+                    	<input id="new_password"  type="password" data-role="none" class="btn_text" id="text_username" placeholder="请输入密码" >
                     </td>
                 </tr>
             </table>
@@ -44,7 +112,7 @@
                     	<input type="image" src="image/user/lin.png" class="img_lin"/>
                     </td>
                     <td style="padding:0 2px;">
-                    	<input type="password" data-role="none" class="btn_text" id="text_password" placeholder="请再次输入密码" >
+                    	<input id="agin_password" type="password" data-role="none" class="btn_text" id="text_password" placeholder="请再次输入密码" >
                     </td>
                 </tr>
             </table>
@@ -52,7 +120,7 @@
                
 
                 <div class="saveCancle fr" data-type="horizontal" data-role="controlgroup" data-corners="false">
-                    <a href="#" data-role="button">保存</a>
+                    <a href="#" id="SavePassword" data-role="button">保存</a>
                     <a href="#" data-role="button">取消</a>
                 </div>
             </div>

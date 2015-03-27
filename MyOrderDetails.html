@@ -17,9 +17,9 @@
    <script type="text/javascript" language="javascript">
    $(document).on("pageshow","#wjh_MyOrderDetails",function(){
 	var OrderDetails = JSON.parse(localStorage.getItem("OrderObj")); 
-	alert("上个页面传过来:"+JSON.stringify(OrderDetails));
+	//alert("上个页面传过来:"+JSON.stringify(OrderDetails));
 	$(".total-price").html("总计："+OrderDetails.total.formattedValue);
-	alert(localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/orders/"+OrderDetails.code);
+	//alert(localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/orders/"+OrderDetails.code);
 	$("#OrderList").find("li").remove(); //清空列表
 		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
 		$.ajax({
@@ -61,7 +61,7 @@
 				$("#OrderList").listview('refresh');
 			},
 			error:function(msg){
-				alert(JSON.stringify(msg));
+				//alert(JSON.stringify(msg));
 				$.mobile.loading("hide");
 				//window.location="Login.html";
 				//window.location.load();	

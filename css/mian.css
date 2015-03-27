@@ -176,7 +176,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .jqm-hxyy .jqm-item-content .div_items .div_item_des{
     margin:5px; border-bottom:1px solid #e4e4e4; width:100%; float:left;}
 .jqm-hxyy .jqm-item-footer{
-    /*background-color:#e9413e;*/ background-color:}
+  /*  background-color:#e9413e;*/}
     
 .jqm-hxyy .jqm-item-footer .ui-btn{
 
@@ -456,16 +456,18 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     background-color: #e9413e;
 }
 .jqm-hxyy .jqm-item-footer .ui-btn {
-    width: 100px;
-    background-color: #bd1e22;
+    width:90%;
+	margin-left:5%;
     color: #fff;
     border: 1px solid #bd1e22;
     font-weight: normal;
     border-radius: 5px;
+	height:35px;
     text-shadow: none;
-    background-image: url(../image/user/button-40.png);
-    background-repeat: no-repeat;
+	/*background:#bd1e22 url(../image/user/button-40.png) no-repeat fixed bottom;*/
+     background:#bd1e22;
 }
+
 .jqm-hxyy .jqm-item-footer .btn-buy {
     float: left;
     margin-left: 5px;
@@ -598,8 +600,8 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
     height: 80px;
     border-bottom: 2px solid #ccc;
     background: #d3d7d4;
-    position: fixed;
-    bottom:245px;
+    position:fixed;
+    bottom:161px;
 }
 
 .WindowShow .goodsinfo a img {
@@ -650,16 +652,18 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
     width: 100%;
     position: fixed;
     bottom: 40px;
-    height: 208px;
+    /*height: 208px;*/
+	height:120px;
     overflow: auto;
     overflow-x: hidden; /* 3?3?μ??úèYè???òt2? */
-    background: white;
+  
 }
 
 .WindowShow .select .type {
-    min-height: 300px;
+    min-height: 100px;
     margin-bottom: 1em;
     margin-left: 10px;
+   
 }
 
 .WindowShow .select .type p {
@@ -670,14 +674,13 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
 .WindowShow .select .type .size {
     border-top: 1px solid #ccc;
     width: 100%;
-    min-height: 300px;
+    /*min-height: 300px;*/
     margin-top:5px;
     padding-top:5px;
 }
 
 .WindowShow .select .type .size .sizeselect {
     min-width: 30%;
-    /*height: 20px;*/
     min-height:20px;
     border-radius: 10px;
     border: 2px solid #ccc;
@@ -685,63 +688,27 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
     text-align: center;
     float: left;
     margin-left: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     cursor:pointer;
 }
 
+/*选择购买数量的样式20150319*/
 .WindowShow .select .type .sellNumber {
     float: left;
     border-top: 1px solid #ccc;
-    height: 50px;
+   /* height: 30px;*/
     width: 100%;
     padding-top: 10px;
+	padding-bottom:20px;
 }
 
-.WindowShow .select .type .sellNumber font {
-    float: left;
-    font-size: 18px;
-    font-weight: bolder;
-    margin-top: 6px;
-}
-
-.WindowShow .select .type .sellNumber .no {
-    float: left;
-    margin-top:-28px;
-    margin-left:10%;
-}
-
-.WindowShow .select .type .sellNumber .no #jian {
-    width: 60px;
-    height: 30px;
-    float: right;
-    cursor: pointer;
-}
-
-.WindowShow .select .type .sellNumber .no #jian img {
-    width: 100px;
-    height: 100px;
-}
-
-.WindowShow .select .type .sellNumber .no input {
-    /* width: 100px; */
-    width: 30%;
-    height: 24px;
-    text-align: center;
-    font-size: 15px;
-    float: right;
-}
-
-.WindowShow .select .type .sellNumber .no #jia {
-    width: 60px;
-    height: 30px;
-    float: right;
-    cursor: pointer;
-}
-
-.WindowShow .select .type .sellNumber .no #jia img {
-    height: 100px;
-    width: 100px;
-}
+.WindowShow .select .type .sellNumber div {float: left;height: 40px;text-align: center;}
+.WindowShow .select .type .sellNumber .des {width: 30%;font-size: 15px;height: 30px; padding-top:10px; }
+.WindowShow .select .type .sellNumber .No{width:68%}
+.WindowShow .select .type .sellNumber .No  input {float: left;height: 36px;text-align: center;font-size: 18px;width: 60px; }
+.WindowShow .select .type .sellNumber .No .mimus{ margin-left:20px;}
+.WindowShow .select .type .sellNumber .No div{width:40px; border:1px solid #ccc; height:100%;}
+.WindowShow .select .type .sellNumber .No div img{width:25px; height:25px; margin-top:5px;}
 
 /* éì?·?ê?éò3--- è·?¨°′?￥*/
 .WindowShow .btn_Confirm {
@@ -751,9 +718,12 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
     height: 40px;
     border-top: 1px solid #ccc;
     text-align: center;
+	background:red;
+	display:none;
+	
 }
 
-.WindowShow .btn_Confirm #confirm {
+.WindowShow .btn_Confirm  #confirm {
     width: 100%;
     height:100%;
     background: #bd1e22;
@@ -761,17 +731,20 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
     color:#fff;
     padding-top:10px;
     font-weight:normal;
+	
 }
 
 /* éì?·?ê?éò3--- μˉ?ò??oó?óè?1o??3μμ??ùê?*/
 .WindowShow .btn_AddCar {
     position: fixed;
-    bottom: 5px;;
+    bottom: 0px;
     width: 100%;
-    height: 35px;
+    height: 40px;
     border-top: 1px solid #ccc;
     text-align: center;
     border-radius: 5px;
+/*	margin-top:5px;*/
+	
 }
 
 .WindowShow .btn_AddCar .AddOrBuy {
@@ -845,16 +818,26 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
 /*购物车*/
 
 .jqm-hxyy .shopingcar-content ul{
-	height:100px; padding:0; margin:0; list-style:none;
+	 padding:0; margin:0; list-style:none;
 }
 .jqm-hxyy .shopingcar-content li{
 	padding:0; margin:0; 
 }
 .jqm-hxyy .shopingcar-content .list-itme{
-	width:100%; height:80px; float:left; margin-top:10px;
+	width:98%; height:90px; margin-left:2%;  float:left; margin-top:10px; border-bottom:#cccccc 1px solid;
 	}
+
 .jqm-hxyy .shopingcar-content .list-itme .choose-btn{
-	height:80px; line-height:80px;  width:35px;
+	height:80px; line-height:80px;  width:35px; 
+	}
+.jqm-hxyy .shopingcar-content .list-itme .choose-btn .checbox_div_a{
+	width:23px; height:23px;
+}
+.jqm-hxyy .shopingcar-content .list-itme .choose-btn .checbox_div_a .checbox_div_classoff{
+	width:18px; height:23px; background:url(../image/order/delet.png);
+	}
+.jqm-hxyy .shopingcar-content .list-itme .choose-btn .checbox_div_a .checbox_div_classon{
+	width:23px; height:23px; background:url(../image/button-24.png);
 	}
 .jqm-hxyy .shopingcar-content .list-itme .imge-div{
 	 width:80px; height:80px; border:#cccccc 1px solid;
@@ -871,13 +854,13 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
 	height:45px;width:100%;float:left; overflow:hidden; font-size:14px;
 	}
 .jqm-hxyy .shopingcar-content .list-itme .name-descreble .name .text-p{
-	margin:6px 4px 0px 4px; height:38px; overflow:hidden; 
+	margin:6px 4px 0px 4px; height:36px; overflow:hidden; 
 }
 .jqm-hxyy .shopingcar-content .list-itme .name-descreble .describe{
 	height:35px;  font-size:10px; overflow:hidden; width:100%;float:left;
 	}
 .jqm-hxyy .shopingcar-content .list-itme .name-descreble .describe .text-p{
-	margin:6px 4px 0px 4px; height:38px; overflow:hidden; color:#CCCCCC;
+	margin:6px 4px 0px 4px; height:32px; overflow:hidden; color:#CCCCCC;
 }
 .jqm-hxyy .shopingcar-content .list-itme .count-price .price{
 	height:40px; line-height:40px; width:100%; text-align:center; float:left; 
@@ -890,6 +873,55 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
 	width:25px; height:25px; 
 }
 
+/*checkbox复选框样式*/
+
+
+
+#shoping-car-page .jqm-footer .ui-checkbox .ui-btn-icon-left {
+	border: none !important;
+	padding-left: 30px;
+	background: #e5e4e2;
+	margin-top: -14px;
+}
+#shoping-car-page .jqm-footer .ui-checkbox .ui-btn-icon-left:hover {
+	background: #e5e4e2;
+}
+#shoping-car-page .jqm-footer .ui-checkbox .ui-btn-icon-left:after {
+	width: 23px;
+	height: 23px;
+	margin-left: 0px;
+	opacity: 1;
+	background: url(../image/button-28.png);
+}
+#shoping-car-page .jqm-footer .ui-checkbox .ui-checkbox-on:after {
+	background: url(../image/button-24.png) !important;
+}
+#shoping-car-page .jqm-footer .ui-checkbox .ui-checkbox-on:after, .dlj-register .ui-checkbox .ui-btn.ui-checkbox-off:after {
+	margin-top: -11px;
+}
+
+
+
+
+/*购物车底角*/
+.jqm-hxyy  .jqm-footer .shoping-car-paydiv{
+	width:100%; height:40px; background:#e5e4e2; float:left;
+	}
+.jqm-hxyy  .jqm-footer .shoping-car-paydiv .allchoose{
+	width:60%; height:40px;   float:left; 
+	}
+.jqm-hxyy  .jqm-footer .shoping-car-paydiv .allchoose .all-choose-checkbox{
+	width:100px; height:30px; line-height:30px; float:left; margin-left:10px; margin-top:5px; color:#666666; font-size:14px;
+}
+
+.jqm-hxyy  .jqm-footer .shoping-car-paydiv .allchoose .delet-shopingcar{
+	width:110px; height:30px; line-height:30px;  margin-left:10px; float:left; margin-top:5px; color:#F00; font-size:14px;
+}
+
+
+.jqm-hxyy  .jqm-footer .shoping-car-paydiv .topay{
+	width:35%; height:40px;  text-align:right; float:left; padding-right:5%;
+	} 
 
 /*商品确认页面*/
 .jqm-hxyy .confirm-order-content{
@@ -920,13 +952,13 @@ body .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, 
 	}
 
 .jqm-hxyy .confirm-order-content .goods-list .list-itme .name-descreble .name{
-	height:43px;width:100%;float:left; overflow:hidden; font-size:14px;
+	height:44px;width:100%;float:left; overflow:hidden; font-size:14px;
 	}
 .jqm-hxyy .confirm-order-content .goods-list .list-itme .name-descreble .name .text-p{
-	margin:6px 4px 0px 4px; height:38px; overflow:hidden; 
+	margin:6px 4px 0px 4px; height:42px; overflow:hidden; 
 }
 .jqm-hxyy .confirm-order-content .goods-list .list-itme .name-descreble .describe{
-	height:37px;  font-size:10px; overflow:hidden; width:100%;float:left;
+	height:36px;  font-size:10px; overflow:hidden; width:100%;float:left;
 	}
 .jqm-hxyy .confirm-order-content .goods-list .list-itme .name-descreble .describe .text-p{
 	margin:6px 4px 0px 4px; height:38px; overflow:hidden; color:#CCCCCC;
@@ -1119,7 +1151,7 @@ html body div.perPhoto {
     /*    margin: 0.5em 0.5em 0 0.5em;*/
 }
 .wj-conTit li {
-    width: 25%;
+    width: 33.3%;
     float: left;
     padding-bottom: 1px;
     border-bottom: 1px solid #e4e4e4;
@@ -1342,3 +1374,63 @@ html body .yyg_disInfo ul li span{
 }
 /*personInfo page's css style END*/
 /*yeyuguo END*/
+
+
+
+
+/*分类页样式*/
+.jqm-hxyy .category-content{
+	width:90%;  margin-left:5%;
+}
+.jqm-hxyy .category-content  ul{
+	width:100%;  margin:0; padding:0; list-style:none;
+}
+.jqm-hxyy .category-content  li{
+	width:100%; height:70px;  margin:0; padding:0;
+}
+.jqm-hxyy .category-content .category-list-item{
+	width:100%; height:60px; float:left; margin-top:5px; border-bottom: 1px solid #cccccc;
+	
+}
+.jqm-hxyy .category-content .category-list-item .category-img-div{
+	width:20%; height:60px;  float:left;
+	
+}
+.jqm-hxyy .category-content .category-list-item .category-img-div .category-img{
+	width:40%; height:50px; line-height:60px; margin-top:5px;  float:left; text-align:center; 
+}
+.jqm-hxyy .category-content .category-list-item .category-img-div .category-img{
+	width:40px; height:40px; 
+}
+
+.jqm-hxyy .category-content .category-list-item .category-name{
+	width:80%; height:60px;  float:left;
+}
+.jqm-hxyy .category-content .category-list-item .category-name .category-bigname{
+	width:100%; height:20px;  float:left;  padding-top:10px; font-size:14px; color:#000000; font-weight:bold;
+}
+.jqm-hxyy .category-content .category-list-item .category-name .category-smallname{
+	width:100%; height:30px;  float:left;  font-size:12px; color:#5d5f5e; 
+}
+
+/*配送方式列表页面*/
+.jqm-hxyy .send-methods-content{
+	width:100%;
+
+}
+
+.jqm-hxyy .send-methods-content ul{
+	width:90%; margin:0; padding:0; margin-left:5%;
+}
+.jqm-hxyy .send-methods-content li{
+	width:100%; margin:0; padding:0; border:none;
+}
+.jqm-hxyy .send-methods-content .send-list-item{
+	width:100%; height:60px; float:left; border-bottom:1px solid #e4e4e4;
+	}
+.jqm-hxyy .send-methods-content .send-list-item .send-name{
+	width:50%; height:60px; line-height:60px; font-size:14px; color:#000000;  float:left;
+	}
+.jqm-hxyy .send-methods-content .send-list-item .send-description{
+	width:50%; height:60px; line-height:60px; font-size:12px; color:#666666;  float:left;  text-align:right;
+	}

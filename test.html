@@ -1,36 +1,151 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>首页</title>
-<script type="text/jscript">
-	document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">'); 
-	document.write('<link rel="stylesheet" href="css/mian.css">');
-	document.write('<link rel="stylesheet" href="css/lunbo.css">');
-</script>
-<script src="js/jquery.js"></script>
-<script src="js/jquery.mobile-1.4.2.min.js"></script>
-<script>
-
-</script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>购物车</title>
+    <script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+	</script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script>
+	   var AllAddress;  //所有的收货地址信息
+	
+	//事件处理
+	$(document).on("pageinit","#shoping-car-page",function(){
+		var access_token = localStorage.getItem("access_token");
+		if(access_token == null || access_token == ""){
+			window.location="Login.html";
+			window.location.load();	
+		}else{
+			
+		}
+		$("#AddressAdd").click(function(){
+			window.location="AddAddress.html";
+			window.location.load();	
+		});
+	})
+	//加载购物车信息
+	$(document).on("pageshow","#shoping-car-page",function(){
+		//$("#ShopCarList").find('li').remove();  //清空列表
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		//alert(localStorage.getItem("Register_Url")+"SS_GetCart_After?AAccess_token="+localStorage.getItem("access_token")+"&ACookieID"+localStorage.getItem("CookieID"));
+		$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_GetCart_After",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID")},
+			dataType:"jsonp",
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert(data);
+				var data_json = JSON.parse(data); 
+				//alert(JSON.stringify(data_json.entries));
+				if(data_json.entries.length>0){
+					for(var i=0;i<data_json.entries.length;i++){
+					 
+					       var address=' <li><div class="list-itme">'+
+							  '<table id="list_table_id" border="0px" cellpadding="0" cellspacing="0" style=" width:100%;"><tr>'+
+                	          '<td align="center" class="choose-btn"><div class="checbox_div_a"><a onClick=OnClick('+i+')>'+
+                      '<div class="checbox_div_classoff" id="checbox_div_id'+i+'">'+
+                      '<input type="checkbox" id="shopcar_checkbox'+i+'"  style="width:23px; height:23px; display:none"/>'+
+                      '</div></a></div> </td><td class="imge-div">'+
+                    	      '<img src="image/order/pie.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/></td> <td class="name-descreble">'+
+                    	      '<div class="name"><p class="text-p">'+data_json.entries[i].product.name+'</p>'+
+                              '</div> <div class="describe"><p class="text-p">'+data_json.entries[i].product.name+'</p>'+
+                              '</div></td><td class="count-price"><div class="price">'+
+							  data_json.entries[i].basePrice.formattedValue+'</div>'+
+                              '<div class="shoping-count" ><img src="image/button-30.png" id="add" /> '+
+                              '<span>×'+data_json.entries[i].quantity+'</span><img src="image/button-34.png" id="reduce"/> </div>'+
+                              '</td></tr></table></div></li>';
+					
+						     $("#ShopCarList").append(address);
+							 
+				
+					}
+					
+					
+					AllAddress = data;  //赋值
+				}
+				$("#list_table_id").table('refresh');
+				$("#ShopCarList").listview('refresh');
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+	});
+	
+	function OnClick(i){
+		  //alert("进入");
+		  var div=document.getElementById("checbox_div_id"+i);
+		  var chk = document.getElementById('shopcar_checkbox'+i);
+		  //alert(chk.checked);
+          if(chk.checked == true){
+			    div.className="checbox_div_classoff";
+				chk.checked = false;
+				//$("#shopcar_checkbox").attr("checked",'false');//
+		  }else{
+			    div.className="checbox_div_classon";
+				chk.checked = true;
+				//$("#shopcar_checkbox").attr("checked",'true');//
+		  }
+		 
+	   }
+    </script>
 </head>
 <body>
-	<div data-role="page" id="JQM_Home" class="jqm-hxyy jqm-home" data-theme="a">
-		<div data-role="header" class="jqm-header" data-position="fixed"> 
-        
-      	</div>
-      	<div data-role="content" class="jqm-content" align="center">
-        	
-          
-           
-      	</div>
-        <div data-role="footer" class="jqm-footer" data-position="fixed">
-        	<div data-role="navbar" data-theme="c">
-            	
+	
+    <div data-role="page" id="shoping-car-page" class="jqm-hxyy">
+    	<div data-role="header" class="jqm-header" data-position="fixed">
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
+    		<h1>购物车</h1>
+    	</div>
+    	<div data-role="content" class="jqm-content shopingcar-content">
+        	  <ul id="ShopCarList"  >
+                 
+                </ul>
+            </div>
+        </div>
+            <div data-role="navbar" data-theme="c">
+                <ul>
+                    <li>
+                        <a href="Home.html" rel="external" data-ico="" class="ui-btn-active yyg-hom ">
+                            <label>首页</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Query.html" rel="external" data-icon="" class="yyg-find">
+                            <label>发现</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Category.html" rel="external" data-icon="" class="yyg-class">
+                            <label>分类</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ShoppingCart.html" rel="external" data-icon="" class="yyg-buyCar">
+                            <label>购物车</label>
+                            <div class="buyCarCount">122</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="PersonalCenter.html" rel="external" data-icon="" class="yyg-person">
+                            <label>个人中心</label>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </body>
-
 </html>

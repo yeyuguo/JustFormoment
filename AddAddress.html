@@ -6,7 +6,6 @@
 	<title>添加地址</title>
 	<script type="text/jscript">
 		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
-		document.write('<link rel="stylesheet" href="css/mian.css" />');
 		document.write('<link rel="stylesheet" href="css/duanlj.css" />');
 		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
 	</script>
@@ -142,22 +141,22 @@
 			}
 			$.mobile.loading('show',{text:"添加中...",textVisible:true,theme:"b"});
 			//'+$("#sl_area").find("option:selected").text()+'
-			var p='?firstName='+firstname+'&lastName=""&titleCode=mr&line1='+address+'&line2=""&town=""&postalCode='+postal+'&country.isocode=CN&region.isocode='+province+'&city='+city+'&phone='+cellphone+'&access_token='+localStorage.getItem("access_token");
+			var p='?firstName='+firstname+'&lastName=""&titleCode=mr&line1='+address+'&line2=""&town=""&postalCode='+postal+'&country.isocode=CN&region.isocode='+province+'&city='+city+'&cellphone='+cellphone+'&cityDistrict='+DistrictName+'city'+CityName+'&access_token='+localStorage.getItem("access_token");
+			
 			$.ajax({
-				url : localStorage.getItem("H_URL")+"//yxtws/v1/hxyxt/customers/current/addresses"+p,
+				url : localStorage.getItem("H_M_URL")+"//yxtws/v1/hxyxt/customers/current/addresses"+p,
 				type:"POST",
 				dataType:"json",
 				//timeout:30000,
 				contentType:"application/x-www-form-urlencoded; charset=utf-8",
 				success: function(data){
 					$.mobile.loading("hide");
-					alert("添加成功");
+					//alert("添加成功"+JSON.stringify(data));
 					//window.location="AddressCon.html";
-					//window.location.load();	
+					//window.location.load();
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){   //注册成功返回201状态吗
 					$.mobile.loading("hide");
-					alert(textStatus);
 					$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'地址新增失败'});
 				}
 			});

@@ -12,20 +12,70 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
 	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
-        <script>
-	   var AllAddress;  //所有的收货地址信息
+    <script>
+	   var AllShoppingCar;  //所有购物车信息
+	   var UpdateCount = 0;
+	   var AddUpdateCount =0;
+	   var IfToToReturn = false;
 	
 	//事件处理
 	$(document).on("pageinit","#shoping-car-page",function(){
-		$("#AddressAdd").click(function(){
-			window.location="AddAddress.html";
+		var access_token = localStorage.getItem("access_token");
+		if(access_token == null || access_token == ""){
+			window.location="Login.html";
+			localStorage.setItem("come_from_page","ShoppingCart.html");  //登录页面的来源
 			window.location.load();	
+		}else{
+			
+		}
+
+		$("#to_confirmorder").click(function(){
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		for(var i=0;i<AllShoppingCar.entries.length;i++){
+			var  code = AllShoppingCar.entries[i].entryNumber;
+			var LastCount = $("#car_goods_count"+code).html();
+			if(AllShoppingCar.entries[i].quantity != parseInt(LastCount)){
+				UpdateCount++;
+				//数量有变动，更新该条购物车
+					$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_UpdateCart",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID"),AEntryNumber:i,Aqty:"0"},
+			dataType:"jsonp",
+			timeout:5000,
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				//$.mobile.loading("hide");
+				//alert(data);
+				if(data == 'OK'){ 
+					AddUpdateCount++;
+				}
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'数据异常!'});
+			}
+		});
+				
+			}
+			
+		}
+		IfToToReturn = true;
+		//alert("UpdateCount:"+UpdateCount+",IfToToReturn:"+IfToToReturn);
+		
+	
+		
+			
+			
+			
 		});
 	})
 	//加载购物车信息
-	$(document).on("pageshow","#shoping-car-pag",function(){
+	$(document).on("pageshow","#shoping-car-page",function(){
 		//$("#ShopCarList").find('li').remove();  //清空列表
 		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		//alert(localStorage.getItem("Register_Url")+"SS_GetCart_After?AAccess_token="+localStorage.getItem("access_token")+"&ACookieID="+localStorage.getItem("CookieID"));
 		$.ajax({
 			url:localStorage.getItem("Register_Url")+"SS_GetCart_After",
 			type:"GET",
@@ -38,38 +88,135 @@
 				//alert(data);
 				var data_json = JSON.parse(data); 
 				//alert(JSON.stringify(data_json.entries));
+				//alert(JSON.stringify(data_json.entries[i]));
 				if(data_json.entries.length>0){
+					localStorage.setItem("shop_car_count",data_json.entries.length);
+					var car_count = document.getElementById("buy_car_count");  
+					car_count.style.display="";
+					$("#buy_car_count").html(data_json.entries.length);
+					
 					for(var i=0;i<data_json.entries.length;i++){
-						//alert(JSON.stringify(data_json.entries[i]));
-						   
-					 
-					         var address=' <li><div class="list-itme">'+
-							  '<table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;"><tr>'+
-                	          '<td class="choose-btn"><input type="checkbox"/></td><td class="imge-div">'+
+						  var EntryNumber = data_json.entries[i].entryNumber;
+					       var address=' <li><div class="list-itme">'+
+							  '<table id="list_table_id" border="0px" cellpadding="0" cellspacing="0" style=" width:100%;"><tr>'+
+                	         '<td class="imge-div">'+
                     	      '<img src="image/order/pie.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/></td> <td class="name-descreble">'+
                     	      '<div class="name"><p class="text-p">'+data_json.entries[i].product.name+'</p>'+
-                              '</div> <div class="describe"><p class="text-p">商品说明：阿斯顿发阿斯顿斯顿发</p>'+
-                              '</div></td><td class="count-price"><div class="price"'+data_json.entries[i].basePrice.formattedValue+'</div>'+
-                              '<div class="shoping-count" ><img src="image/button-30.png" id="add" /> '+
-                              '<span>×'+data_json.entries[i].quantity+'</span><img src="image/button-34.png" id="reduce"/> </div>'+
-                              '</td></tr></table></div></li>';
+                              '</div> <div class="describe"><p class="text-p">'+data_json.entries[i].product.name+'</p>'+
+                              '</div></td>'+'<td class="count-price"><div class="price">'+
+							  data_json.entries[i].basePrice.formattedValue+'</div>'+
+                              '<div class="shoping-count" ><img src="image/order/reduce_count.png" id="reduce" onClick=OnClickReduce('+EntryNumber+') /> '+
+                              '×<span id="car_goods_count'+EntryNumber+'">'+data_json.entries[i].quantity+'</span><img src="image/order/add_count.png" id="add" onClick=OnClickAdd('+EntryNumber+') /> </div>'+
+                              '</td>'+ '<td align="center" class="choose-btn"><div class="checbox_div_a"><a onClick=OnClick('+EntryNumber+')>'+
+                      '<div class="checbox_div_classoff" id="checbox_div_id'+EntryNumber+'">'+
+                      '<input type="checkbox" id="shopcar_checkbox'+EntryNumber+'"  style="width:23px; height:23px; display:none"/>'+
+                      '</div></a></div></td></tr></table></div></li>';
 					
-						$("#ShopCarList").append(address);
+						     $("#ShopCarList").append(address);
+							 
+				
 					}
-					AllAddress = data;  //赋值
+					
+					
+					AllShoppingCar =JSON.parse(data);  //赋值
 				}
+				$("#list_table_id").table('refresh');
 				$("#ShopCarList").listview('refresh');
 			},
 			error:function(msg){
 				$.mobile.loading("hide");
-				alert(JSON.stringify(msg));
+				//alert(JSON.stringify(msg));
 				//window.location="Login.html";
 				//window.location.load();	
 			}
 		});
 	});
 	
-	
+	function OnClick(i){
+		  //alert("进入");
+		 /* var div=document.getElementById("checbox_div_id"+i);
+		  var chk = document.getElementById('shopcar_checkbox'+i);
+		  //alert(chk.checked);
+          if(chk.checked == true){
+			    div.className="checbox_div_classoff";
+				chk.checked = false;
+				//$("#shopcar_checkbox").attr("checked",'false');//
+		  }else{
+			    div.className="checbox_div_classon";
+				chk.checked = true;
+				//$("#shopcar_checkbox").attr("checked",'true');//
+		  }*/
+		  
+		  //单个删除
+		  $.mobile.loading('show',{text:"正在删除...",textVisible:true,theme:"b"});
+		//alert(localStorage.getItem("Register_Url")+"SS_UpdateCart"+"?AAccess_token="+localStorage.getItem("access_token")+"&ACookieID="+localStorage.getItem("CookieID")+"&AEntryNumber="+i+"&Aqty="+i);
+		$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_UpdateCart",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID"),AEntryNumber:i,Aqty:"0"},
+			dataType:"jsonp",
+			timeout:5000,
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert(data);
+				if(data == 'OK'){ 
+					parent.location.reload(); 
+				}
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'删除失败!'});
+			}
+		});
+		 
+	   }
+	  function OnClickReduce(i){
+		  var OldCount = $("#car_goods_count"+i).html();
+		  var count;
+		  if(parseInt(OldCount) >0){
+			  count = parseInt(OldCount) -1;
+			  $("#car_goods_count"+i).html(count);
+		  } 
+	  }
+	   function OnClickAdd(i){
+		  var OldCount = $("#car_goods_count"+i).html();
+		  var count;
+		  count = parseInt(OldCount) +1;
+		  $("#car_goods_count"+i).html(count);
+	   }
+	   
+	   
+	   function showLogin(){
+		  if(IfToToReturn && AddUpdateCount == UpdateCount){
+			  //设置默认收货地址和配送方式
+		$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_SetCart",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID")},
+			dataType:"jsonp",
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//if(data == OK){
+					window.location="ConfirmOrder.html"; 
+			        window.location.load();	
+				//}
+				
+		
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+		  }
+		 }
+		   setInterval("showLogin()","1000");
     </script>
 </head>
 <body>
@@ -81,52 +228,51 @@
     	</div>
     	<div data-role="content" class="jqm-content shopingcar-content">
         	  <ul id="ShopCarList"  >
-                 <li>
-                   <div class="list-itme">
-                     <table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;">
-            	<tr>
-                	<td class="choose-btn">
-                    	<!--  <input type="checkbox"/>  -->
-                        <input type="checkbox" id="dlj-agreement" />
-                        <label for="dlj-agreement" class="dlj-agreement"></label>
-                        
-                    </td>
-                    <td class="imge-div">
-                    	<img src="image/order/pie.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/>
-                    </td>
-                    <td class="name-descreble">
-                    	<div class="name">
-                        	<p class="text-p">商品名称：阿道夫爱的色放阿斯顿发阿斯顿发阿斯顿发撒地方阿斯顿发阿斯sdf sdf 顿发按时的</p>
-                        </div>
-                        <div class="describe">
-                        	<p class="text-p">商品说明：阿斯顿发阿斯顿发阿斯顿发撒地方阿斯顿发</p>
-                        </div>
-                    </td>
-                    <td class="count-price">
-                    	<div class="price">
-                        	200￥
-                        </div>
-                        <div class="shoping-count" >
-                          <img src="image/button-30.png" id="add" /> 
-                          <span>×2</span>
-                          <img src="image/button-34.png" id="reduce"/>
-                        </div>
-                    </td>
-                </tr>
-                
-            </table>
-                   </div>
-                 </li>
+             
               </ul>
     	</div>
         <div data-role="footer" class="jqm-footer" data-position="fixed">
+            <div class="shoping-car-paydiv">
+              <div class="allchoose">
+                  <div class="all-choose-checkbox">
+                   <!--  <label for="dlj-agreement" class="dlj-agreement">全选</label>
+                     <input type="checkbox" id="dlj-agreement" />-->
+                   <span>总计33件商品</span>
+                  </div>
+                  <div class="delet-shopingcar">
+                 <!-- <img src="image/button-34.png" />-->
+                  <span>总价:1024.0￥</span></div>
+               </div>
+               <div class="topay"><input id="to_confirmorder" type="button" value="结算" style="width:20px; height:20px;" /></div>
+            </div>
             <div data-role="navbar" data-theme="c">
-            	<ul>
-                    <li><a href="Home.html" rel="external" data-icon="home" >首页</a></li>
-                    <li><a href="Query.html" rel="external" data-icon="search" >发现</a></li>
-                    <li><a href="Category.html" rel="external" data-icon="bars">分类</a></li>
-                    <li><a href="ShoppingCart.html" rel="external"  data-icon="star" class="ui-btn-active">购物车</a></li>
-                    <li><a href="PersonalCenter.html" rel="external" data-icon="user">个人中心</a></li>
+                <ul>
+                    <li>
+                        <a href="Home.html" rel="external" data-ico="" class="yyg-hom ">
+                            <label>首页</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Query.html" rel="external" data-icon="" class="yyg-find">
+                            <label>团购</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Category.html" rel="external" data-icon="" class="yyg-class">
+                            <label>分类</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ShoppingCart.html" rel="external" data-icon="" class="ui-btn-active yyg-buyCar">
+                            <label>购物车</label>
+                            <div id="buy_car_count" class="buyCarCount" style="display:none">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="PersonalCenter.html" rel="external" data-icon="" class="yyg-person">
+                            <label>个人中心</label>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -13,14 +13,13 @@
     <script type="text/javascript" language="javascript">
     $(document).ready(function () {
         //设置WCF访问地址
-        //localStorage.clear();
-        //var url = localStorage.getItem("Register_Url");
-        //if(url == null || url == ''){
-            //localStorage.setItem("Register_Url","http://127.0.0.1:10344/RegisterService.svc/");//本地
-            //localStorage.setItem("Register_Url","http://10.0.36.110:5051/RegisterService.svc/");  //内网
-            //localStorage.setItem("Register_Url","http://116.55.227.230:11812/RegisterService.svc/");//外网
-            //localStorage.setItem("Register_Url","http://10.0.51.206:5052/RegisterService.svc/");  //内网
-        //}
+        localStorage.clear();
+        localStorage.setItem("Register_Url","http://10.0.51.206:7001/RegisterService.svc/");//服务器
+		//localStorage.setItem("Register_Url","http://127.0.0.1:10344/RegisterService.svc/");//服务器
+		localStorage.setItem("H_M_URL","https://10.0.36.118:9002/");//用户信息类加密接口
+		localStorage.setItem("H_URL","http://10.0.36.118:9001/");  //准生产环境	
+		//localStorage.setItem("N_URL","http://10.0.51.206:7001/");    //.net接口  http://10.0.51.206:7001/
+		localStorage.setItem("N_URL","http://127.0.0.1:10344/");
         //3秒后跳转主页
         setTimeout(function(){
             window.location="Home.html";

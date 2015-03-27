@@ -13,13 +13,27 @@
     </script>
     <script src="js/jquery.js"></script>
     <script src="js/jquery.mobile-1.4.2.min.js"></script>
-    <script src="js/jquery.msgbox.min.js"></script>
+    <!--<script src="js/jquery.msgbox.min.js"></script> -->
     <!--messageBos  -->
     <script src="js/lunbo.js"></script>
+    
+    <script>
+
+	//页面初始化
+	$(document).on("pageinit","#home-page",function(){
+		var CarPage = localStorage.getItem("shop_car_count");
+		if(CarPage != null && CarPage!=""){
+			var car_count = document.getElementById("buy_car_count");  
+		    car_count.style.display="";
+		    $("#buy_car_count").html(CarPage);
+		}
+		
+	});
+	</script>
 </head>
 
 <body>
-    <div data-role="page" class="jqm-hxyy">
+    <div data-role="page" id="home-page" class="jqm-hxyy">
         <div data-role="header" class="jqm-header" data-position="fixed">
             <a href="#"><img src="image/user/button-47.png" />
             </a>
@@ -36,9 +50,9 @@
                     <li class="num"><a>1</a><a>2</a><a>3</a><a>4</a>
                     </li>
                     <li class="img_content">
-                        <a href="ItemDes.html?Id=132560&Type=HY" rel="external"><img src="image/goods/01.jpg" alt="全场惠不停" />
+                        <a href="ItemDes.html?Id=100013521&Type=HY" rel="external"><img src="image/goods/01.jpg" alt="阿胶" />
                         </a>
-                        <a href="ItemDes.html?Id=132560&Type=HY" rel="external"><img src="image/goods/02.jpg" alt="聚惠来袭" />
+                        <a href="ItemDes.html?Id=100020954&Type=HY" rel="external"><img src="image/goods/02.jpg" alt="面膜" />
                         </a>
                         <a href="ItemDes.html?Id=132560&Type=HY" rel="external"><img src="image/goods/03.jpg" alt="全场4.9折" />
                         </a>
@@ -117,10 +131,9 @@
             </div>
 
         </div>
-        <div data-role="footer" class="jqm-footer" data-position="fixed">
+         <div data-role="footer" class="jqm-footer" data-position="fixed">
             <div data-role="navbar" data-theme="c">
                 <ul>
-
                     <li>
                         <a href="Home.html" rel="external" data-ico="" class="ui-btn-active yyg-hom ">
                             <label>首页</label>
@@ -128,7 +141,7 @@
                     </li>
                     <li>
                         <a href="Query.html" rel="external" data-icon="" class="yyg-find">
-                            <label>发现</label>
+                            <label>团购</label>
                         </a>
                     </li>
                     <li>
@@ -139,7 +152,7 @@
                     <li>
                         <a href="ShoppingCart.html" rel="external" data-icon="" class="yyg-buyCar">
                             <label>购物车</label>
-                            <div class="buyCarCount">12</div>
+                           <div id="buy_car_count" class="buyCarCount" style="display:none">0</div>
                         </a>
                     </li>
                     <li>
@@ -147,11 +160,17 @@
                             <label>个人中心</label>
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>
     </div>
+    <script>
+    // $(document).ready(function(){
+    //     $(".jqm-footer li a").click(function(){
+    //         $(this).addClass(".ui-btn-active").siblings().removeClass(".ui-btn-active");
+    //     })
+    // })
+    </script>
 </body>
 
 </html>

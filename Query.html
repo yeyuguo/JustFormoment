@@ -3,64 +3,144 @@
 <head>
     <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>发现</title>
+    <title>团购</title>
     <script type="text/jscript">
 		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
 		document.write('<link rel="stylesheet" href="css/mian.css" />');
 		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+		document.write('<link rel="stylesheet" href="css/MyOrder.css">');
 	</script>
     <script src="js/jquery.js"></script>
     <script src="js/jquery.mobile-1.4.2.min.js"></script>
     <script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script type="text/javascript" language="javascript">
+    var OrderList;
+	var NeedPayOrderList = new Array();
+	var SendOrderList= new Array();
+	var NeedAcceptOrderList= new Array();
+    $(document).on("pageshow","#bulk-page",function(){
+		var CarPage = localStorage.getItem("shop_car_count");
+		if(CarPage != null && CarPage!=""){
+			var car_count = document.getElementById("buy_car_count");  
+		    car_count.style.display="";
+		    $("#buy_car_count").html(CarPage);
+		}
+		});
+		
+		 //点击类别
+		function OnclickClass(i){
+			var RefreshOrderList;
+			if(i == 1){
+				//RefreshOrderList = OrderList.orders;
+			}else if(i == 2){
+				//RefreshOrderList = NeedPayOrderList;
+			}
+			if(i == 1){
+				$("#BuilNowPrice").html(56);
+				var image = '<img src="image/order/pie.png" />';
+				$("#GoodsImage").html(image);
+				
+				
+			}else{
+				$("#BuilNowPrice").html(111);
+			    var image = '<img src="image/order/test.png" />';
+				$("#GoodsImage").html(image);
+				
+				
+			}
+		}
+</script>
 </head>
 <body>
-    <div data-role="page" class="jqm-hxyy">
+    <div data-role="page" id="bulk-page" class="jqm-hxyy">
         <div data-role="header" class="jqm-header" data-position="fixed">
         	<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
-    		<h1>发&nbsp;&nbsp;现</h1>
+    		<h1>团&nbsp;&nbsp;购</h1>
         </div>
-        <div data-role="content" class="jqm-content">
+        <div data-role="content" id="wj-con" class="jqm-content bulk-content">
 			
-            <table border="0px" cellpadding="0" cellspacing="0" style=" width:100%;">
-            	<tr>
-                	<td style="height:80px; line-height:80px; background-color:#0CF; width:35px;">
-                    	<input type="checkbox"/>
-                    </td>
-                    <td style="background-color:#FF0000; width:80px;">
-                    	<img src="image/default.png" style="width:76px; height:76px; margin-left:2px; margin-top:1px; display:block;"/>
-                    </td>
-                    <td>
-                    	<div style="height:50px;width:100%;float:left; overflow:hidden; font-size:14px;background-color:#00C;">
-                        	<p style=" margin:6px 4px 0px 4px; height:38px; overflow:hidden; background-color:#0033FF;">商品名称：阿道夫爱的色放阿斯顿发阿斯顿发阿斯顿发撒地方阿斯顿发阿斯sdf sdf 顿发按时的</p>
-                        </div>
-                        <div style="height:30px; line-height:30px; font-size:10px; overflow:hidden; width:100%;float:left; background-color:#C99;">
-                        	商品说明：阿斯顿发阿斯顿发阿斯顿发撒地方阿斯顿发
-                        </div>
-                    </td>
-                    <td style="width:80px;">
-                    	<div style="height:40px; line-height:40px; width:100%; text-align:center; float:left; background-color:#0C9;">
-                        	200￥
-                        </div>
-                        <div style="height:40px; line-height:40px; width:100%; text-align:center; float:left; background-color:#C63;">
-                        	-  1  +
-                        </div>
-                    </td>
-                </tr>
-                
-            </table>
+            <div class="buik-navigation">
+                <ul>
+                    <li class="on" id="tb_11">
+                        <a href="#" onClick="OnclickClass(1)">本周团购</a>
+                    </li>
+                    <li id="tb_12">
+                        <a href="#" onClick="OnclickClass(2)">下周预告</a>
+                    </li>
+                    <!-- <li id="tb_13">
+                        <a href="#" onClick=OnclickClass(3)>待发货</a>
+                    </li>
+                    <li id="tb_14">
+                        <a href="#" onClick=OnclickClass(4)>待收货</a>
+                    </li>  -->
+                </ul>
+            </div>
+            <div class="goods-content">
+              <!-- 内容 <img src="image/order/pie.png" /> -->
+                <div class="update-time" id="tbc_11">
+                      <span>每周一00:00更新</span>
+                </div>
+                <div class="goods-details">
+                    <div class="image-div"><div class="image-div-img" id="GoodsImage"><img src="image/order/pie.png" /></div><div class="image-div-bord"><img src="image/order/buil_bord_img.png" /></div></div>
+                    <div class="buil-price-buy">
+                        <div class="buil-price" id="BuilPriceID"><span class="now-price" id="BuilNowPrice">89</span>&nbsp;<span class="old-price">108</span></div>
+                        <div class="buil-buy"><img src="image/order/rob_buy.png" /></div>
+                     </div>
+                    <div class="buil-describe"><span>&nbsp;&nbsp;&nbsp;&nbsp;测试啦啦测试啦啦测试啦啦测试啦啦测试啦啦测试啦啦测试啦啦测试啦啦测试啦啦测试啦啦</span></div>
+                    </div>
+               
+
+            </div>
             
         </div>
-        <div data-role="footer" class="jqm-footer" data-position="fixed">
+         <div data-role="footer" class="jqm-footer" data-position="fixed">
             <div data-role="navbar" data-theme="c">
-            	<ul>
-                    <li><a href="Home.html" rel="external" data-ico="" class="yyg-hom "><label>首页</label></a></li>
-                    <li><a href="Query.html" rel="external" data-icon="" class="ui-btn-active yyg-find"><label>发现</label></a></li>
-                    <li><a href="Category.html" rel="external" data-icon="" class="yyg-class"><label>分类</label></a></li>
-                    <li><a href="ShoppingCart.html" rel="external" data-icon=""class="yyg-buyCar"><label>购物车</label></a></li>
-                    <li><a href="PersonalCenter.html" rel="external" data-icon=""class="yyg-person"><label>个人中心</label></a></li>
+                <ul>
+                    <li>
+                        <a href="Home.html" rel="external" data-ico="" class="yyg-hom ">
+                            <label>首页</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Query.html" rel="external" data-icon="" class="ui-btn-active yyg-find">
+                            <label>团购</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Category.html" rel="external" data-icon="" class="yyg-class">
+                            <label>分类</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ShoppingCart.html" rel="external" data-icon="" class="yyg-buyCar">
+                            <label>购物车</label>
+                            <div id="buy_car_count" class="buyCarCount" style="display:none">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="PersonalCenter.html" rel="external" data-icon="" class="yyg-person">
+                            <label>个人中心</label>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
+     <script>
+    function tab(e) {
+        var elm = $(e),
+            tabs = elm.find('ul li'),
+            tabc = elm.find('.department_c');
+        tabs.each(function(i) {
+            $(tabs[i]).on('click', function() {
+                tabs.each(function() {
+                    tabs.hasClass('on') ? tabs.removeClass('on') : false;
+                }) 
+                $(tabs[i]).addClass('on');
+            })
+        })
+    }
+    tab('#wj-con')
+    </script>
 </body>
 </html>

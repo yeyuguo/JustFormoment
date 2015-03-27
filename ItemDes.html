@@ -15,9 +15,11 @@
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
 	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
     <script src="js/lunbo.js"></script>
+    <script src="js/mian.js"></script>
     <script src="js/xcj.js"></script>
-     <script>
-	
+    <script>
+	var GoodsID ="000000";
+	var GoodsCount ="1";
 	//事件处理
 	$(document).on("pageinit","#goods-details-page",function(){
 		$("#AddressAdd").click(function(){
@@ -26,11 +28,13 @@
 		});
 	})
 	
-	//加载地址列表
+	//加载商品信息
 	$(document).on("pageshow","#goods-details-page",function(){
+		GoodsID =  GetQueryString("Id");
+		//alert(GoodsID);
 		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
 		$.ajax({
-			url:localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/products/100004524",
+			url:localStorage.getItem("H_URL")+"yxtws/v1/hxyxt/products/"+GoodsID,
 			type:"GET",
 			data:{options:"STOCK,PRICE"},
 			dataType:"json",
@@ -39,17 +43,22 @@
 				$.mobile.loading("hide");
 				//alert(JSON.stringify(data));
 				var allimage ="";
+				var GoodsSmallPicture = "";
 				if(data.images.length>0){
 					for(var i=0;i<data.images.length;i++){
 						var image_tring = data.images[i].url;
 						image_tring = image_tring.replace('http://qa-image1.yxt.com:8080/medias','http://image.hxyxt.com/medias');
 						//alert(image_tring);
+						if(i+1 == data.images.length){
+							GoodsSmallPicture = image_tring;
+						}
 					    var address='<img '+'src="'+image_tring+'" alt="'+data.images[i].altText+'" title="'+
 				data.images[i].altText+'"/>';
 						allimage=allimage+address;
 					}
 				}
-				
+				//var image = '<img src="image/order/pie.png" />';
+				$("#goods_small_picture").html('<img src="'+GoodsSmallPicture+'" />');
 				$("#goods_nameID").append('<span>'+data.name+'</span>');
 				$("#priceID").append('<span>'+data.price.formattedValue+'</span>');
 				$("#goods_detailsID").append(allimage);
@@ -67,7 +76,7 @@
 			},
 			error:function(msg){
 				$.mobile.loading("hide");
-				alert(JSON.stringify(msg));
+				//alert(JSON.stringify(msg));
 				//window.location="Login.html";
 				//window.location.load();	
 			}
@@ -116,10 +125,7 @@
             </div>
     	</div>
         <div data-role="footer" class="jqm-footer jqm-item-footer" data-position="fixed">
-        	<input type="button" id="btn_Buy" data-role="none" value="立即购买" class="ui-btn btn-buy select">
-            <input type="button" id="btn_AddCart" data-role="none" value="加入购物车" class="ui-btn btn-addcart select">
-            <input type="button" id="btn_Cart" data-role="none" value="购物车" class="ui-btn btn-cart">
-            <span class="span_count">2</span>
+             <input type="button" id="btn_AddCart" data-role="none" value="加入购物车" class="ui-btn btn-addcart select"> 
         </div>
       
     </div>
@@ -130,7 +136,7 @@
 		<div class="goodsinfo">
 			<a href="#" id="close"><img src="image/close.png" title="关闭" alt="关闭"></img> </a>
 			<dl>
-				<dt>
+				<dt id="goods_small_picture">
 					<img src="image/goods/1.jpg"></img>
 				</dt>
 				<dd class="Price" id="goods_priceID"></dd>
@@ -138,10 +144,11 @@
 				<dd class="Classify">请选择规格、分类</dd>
 			</dl>
 		</div>
-
+    
 		<div class="select">
 			<div class="type">
-				<p>颜色/尺码</p>
+              <!-- 颜色和尺码属于预留模块-->
+				<!--<p>颜色/尺码</p>
 				<div class="size">
 					<div class="sizeselect">10g精美包装 送礼佳品 10g精美包装 送礼佳品10g精美包装 </div>
 					<div class="sizeselect">20g精美包装 送礼佳品</div>
@@ -157,27 +164,32 @@
 					<div class="sizeselect">70g</div>
 					<div class="sizeselect">80g</div>
 					<div class="sizeselect">90g</div>
-				</div>
+				</div>-->
 
-
-				<div class="sellNumber">
-					<font>购买数量</font>
-					<div class="no">
-						<img src="image/button-48.png" id="jia" /> <input type="text"
-							value="1" id="num"> <img src="image/button-48.png" id="jian"/>
-					</div>
+   
+                <div class="sellNumber" >
+                  <div class="des" >购买数量：</div>
+                  <div class="No">
+                     <div class="mimus" id="jian"><img src="image/order/reduce_count.png" width="14" height="14"></div>
+		             <input type="text" value="1" id="num" />
+		             <div class="plus" id="jia"><img src="image/order/add_count.png" width="14" height="14"></div>
+                  </div>
+                </div>
+   
 				</div>
+				
 
 			</div>
+			  <div class="btn_Confirm">
+			  <div id="confirm">确定</div>
+		    </div>
+		      <div class="btn_AddCar">
+			  <div class="AddOrBuy" class="oo" id="AddCar" >加入购物车</div>
+		    </div>
 
 		</div>
 
-		<div class="btn_Confirm">
-			<div id="confirm">确定</div>
-		</div>
-		<div class="btn_AddCar">
-			<div class="AddOrBuy" class="oo" id="AddCar" >加入购物车</div>
-		</div>
+		
 	</div>
     
   

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>配送方式</title>
+	<script type="text/jscript">
+		document.write('<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">');
+		document.write('<link rel="stylesheet" href="css/mian.css" />');
+		document.write('<link rel="stylesheet" href="css/duanlj.css" />');
+		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
+	</script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script>
+	var AllSendMethods;
+	//事件处理
+	$(document).on("pageinit","#send-methods-page",function(){
+		$("#AddressAdd").click(function(){
+			window.location="AddAddress.html";
+			window.location.load();	
+		});
+	})
+	//加载配送方式列表
+	$(document).on("pageshow","#send-methods-page",function(){
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_GetAllUserLogistics",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID")},
+			dataType:"jsonp",
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			
+			
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert("成功"+JSON.stringify(data));
+				if(data.deliveryModes.length>0){
+					for(var i=0;i<data.deliveryModes.length;i++){
+						
+				var address='<li> <div class="send-list-item"><a onClick=SelectSend('+i+') href="#">'+
+                    '<div class="send-name"><span>'+data.deliveryModes[i].name+'</span></div>'+
+                    '<div class="send-description"><span>'+data.deliveryModes[i].description+'</span></div></a></div></li>';
+						
+						
+						$("#send_methods_list").append(address);
+					}
+					AllSendMethods = data;
+
+				}
+				$("#send_methods_list").listview('refresh');
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+	});
+	//设置选中配送方式信息
+	function SelectSend(i){
+		var code = AllSendMethods.deliveryModes[i].code;
+		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
+		//alert(localStorage.getItem("Register_Url")+"SS_SetUserLogistics"+"?AAccess_token="+localStorage.getItem("access_token")+"&ACookieID="+localStorage.getItem("CookieID")+"&AAddress="+i);
+		$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_SetUserLogistics",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID"),ALogistics:code},
+			dataType:"jsonp",
+			timeout:5000,
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				if(data == 'OK'){ 
+					window.location="ConfirmOrder.html";
+					window.location.load();	
+				}
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				$.msgbox({closeImg: 'image/close.gif',height:120,width:250,type :'alert',content:'设置收货地址错误!'});
+			}
+		});
+	}
+	
+    </script>
+</head>
+<body>
+   
+   <div data-role="page" id="send-methods-page" class="jqm-hxyy">
+    	<div data-role="header" class="jqm-header" data-position="fixed">
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
+    		<h1>配送方式</h1>
+    	</div>
+        <div data-role="content" class="send-methods-content">
+        <!-- 其他属性  data-inset="true" data-split-theme="a" data-split-icon="delete -->
+          <ul id="send_methods_list" data-role="listview"  >
+             <!-- <li>
+                 <div class="send-list-item"><a onClick=SelectSend() href="#">
+                    <div class="send-name"><span>快递</span></div>
+                    <div class="send-description"><span>快递</span></div>
+                 </a></div>
+              </li>-->
+           </ul>
+         
+          
+          
+  
+        </div>
+       
+    </div>
+
+  
+</body>
+</html>

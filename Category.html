@@ -9,31 +9,148 @@
 		document.write('<link rel="stylesheet" href="css/mian.css" />');
 		document.write('<link rel="stylesheet" href="css/jquery.msgbox.css">');
 	</script>
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.mobile-1.4.2.min.js"></script>
+	<!--<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.2.min.js"></script> -->
 	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+     <script>
+
+	//页面初始化
+	$(document).on("pageinit","#category-page",function(){
+		var CarPage = localStorage.getItem("shop_car_count");
+		if(CarPage != null && CarPage!=""){
+			var car_count = document.getElementById("buy_car_count");  
+		    car_count.style.display="";
+		    $("#buy_car_count").html(CarPage);
+		}
+		
+	});
+	</script>
    
 </head>
 <body>
-	<div data-role="page" class="jqm-hxyy">
-    	<div data-role="header" class="jqm-header" data-position="fixed">
+	<div data-role="page" id="category-page" class="jqm-hxyy">
+    	<div data-role="header" class="jqm-header category-page" data-position="fixed">
     		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
     		<h1>分&nbsp;&nbsp;类</h1>
     	</div>
-    	<div data-role="content" class="jqm-content">
-        	
+    	<div data-role="content" class="jqm-content category-content">
+        	<ul id="CategoryList" >
+               <li>
+                   <div class="category-list-item"><a href="CategoryList.html?serch_key=中西药品"   rel="external">
+                       <div class="category-img-div"><div class="category-img"><img src="image/order/wandtcm.png" /></div></div>
+                       <div class="category-name">
+                           <div class="category-bigname"><span>中西药品</span></div>
+                           <div class="category-smallname"><span>心脑血管&nbsp;&nbsp;感冒用药&nbsp;&nbsp;妇科用药</span></div>
+                       </div>
+                   </a></div>
+               </li>
+               <li>
+                   <div class="category-list-item"><a href="CategoryList.html?serch_key=中药"  rel="external">
+                       <div class="category-img-div"><div class="category-img"><img src="image/order/tcm.png" /></div></div>
+                       <div class="category-name">
+                           <div class="category-bigname"><span>中药</span></div>
+                           <div class="category-smallname"><span>名贵药材&nbsp;&nbsp;药膳&nbsp;&nbsp;花茶&nbsp;&nbsp;三七</span></div>
+                       </div>
+                   </a></div>
+               </li>
+               <li>
+                   <div class="category-list-item"><a href="CategoryList.html?serch_key=保健养生"  rel="external">
+                       <div class="category-img-div"><div class="category-img"><img src="image/order/good_health.png" /></div></div>
+                       <div class="category-name">
+                           <div class="category-bigname"><span>保健养生</span></div>
+                           <div class="category-smallname"><span>美体瘦身&nbsp;&nbsp;强健男人&nbsp;&nbsp;调节三高</span></div>
+                       </div>
+                   </a></div>
+               </li>
+                <li>
+                   <div class="category-list-item"><a href="CategoryList.html?serch_key=成人用品"  rel="external">
+                       <div class="category-img-div"><div class="category-img"><img src="image/order/adult_goods.png" /></div></div>
+                       <div class="category-name">
+                           <div class="category-bigname"><span>成人用品</span></div>
+                           <div class="category-smallname"><span>安全套&nbsp;&nbsp;丰胸美体&nbsp;&nbsp;男用器具</span></div>
+                       </div>
+                   </a></div>
+               </li>
+                <li>
+                   <div class="category-list-item"><a href="CategoryList.html?serch_key=医疗器械"  rel="external">
+                       <div class="category-img-div"><div class="category-img"><img src="image/order/medical_apparatus.png" /></div></div>
+                       <div class="category-name">
+                           <div class="category-bigname"><span>医疗器械</span></div>
+                           <div class="category-smallname"><span>血压计&nbsp;&nbsp;制氧机&nbsp;&nbsp;轮椅拐杖</span></div>
+                       </div>
+                   </a></div>
+               </li>
+                <li>
+                   <div class="category-list-item"><a href="CategoryList.html?serch_key=母婴用品"  rel="external">
+                       <div class="category-img-div"><div class="category-img"><img src="image/order/pregnant_goods.png" /></div></div>
+                       <div class="category-name">
+                           <div class="category-bigname"><span>母婴用品</span></div>
+                           <div class="category-smallname"><span>奶粉&nbsp;&nbsp;母婴用品&nbsp;&nbsp;纸尿裤</span></div>
+                       </div>
+                   </a></div>
+               </li>
+                <li>
+                   <div class="category-list-item"><a href="CategoryList.html?serch_key=个人护理" rel="external">
+                       <div class="category-img-div"><div class="category-img"><img src="image/order/personal_care.png" /></div></div>
+                       <div class="category-name">
+                           <div class="category-bigname"><span>个人护理</span></div>
+                           <div class="category-smallname"><span>口腔护理&nbsp;&nbsp;精华液/精华露&nbsp;&nbsp;眼膜</span></div>
+                       </div>
+                   </a></div>
+               </li>
+                <li>
+                   <div class="category-list-item"><a href="CategoryList.html?serch_key=隐形眼镜"  rel="external">
+                       <div class="category-img-div"><div class="category-img"><img src="image/order/contact_lenses.png" /></div></div>
+                       <div class="category-name">
+                           <div class="category-bigname"><span>隐形眼镜</span></div>
+                           <div class="category-smallname"><span>强生&nbsp;&nbsp;博士伦&nbsp;&nbsp;美瞳&nbsp;&nbsp;护理液</span></div>
+                       </div>
+                   </a></div>
+               </li>
+           </ul>
     	</div>
-        <div data-role="footer" class="jqm-footer" data-position="fixed">
+         <div data-role="footer" class="jqm-footer" data-position="fixed">
             <div data-role="navbar" data-theme="c">
-            	<ul>
-                    <li><a href="Home.html" rel="external" data-ico="" class="yyg-hom "><label>首页</label></a></li>
-                    <li><a href="Query.html" rel="external" data-icon="" class="yyg-find"><label>发现</label></a></li>
-                    <li><a href="Category.html" rel="external" data-icon="" class="ui-btn-active yyg-class"><label>分类</label></a></li>
-                    <li><a href="ShoppingCart.html" rel="external" data-icon=""class="yyg-buyCar"><label>购物车</label></a></li>
-                    <li><a href="PersonalCenter.html" rel="external" data-icon=""class="yyg-person"><label>个人中心</label></a></li>
+                <ul>
+                    <li>
+                        <a href="Home.html" rel="external" data-ico="" class="yyg-hom ">
+                            <label>首页</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Query.html" rel="external" data-icon="" class="yyg-find">
+                            <label>团购</label>
+                        </a>
+                    </li>
+                    <li>
+
+                        <a href="Category.html" rel="external" data-icon="" class="ui-btn-active yyg-class">
+                            <label>分类</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ShoppingCart.html" rel="external" data-icon="" class="yyg-buyCar">
+                            <label>购物车</label>
+                            <div id="buy_car_count" class="buyCarCount" style="display:none">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="PersonalCenter.html" rel="external" data-icon="" class="yyg-person">
+                            <label>个人中心</label>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
+<script>
+function click(){
+  alert("heloi")
+}
+var A=getElementsByClassName("li");
+A.attachEvent('onclick',click())
+
+</script>
+
 </body>
 </html>

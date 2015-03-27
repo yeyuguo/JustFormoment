@@ -12,34 +12,71 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.mobile-1.4.2.min.js"></script>
 	<script src="js/jquery.msgbox.min.js"></script>   <!--messageBos  -->
+    <script src="js/mian.js"></script>
+    <script>
+	var TotalPrice;
+	var OrderNumber;
+	$(document).on("pageinit","#order-pay-page",function(){
+		 TotalPrice = GetQueryString("total_price");
+		 OrderNumber = GetQueryString("order_number");
+		 $("#order_number").html('订单编号：'+OrderNumber);
+		 $("#pay_money").html(TotalPrice);
+		});
+    	$(document).ready(function(e) {
+			$("#btn_pay").click(function(){
+				$.mobile.loading('show',{text:"请稍等...",textVisible:true,theme:"b"});
+				var type=$('input:radio[name="rad_Pay"]:checked').val();  //支付方式
+				var money="0.01";
+				$.ajax({
+					url:localStorage.getItem("Register_Url")+"SS_Pay",
+					type:"GET",
+					data:{AType:type,AHybrisID:OrderNumber,ASubject:'一心堂电商',ATotlefee:money,AUserID:localStorage.getItem("user_id")},
+					dataType:"jsonp",
+					//timeout:30000,
+					jsonp:"BaseCallback",
+					contentType:"application/json; charset=utf-8",
+					success:function(data){
+						$.mobile.loading("hide");
+						window.location=data;  //返回支付宝页面
+						window.location.load();
+					},
+					error:function(msg){
+						$.mobile.loading("hide");
+						$.msgbox({closeImg: 'image/close.gif',height:150,width:250,type :'alert',content:'支付失败!'});
+					}
+				});
+			});
+		});
+    	
+    </script>
 </head>
 <body>
-	<div data-role="page" class="jqm-hxyy">
+	<div data-role="page" id="order-pay-page" class="jqm-hxyy">
     	<div data-role="header" class="jqm-header" data-position="fixed">
-    		<a href="MyOrder.html" rel="external"><img src="image/button-48.png" /></a>
+    		<a href="#" data-rel="back"><img src="image/button-48.png" /></a>
     		<h1>订单支付</h1>
     	</div>
     	<div data-role="content" class="jqm-content">
             <div class="div_content">
             	<div class="div_order_number">
-            		<span>订单编号：1111123123123123213</span>
+            		<span id="order_number"></span>
                 </div>
                 <div class="div_order_number">
-            		<span>支付金额：3000.00</span>
+            		<span>支付金额：<b class="b_money" id="pay_money">0.01</b>￥</span>
                 </div>
                <div class="div_order_number">
             		<span>选择支付方式</span>
                 </div>
                 <fieldset data-role="controlgroup">
                     <input name="rad_Pay" id="rad_zfb" type="radio" checked="checked" value="0">
-                    <label for="rad_zfb"><img src="image/payments.png"/></label>
+                    <label for="rad_zfb"><img src="image/pay/0.gif"/></label>
                     <input name="rad_Pay" id="rad_yl" type="radio" value="1">
-                    <label for="rad_yl"><img src="image/unionpay.jpg"/></label>
+                    <label for="rad_yl"><img src="image/pay/4.gif"/></label>
                 </fieldset>
             </div>
     	</div>
         <div data-role="footer" class="jqm-footer" data-position="fixed">
-            <button class="ui-btn btn-pay">立即付款</button>
+            <button class="ui-btn btn-pay" id="btn_pay">立即付款</button>
         </div>
     </div>
 </body>

@@ -10,6 +10,7 @@
     </script>
     <script src="js/jquery.js"></script>
     <script src="js/jquery.mobile-1.4.2.min.js"></script>
+    <script src="js/mian.js"></script>
     <style type="text/css" media="all">
     </style>
     <script type="text/javascript" language="javascript">
@@ -17,6 +18,13 @@
 	var NeedPayOrderList = new Array();
 	var SendOrderList= new Array();
 	var NeedAcceptOrderList= new Array();
+	var tabID;
+	 $(document).on("pageinit","#JQM_OrderList",function(){
+		 tabID = GetQueryString("order_class_id");
+		 //alert(tabID);
+		 var this_table = document.getElementById("tb_"+tabID);
+		 this_table.className="on";
+	 });
     $(document).on("pageshow","#JQM_OrderList",function(){
 	 $("#OrderList").find("li").remove(); //清空列表
 		$.mobile.loading('show',{text:"请稍后...",textVisible:true,theme:"b"});
@@ -63,22 +71,15 @@
 							//alert(j);
 							NeedAcceptOrderList[j]=data.orders[i];
 						}
-                       var liItem ='<li> <div class="ListItem"> <a href="#" rel="external" onClick=SelectOrder('+i+')>' +
-                      ' <div class="Order_info">'+
-                      ' <div class="TotalPrice" id="eamilID"><span>订单号：'+data.orders[i].code+'</span></div>'+
-                      ' <div class="OrderState" id="sexID"><span>订单状态：'+order_state+'</span></div>'+
-                      ' <div class="OrderTime" id="tellID"><span>下单时间：'+date_time+'</span></div>'+
-                      ' <div class="OrderNumber" id="birthdayID"><span>总价：'+order_price+'</span></div>'+
-                      ' </div> </a></div></li> ';
+                     
 				     
-					
-					
-					  $("#OrderList").append(liItem);  //添加到ul中
+					 
 				}
 					OrderList = data;  //赋值
+					OnclickClass(tabID);
 		
 				}
-				$("#OrderList").listview('refresh');
+				
 			},
 			error:function(msg){
 				//alert(JSON.stringify(msg));
@@ -163,16 +164,16 @@
         <div data-role="content" id="wj-con" class="department">
             <div class="wj-conTit">
                 <ul>
-                    <li class="on" id="tb_11">
+                    <li id="tb_1">
                         <a href="#" onClick=OnclickClass(1)>全部</a>
                     </li>
-                    <li id="tb_12">
+                    <li id="tb_2">
                         <a href="#" onClick=OnclickClass(2)>待付款</a>
                     </li>
-                    <li id="tb_13">
+                    <li id="tb_3">
                         <a href="#" onClick=OnclickClass(3)>待发货</a>
                     </li>
-                    <li id="tb_14">
+                    <li id="tb_4">
                         <a href="#" onClick=OnclickClass(4)>待收货</a>
                     </li>
                 </ul>

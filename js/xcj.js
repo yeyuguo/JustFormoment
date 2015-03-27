@@ -6,6 +6,7 @@ $(document).ready(function() {
 		$(".select").click(function() {
 			source=$(this).html();
 			show();
+			
 		});
 		
 		/* 请选择颜色和尺寸 */
@@ -67,7 +68,41 @@ $(document).ready(function() {
 		});
 		
 		//确定订单
-		$("#confirm").click(function(){			
+		$("#confirm").click(function(){		
+	        GoodsCount =$("#num").val();
+		  	//alert("商品ID："+GoodsID+",数量："+GoodsCount);
+			
+			var access_token = localStorage.getItem("access_token");
+		   if(access_token == null || access_token == ""){
+			   window.location="Login.html";
+			   localStorage.setItem("come_from_page","ItemDes.html?Id="+GoodsID);  //登录页面的来源
+			   window.location.load();	
+		   }else{
+			$.mobile.loading('show',{text:"正在提交...",textVisible:true,theme:"b"});
+		//alert(localStorage.getItem("Register_Url")+"SS_AddCart?access_token="+localStorage.getItem("access_token")+"&ACookieID="+localStorage.getItem("CookieID"));
+		$.ajax({
+			url:localStorage.getItem("Register_Url")+"SS_AddCart",
+			type:"GET",
+			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID"),AMatnr:GoodsID,ACount:GoodsCount},
+			dataType:"jsonp",
+			jsonp:"BaseCallback",
+			contentType:"application/json; charset=utf-8",
+			success:function(data){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(data));
+				sure();
+			},
+			error:function(msg){
+				$.mobile.loading("hide");
+				//alert(JSON.stringify(msg));
+				//window.location="Login.html";
+				//window.location.load();	
+			}
+		});
+			
+		   }
+		
+			
 			sure();	
 		 
 		});
@@ -79,31 +114,7 @@ $(document).ready(function() {
 				flag="true";
 			}
 			
-			alert("jinru");
-			
-			
-			$.mobile.loading('show',{text:"正在提交...",textVisible:true,theme:"b"});
-		//alert(localStorage.getItem("Register_Url")+"SS_AddCart?access_token="+localStorage.getItem("access_token")+"&ACookieID="+localStorage.getItem("CookieID"));
-		$.ajax({
-			url:localStorage.getItem("Register_Url")+"SS_AddCart",
-			type:"GET",
-			data:{AAccess_token:localStorage.getItem("access_token"),ACookieID:localStorage.getItem("CookieID"),AMatnr:"100004524",ACount:3},
-			dataType:"jsonp",
-			jsonp:"BaseCallback",
-			contentType:"application/json; charset=utf-8",
-			success:function(data){
-				$.mobile.loading("hide");
-				alert(JSON.stringify(data));
-				sure();
-			},
-			error:function(msg){
-				$.mobile.loading("hide");
-				alert(JSON.stringify(msg));
-				//window.location="Login.html";
-				//window.location.load();	
-			}
-		});
-			
+		
 			
 			
 			
@@ -142,10 +153,11 @@ $(document).ready(function() {
 	//显示可选择的模块
 	//已经选择加入购物车或者立即购买
 	function show(){
+		$(".jqm-hxyy").css("opacity", "0.2");
 		$(".WindowShow").css("display", "block");
 		$(".btn_AddCar").css("display", "none");
 		$(".btn_Confirm").css("display", "block");
-		$(".jqm-hxyy").css("opacity", "0.2");
+		
 	}
 	//隐藏可选择的模块
 	function notshow(){
@@ -155,7 +167,7 @@ $(document).ready(function() {
 	}
 	
 	//显示可选择的模块
-	//已经选择加入购物车或者立即购买
+	//已经选择请选择颜色和分类
 	function showadd(){
 		$(".WindowShow").css("display", "block");
 		$(".btn_Confirm").css("display", "none");
@@ -181,12 +193,10 @@ $(document).ready(function() {
 	function sure(){
 		//确定订单
 		var selects=$("dd.Classify").html();
-		if(selects!="请选择规格、分类"){
+		//if(selects!="请选择规格、分类"){
 			if(source=="立即购买"){//立即购买
-				alert("跳转到付款页面！");
 				window.location.href="OrderPay.html";
 			}else if(source=="加入购物车"){//加入购物车
-				alert("加入购物车！");
 				notshow();
 				$(".div_item_type").html(selects);
 			}else{//确定按钮
@@ -194,7 +204,7 @@ $(document).ready(function() {
 				$(".div_item_type").html(selects);
 			}
 			$(".div_item_type").css("font-size","10px");
-		}else{
+		/*}else{
 			if(flag=="true"){
 				$(".WindowShow").css("display", "block");
 				$(".btn_AddCar").css("display", "block");
@@ -203,5 +213,5 @@ $(document).ready(function() {
 			alert("请选择规格、分类");
 			
 		}
-		
+		*/
 	}
