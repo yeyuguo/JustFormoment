@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>自己写的轮播</title>
+    <meta charset="utf8">
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<style>
+li{float: left;list-style: none;}
+.serviceCarousel {
+    height: 290px;
+    width: 600px;
+    position: relative;
+    padding: 10px 0;
+    overflow: hidden;
+}
+/*轮播*/
+
+.serviceCarousel .wrapImg {
+    width: 2400px;
+    height: 250px;
+    position: absolute;
+}
+.serviceCarousel .wrapImg li {
+    float: left;
+    margin-left: 10px;
+    height: 250px;
+}
+.wrapImg img {
+    width: 360px;
+    height: 250px;
+}
+.wrapImgNum {
+    width: 140px;
+    height: 20px;
+    margin: 0 auto;
+    position: relative;
+    top: 260px;
+}
+.wrapImgNum li {
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+.wrapImgNum li.on {
+    background-color: #B92525;
+}
+.wrapImgNum li a {
+    width: 10px;
+    height: 10px;
+}
+</style>
+
+<body>
+    <div class="serviceCarousel">
+        <div class="wrapImg">
+            <ul>
+                <li>
+                    <a href="#" title="">
+                        <img src="http://e.hiphotos.baidu.com/image/w%3D310/sign=7b010b7daf345982c58ae3933cf5310b/f11f3a292df5e0fe75f916085e6034a85fdf72d2.jpg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="">
+                        <img src="http://g.hiphotos.baidu.com/image/w%3D310/sign=225fc16ce9f81a4c2632eac8e72b6029/caef76094b36acaf00b1e5e47ed98d1001e99c50.jpg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="">
+                        <img src="http://e.hiphotos.baidu.com/image/w%3D310/sign=9d744b866e81800a6ee58f0f813533d6/7c1ed21b0ef41bd5e1425afd53da81cb39db3da1.jpg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="">
+                        <img src="http://h.hiphotos.baidu.com/image/w%3D310/sign=44b17d239113b07ebdbd56093cd79113/cf1b9d16fdfaaf514c9d7bbd8e5494eef01f7ab2.jpg" alt="">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="wrapImgNum">
+            <ul>
+                <li></li>
+                <li class="on"></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="serviceCarousel">
+        <div class="wrapImg">
+            <ul>
+                <li>
+                    <a href="#" title="">
+                        <img src="images/2.jpg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="">
+                        <img src="images/3.jpg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="">
+                        <img src="images/4.jpg" alt="">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="wrapImgNum">
+            <ul>
+                <li></li>
+                <li class="on"></li>
+                <li></li>
+
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+$(function() {
+    // 380是每张图片的宽度    130是轮播到第一张图片left的值
+    var onIndex = $(".wrapImgNum li.on").index();
+    var initLeft = 130;
+    var picWidth = 380;
+    $(".wrapImg").css({
+        left: initLeft + ((onIndex - 1) * (-picWidth))
+    });
+    $(".wrapImgNum li").click(function() {
+        var _this = $(this).parents(".serviceCarousel");
+        _this.find(".wrapImgNum li").removeClass('on');
+        $(this).addClass('on');
+        if ($(this).index() == 0) {
+            _this.find(".wrapImg").animate({
+                left: initLeft
+            })
+        } else {
+            _this.find(".wrapImg").animate({
+                left: initLeft + ($(this).index() * (-picWidth))
+            })
+        }
+    });
+})
+</script>
+
+</html>
